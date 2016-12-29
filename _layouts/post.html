@@ -1,0 +1,33 @@
+---
+layout: default
+---
+<div id="blue">
+  <div class="container">
+    <div class="row">
+      <h3>{{ page.title }}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <p>Posted {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} by {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+
+      {{ content }}
+    </div>
+
+    <div class="col-lg-4">
+      <h4>Recent Posts</h4>
+      <div class="hline"></div>
+      <ul class="popular-posts">
+        {% for post in site.posts limit:4 %}
+        <li>
+          <p><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></p>
+          <em>Posted on {{ post.date | date: "%b %-d, %Y" }}</em>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

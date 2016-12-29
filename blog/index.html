@@ -1,0 +1,13 @@
+---
+layout: page
+title: Blog
+permalink: /blog/
+---
+<p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+{% for post in site.posts %}
+<a href="{{ post.url | prepend: site.baseurl }}"><h3 class="ctitle">{{ post.title }}</h3></a>
+<p>Posted {{ post.date | date: "%b %-d, %Y" }}{% if post.author %} by {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</p>
+<p><a href="{{ post.url | prepend: site.baseurl }}">[Read More]</a></p>
+<div class="hline"></div>
+{% endfor %}
