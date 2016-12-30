@@ -10,6 +10,8 @@ baseurl: ''
 
 doc_cat: ["User", "Development", "Infrastructure"]
 
+timezone: GMT+8
+
 collections:
   docs:
     output: true

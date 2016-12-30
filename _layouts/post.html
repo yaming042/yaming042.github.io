@@ -12,13 +12,13 @@ layout: default
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
-      <p>Posted {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} by {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+      <p>发表： {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} by {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
 
       {{ content }}
     </div>
 
     <div class="col-lg-4">
-      <h4>Recent Posts</h4>
+      <h4>近期发表</h4>
       <div class="hline"></div>
       <ul class="popular-posts">
         {% for post in site.posts limit:4 %}
