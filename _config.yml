@@ -4,7 +4,7 @@ title: Blog test
 support_email: 982342750@qq.com
 
 description: > # this means to ignore newlines until "baseurl:"
-  The home for all Sensu Community plugins, handlers, and mutators. Open Source under MIT License.
+  这个网站是基于sensu-plugins.github.io的模板实现的，后期调整成现在的板式
 
 baseurl: ''
 
