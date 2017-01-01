@@ -31,96 +31,36 @@ categories: issue
 <h3>完整代码如下(可运行)</h3>
 <div class="code_box">
 	<pre>
-	<code>
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-		<html xmlns="http://www.w3.org/1999/xhtml"> 
-		<head> 
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-		<title>循环滚动信息栏</title> 
-		<style type="text/css"> 
-		body{ 
-			margin:0px; 
-			padding:0px; 
-		} 
-		#express li{ 
-			height:25px; 
-			border-bottom:dashed 1px #999; 
-			line-height:20px; 
-			font-size:12px; 
-			list-style:none; 
-		} 
-		#div2{ 
-			height:305px; 
-			overflow:hidden; 
-			margin-top:0px; 
-		} 
-		#div1{ 
-			width:200px; 
-			height:310px; 
-			border:3px solid #999; 
-			margin-left:auto; 
-			margin-right:auto; 
-			margin-top:70px; 
-			border-radius:5px 5px 5px 5px; 
-			box-shadow:0px 0px 10px 10px #CECED1; 
-		} 
-		.express{ 
-			padding: 0;
-		} 
-		#div1 div div ul li a{ 
-			text-decoration:none; 
-			color:#333333; 
-		} 
-		#div1 div div ul li a:hover{ 
-			text-decoration:underline; 
-		} 
-		</style> 
-		</head> 
-		<body> 
-		<div id="div1"> 
-			<div id="div2"> 
-				<div id="div3"> 
-					<ul class="express"> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-					</ul>
-				</div> 
-				<div id="clone-div3"></div> 
-			</div> 
-		</div> 
-		<!----------防止html没有加载完，把javascript代码写在下面----------> 
-		<script type="text/javascript"> 
-			var div2=document.getElementById("div2"); 
-			var div3=document.getElementById("div3"); 
-			var clone-div3=document.getElementById("clone-div3"); 
-			var speed=50;//设置向上轮动的速度 
-			clone-div3.innerHTML=div3.innerHTML;//复制节点 
-			function moveTop(){ 
-				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
-					div2.scrollTop=0; 
-				}else{ 
-					div2.scrollTop++; 
-				} 
-			} 
-			var myFunction=setInterval("moveTop()",speed); 
-			div2.onmouseover=function(){ 
-				clearInterval(myFunction); 
-			} 
-			div2.onmouseout=function(){ 
-				myFunction=setInterval(moveTop,speed); 
-			} 
-		</script> 
-		</body> 
-		</html>
-	</code>		
+		<span>'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' </span> 
+		<span>'<html xmlns="http://www.w3.org/1999/xhtml"> '</span> 
+		<span>'<head> '</span> 
+		<span>'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> '</span> 
+		<span>'<title>循环滚动信息栏</title> '</span> 
+
+		<span>'</style>' </span> 
+		<span>'</head> '</span> 
+		<span>'<body> '</span> 
+		<span>'<div id="div1"> '</span> 
+			<span>'<div id="div2"> '</span> 
+				<span>'<div id="div3"> '</span> 
+					<span>'<ul class="express"> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+						<span>'<li><a href="#">列表条目...</a></li> '</span> 
+					<span>'</ul>'</span> 
+				<span>'</div> '</span> 
+				<span>'<div id="clone-div3"></div> '</span> 
+			<span>'</div> '</span> 
+		<span>'</div> '</span> 
+		<span>'</body> '</span> 
+		<span>'</html>'</span> 
 	</pre>
 </div>
 
@@ -185,9 +125,9 @@ categories: issue
 		<script type="text/javascript"> 
 			var div2=document.getElementById("div2"); 
 			var div3=document.getElementById("div3"); 
-			var clone-div3=document.getElementById("clone-div3"); 
+			var clone_div3=document.getElementById("clone-div3"); 
 			var speed=50;//设置向上轮动的速度 
-			clone-div3.innerHTML=div3.innerHTML;//复制节点 
+			clone_div3.innerHTML=div3.innerHTML;//复制节点 
 			function moveTop(){ 
 				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
 					div2.scrollTop=0; 
