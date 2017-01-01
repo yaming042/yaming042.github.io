@@ -10,59 +10,7 @@ categories: issue
 <p>今天本来还在想要不要改变下网站的内容呢，最新博客左边的栏目一直在犹豫放什么东西，一度想过放一个信息滚动栏目，放些前端常用的网站链接啥的，于是就开始参考别人的思路写一个公告滚动的效果，天色已晚，先上js原声代码吧</p>
 <p>&nbsp;</p>
 
-<p>其实公告滚动效果的原理也不难，需要三个div容器来承载这个滚动列表。</p>
-<div class="code_box">
-	<pre>
-		<div id="div1">
-			<div id="div2">
-				<div class="div3">
-					<ul>
-						。。。。。。
-					</ul>
-				</div>
-				<div id="clone-div2"></div>
-			</div>
-		</div>
-	</pre>
-</div>
-
-<p>首先div1是最外面的容器，来装载整个列表的。div2是用来滚动的容器，用scrollTop使其一直向上滚动，再利用其scrollTop与父容器的height判断滚动是否重置。div3只是装载列表的容器。至于clone-div3其实是用来实现无缝滚动的，他下面的内容就是div3下ul的副本，这样当div3滚到最上面时clone-div3就会显示，这样在效果上就能到达第一屏滚上去的内容从下面滚上来了</p>
-
 <h3>完整代码如下(可运行)</h3>
-<div class="code_box">
-	<pre>
-		<span>'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' </span> 
-		<span>'<html xmlns="http://www.w3.org/1999/xhtml"> '</span> 
-		<span>'<head> '</span> 
-		<span>'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> '</span> 
-		<span>'<title>循环滚动信息栏</title> '</span> 
-
-		<span>'</style>' </span> 
-		<span>'</head> '</span> 
-		<span>'<body> '</span> 
-		<span>'<div id="div1"> '</span> 
-			<span>'<div id="div2"> '</span> 
-				<span>'<div id="div3"> '</span> 
-					<span>'<ul class="express"> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-						<span>'<li><a href="#">列表条目...</a></li> '</span> 
-					<span>'</ul>'</span> 
-				<span>'</div> '</span> 
-				<span>'<div id="clone-div3"></div> '</span> 
-			<span>'</div> '</span> 
-		<span>'</div> '</span> 
-		<span>'</body> '</span> 
-		<span>'</html>'</span> 
-	</pre>
-</div>
 
 <style type="text/css"> 
 		body{ 
