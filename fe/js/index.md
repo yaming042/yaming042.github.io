@@ -5,5 +5,16 @@ permalink: /fe/js/
 ---
 
 <div class="alert alert-warning" role="alert">
-这是JavaScript文件夹主文件
+<ul class="">
+	{% for doc_cat in site.doc_cat %}
+		{% for node in site.fe %}
+            {% if node.title != null %}
+                {% if node.doc_cat contains doc_cat %}
+                    <li><a href="{{ node.url }}">{{ node.title }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+	{% if forloop.last %}{% else %}<li class="nav-divider"></li>{% endif %}
+	{% endfor %}
+</ul>
 </div>
