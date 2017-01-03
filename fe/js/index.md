@@ -6,7 +6,7 @@ permalink: /fe/js/
 
 <div class="alert alert-warning" role="alert">
 <ul class="">
-	{% for doc_cat in site.doc_cat %}
+	{% for doc_cat in site.doc_cat[0] %}
 		{% for node in site.fe %}
             {% if node.title != null %}
                 {% if node.doc_cat contains doc_cat %}
