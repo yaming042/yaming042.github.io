@@ -6,7 +6,7 @@ permalink: /blog/
 
 {% for post in site.posts %}
 <a href="{{ post.url | prepend: site.baseurl }}"><h3 class="ctitle">{{ post.title }}</h3></a>
-<p>发表于： {{ post.date | date: "%b %-d, %Y" }}{% if post.author %} by {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</p>
+<p>发表于： {{ site.time | date_to_xmlschema }}{% if post.author %} by {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</p>
 <p><a href="{{ post.url | prepend: site.baseurl }}">[查看更多]</a></p>
 <div class="hline"></div>
 {% endfor %}
