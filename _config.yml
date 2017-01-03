@@ -9,7 +9,7 @@ description: > # this means to ignore newlines until "baseurl:"
 baseurl: ''
 url: 'https://yaming042.github.io/'
 
-doc_cat: ["User", "Development", "Infrastructure"]
+doc_cat: ["js", "jq", "html","css"]
 
 timezone: GMT+8
 

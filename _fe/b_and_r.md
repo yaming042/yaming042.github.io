@@ -3,7 +3,7 @@ layout: page
 # permalink:
 title: Build And Release Pipeline
 doc_cat:
-  - Development
+  - js
 ---
 
 Currently we use [Codeship](https://codeship.com/) for testing and [Travis](https://travis-ci.org/) is used to run tests across all forks and deploying the gems.

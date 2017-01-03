@@ -1,0 +1,33 @@
+---
+layout: page
+# permalink:
+title: JavaScript-总结常用代码书写规范
+doc_cat:
+  - js
+---
+<p>原文地址：<a href="https://segmentfault.com/a/1190000006835021" target="_blank">https://segmentfault.com/a/1190000006835021</a></p>
+<h3>javascript 代码规范</h3>
+<p>代码规范我们应该遵循古老的原则：“能做并不意味着应该做”。</p>
+
+<h3 class="">1.全局命名空间污染</h3>
+<p>总是将代码包裹在一个立即的函数表达式里面，形成一个独立的模块。</p>
+<p>不推荐</p>
+<div class="code_box">
+<xmp>
+var x = 10,
+    y = 100;
+console.log(window.x + ' ' + window.y);
+</xmp>
+</div>
+<p>推荐</p>
+<div class="code_box">
+<xmp>
+;(function(window){
+  'use strict';
+  var x = 10,
+    y = 100;
+  console.log(window.x + ' ' + window.y);
+}(window));
+</xmp>
+</div>
+
