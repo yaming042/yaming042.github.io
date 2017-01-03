@@ -7,6 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   这个网站是基于sensu-plugins.github.io的模板实现的，后期调整成现在的板式
 
 baseurl: ''
+url: 'https://yaming042.github.io/'
 
 doc_cat: ["User", "Development", "Infrastructure"]
 

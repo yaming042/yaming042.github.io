@@ -485,3 +485,15 @@ csmall2 {
 .slider-zone:hover .arrow { display: block;}
 #prev { left: 20px;}
 #next { right: 20px;}
+
+/*代码容器样式*/
+.code_box {
+    background-color: #f5f5f5;
+    font-family: Courier New!important;
+    font-size: 12px!important;
+    border: 1px solid #ccc;
+    padding: 5px;
+    overflow: auto;
+    margin: 5px 0;
+    color: #000;
+}

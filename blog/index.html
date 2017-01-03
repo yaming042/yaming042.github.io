@@ -5,8 +5,15 @@ permalink: /blog/
 ---
 
 {% for post in site.posts %}
+<<<<<<< HEAD
 <a href="{{ post.url | prepend: site.baseurl }}"><h3 class="ctitle">{{ post.title }}</h3></a>
 <p>发表于： {{ site.time | date_to_xmlschema }}{% if post.author %} by {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</p>
+=======
+<a href="{{ post.url | prepend: site.baseurl }}">
+	<h3 class="ctitle">{{ post.title }}</h3>
+</a>
+<p>发表于： {{ post.date | date: "%b %-d, %Y" }}{% if post.author %} by {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</p>
+>>>>>>> c55c19aa6dbc3b42e6f1e0dad3c1c4a1a0a21dbf
 <p><a href="{{ post.url | prepend: site.baseurl }}">[查看更多]</a></p>
 <div class="hline"></div>
 {% endfor %}
