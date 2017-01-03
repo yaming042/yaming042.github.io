@@ -497,3 +497,18 @@ csmall2 {
     margin: 5px 0;
     color: #000;
 }
+/*效果链接样式*/
+a.demolink {
+    background-color: #0AD;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    color: #FFF!important;
+    display: inline-block;
+    line-height: 30px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+}
