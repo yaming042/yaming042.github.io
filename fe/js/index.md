@@ -9,7 +9,7 @@ permalink: /fe/js/
 
 		{% for node in site.fe %}
             {% if node.title != null %}
-                {% if node.doc_cat contains 'User' %}
+                {% if node.doc_cat contains 'js' %}
                     <li><a href="{{ node.url }}">{{ node.title }}</a></li>
                 {% endif %}
             {% endif %}
