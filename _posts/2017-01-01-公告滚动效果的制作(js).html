@@ -12,8 +12,7 @@ categories: issue
 
 <p>这个模板需要三个div容器来装载滚动列表，大概结构如下</p>
 <div class="code_box">
-	<xmp>
-		<div id="div1"> 
+	<xmp><div id="div1"> 
 			<div id="div2"> 
 				<div id="div3"> 
 					<ul class="express"> 
@@ -31,8 +30,7 @@ categories: issue
 				</div> 
 				<div id="clone-div3"></div> 
 			</div> 
-		</div> 		
-	</xmp>
+		</div></xmp>
 </div>
 <p>div1:最外层的容器，可以用他改变滚动列表的位置</p>
 <p>div2:这个才是滚动列表的“父容器”，因为他才对我们的计算有用</p>
@@ -44,8 +42,7 @@ categories: issue
 
 <h3>完整代码如下：</h3>
 <div class="code_box">
-	<xmp>
-		<style type="text/css"> 
+	<xmp><style type="text/css"> 
 		body{ 
 			margin:0px; 
 			padding:0px; 
@@ -116,7 +113,6 @@ categories: issue
 			var height1 = div3.offsetHeight,
 				height2 = div2.scrollTop;
 
-			clone_div3.innerHTML = div3.innerHTML;//复制节点 
 			function moveTop(){ 
 				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
 					div2.scrollTop = 0; 
@@ -125,7 +121,8 @@ categories: issue
 				} 
 			} 
 			
-			if(hegiht1 >= height2){
+			if(height1 >= height2){
+				clone_div3.innerHTML = div3.innerHTML;//复制节点 
 				time = setInterval("moveTop()",speed); 
 			}
 
@@ -135,11 +132,10 @@ categories: issue
 			div2.onmouseout = function(){ 
 				time = setInterval(moveTop,speed); 
 			} 
-		</script> 
-	</xmp>
+		</script></xmp>
 </div>
 
-<h3>完整代码请查看源码</h3>
+<h3>效果如下：</h3>
 
 <style type="text/css"> 
 		body{ 
@@ -186,16 +182,16 @@ categories: issue
 			<div id="div2"> 
 				<div id="div3"> 
 					<ul class="express"> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目1...</a></li> 
+						<li><a href="#">列表条目2...</a></li> 
+						<li><a href="#">列表条目3...</a></li> 
+						<li><a href="#">列表条目4...</a></li> 
+						<li><a href="#">列表条目5...</a></li> 
+						<li><a href="#">列表条目6...</a></li> 
+						<li><a href="#">列表条目7...</a></li> 
+						<li><a href="#">列表条目8...</a></li> 
+						<li><a href="#">列表条目9...</a></li> 
+						<li><a href="#">列表条目10...</a></li> 
 					</ul>
 				</div> 
 				<div id="clone-div3"></div> 
@@ -212,7 +208,6 @@ categories: issue
 			var height1 = div3.offsetHeight,
 				height2 = div2.scrollTop;
 
-			clone_div3.innerHTML = div3.innerHTML;//复制节点 
 			function moveTop(){ 
 				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
 					div2.scrollTop = 0; 
@@ -221,7 +216,8 @@ categories: issue
 				} 
 			} 
 			
-			if(hegiht1 >= height2){
+			if(height1 >= height2){
+				clone_div3.innerHTML = div3.innerHTML;//复制节点 
 				time = setInterval("moveTop()",speed); 
 			}
 
