@@ -7,8 +7,137 @@ categories: issue
 ---
 
 <h1>公告滚动效果的制作</h1>
-<p>今天本来还在想要不要改变下网站的内容呢，最新博客左边的栏目一直在犹豫放什么东西，一度想过放一个信息滚动栏目，放些前端常用的网站链接啥的，于是就开始参考别人的思路写一个公告滚动的效果，天色已晚，先上js原声代码吧</p>
+<p>今天本来还在想要不要改变下网站的内容呢，最新博客左边的栏目一直在犹豫放什么东西，一度想过放一个信息滚动栏目，放些前端常用的网站链接啥的，于是就开始参考别人的思路写一个公告滚动的效果，天色已晚，先上js原生代码吧</p>
 <p>&nbsp;</p>
+
+<p>这个模板需要三个div容器来装载滚动列表，大概结构如下</p>
+<div class="code_box">
+	<xmp>
+		<div id="div1"> 
+			<div id="div2"> 
+				<div id="div3"> 
+					<ul class="express"> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+					</ul>
+				</div> 
+				<div id="clone-div3"></div> 
+			</div> 
+		</div> 		
+	</xmp>
+</div>
+<p>div1:最外层的容器，可以用他改变滚动列表的位置</p>
+<p>div2:这个才是滚动列表的“父容器”，因为他才对我们的计算有用</p>
+<p>div3:滚动的容器，列表装在这个容器里面，用scrollTop使其向上滚动</p>
+
+<h3>主要思路</h3>
+<p>首先我们会先复制一个列表放在原列表下面的div里，因为div3实在div2里面向上滚动，所以我们可以获取div3的scrollTop的值，当然，也可以获取div2的高度，那么，当div2的高度于scrollTop相比较，如果scrollTop的值大于这个height就说明这个容器底部已经到顶了，这个时候就需要显示列表的第一条，因为下面的列表是复制上面的，所以就在效果上可以达到是列表的第一条。</p>
+<p>(这么做有个问题：列表高度小于容器高度时会有问题)</p>
+
+<h3>完整代码如下：</h3>
+<div class="code_box">
+	<xmp>
+		<style type="text/css"> 
+		body{ 
+			margin:0px; 
+			padding:0px; 
+		} 
+		.express li{ 
+			height:25px; 
+			border-bottom:dashed 1px #999; 
+			line-height:20px; 
+			font-size:12px; 
+			list-style:none;
+			text-align:center;
+		} 
+		#div2{ 
+			height:305px; 
+			overflow:hidden; 
+			margin-top:0px; 
+		} 
+		#div1{ 
+			width:200px; 
+			height:310px; 
+			border:3px solid #999; 
+			margin-left:auto; 
+			margin-right:auto; 
+			margin-top:70px; 
+			border-radius:5px 5px 5px 5px; 
+			box-shadow:0px 0px 10px 10px #CECED1; 
+		} 
+		.express{ 
+			padding: 0;
+			margin: 0;
+		} 
+		#div1 div div ul li a{ 
+			text-decoration:none; 
+			color:#333333; 
+			font-size:16px;
+		} 
+		#div1 div div ul li a:hover{ 
+			text-decoration:underline; 
+		} 
+		</style>  
+		<div id="div1"> 
+			<div id="div2"> 
+				<div id="div3"> 
+					<ul class="express"> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+					</ul>
+				</div> 
+				<div id="clone-div3"></div> 
+			</div> 
+		</div> 
+		<!----------防止html没有加载完，把javascript代码写在下面----------> 
+		<script type="text/javascript"> 
+			var div2 = document.getElementById("div2"); 
+			var div3 = document.getElementById("div3"); 
+			var clone_div3 = document.getElementById("clone-div3"); 
+			var speed = 50;//设置向上轮动的速度 
+			var time; 
+
+			var height1 = div3.offsetHeight,
+				height2 = div2.scrollTop;
+
+			clone_div3.innerHTML = div3.innerHTML;//复制节点 
+			function moveTop(){ 
+				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
+					div2.scrollTop = 0; 
+				}else{ 
+					div2.scrollTop++; 
+				} 
+			} 
+			
+			if(hegiht1 >= height2){
+				time = setInterval("moveTop()",speed); 
+			}
+
+			div2.onmouseover = function(){ 
+				clearInterval(time); 
+			} 
+			div2.onmouseout = function(){ 
+				time = setInterval(moveTop,speed); 
+			} 
+		</script> 
+	</xmp>
+</div>
 
 <h3>完整代码请查看源码</h3>
 
@@ -57,16 +186,16 @@ categories: issue
 			<div id="div2"> 
 				<div id="div3"> 
 					<ul class="express"> 
-						<li><a href="#">列表条目列表条目列表条目...</a></li> 
 						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目...</a></li> 
 						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目...</a></li> 
 						<li><a href="#">列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目...</a></li> 
-						<li><a href="#">列表条目列表条目列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
+						<li><a href="#">列表条目...</a></li> 
 					</ul>
 				</div> 
 				<div id="clone-div3"></div> 
@@ -74,23 +203,32 @@ categories: issue
 		</div> 
 		<!----------防止html没有加载完，把javascript代码写在下面----------> 
 		<script type="text/javascript"> 
-			var div2=document.getElementById("div2"); 
-			var div3=document.getElementById("div3"); 
-			var clone_div3=document.getElementById("clone-div3"); 
-			var speed=50;//设置向上轮动的速度 
-			clone_div3.innerHTML=div3.innerHTML;//复制节点 
+			var div2 = document.getElementById("div2"); 
+			var div3 = document.getElementById("div3"); 
+			var clone_div3 = document.getElementById("clone-div3"); 
+			var speed = 50;//设置向上轮动的速度 
+			var time; 
+
+			var height1 = div3.offsetHeight,
+				height2 = div2.scrollTop;
+
+			clone_div3.innerHTML = div3.innerHTML;//复制节点 
 			function moveTop(){ 
 				if( div3.offsetHeight - div2.scrollTop <= 0 ){ 
-					div2.scrollTop=0; 
+					div2.scrollTop = 0; 
 				}else{ 
 					div2.scrollTop++; 
 				} 
 			} 
-			var myFunction=setInterval("moveTop()",speed); 
-			div2.onmouseover=function(){ 
-				clearInterval(myFunction); 
+			
+			if(hegiht1 >= height2){
+				time = setInterval("moveTop()",speed); 
+			}
+
+			div2.onmouseover = function(){ 
+				clearInterval(time); 
 			} 
-			div2.onmouseout=function(){ 
-				myFunction=setInterval(moveTop,speed); 
+			div2.onmouseout = function(){ 
+				time = setInterval(moveTop,speed); 
 			} 
 		</script> 
