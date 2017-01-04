@@ -1,0 +1,194 @@
+---
+layout: post
+title:  CSS导航菜单水平居中
+author: Tim
+date:   2017-01-04 22:00:00
+categories: issue
+---
+<p>水平导航栏应该是一个网页上最重要的部分了吧，之前也做过好多页面，不过之前的水平导航栏都是定宽啥的，这样就可以根据导航内容的多少均分这个宽度，虽然当时感觉这样做肯定不太好，毕竟这样的复用会不好，而且考虑到响应式，估计问题就更多了。后来没事的时候就到网上查些资料，看了看别人的思路，然后总结下，以备以后用。</p>
+<h3>CSS导航菜单水平居中的多种方法</h3>
+<p><a href="#way1">方法1：display:inline-block</a></p>
+<p><a href="#way2">方法2：position:relative</a></p>
+<p><a href="#way3">方法3：display:table</a></p>
+<p><a href="#way4">方法4：display:inline-flex</a></p>
+
+<h2 style="background-color:#e6e6da;" id="way1">方法1：display:inline-block</h2>
+<p>其实这个方法就是利用[text-align:center],用这个属性前应该知道，text-align是无法作用与块级元素的，但对非块级元素是可以的，所以，我们要吧ul变成非块级元素，这个可以使用[display:inline-block],这样配合text-align就可以让ul这个导航栏水平居中了。</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <ul>
+	  <li><a href="#">首页</a></li>
+	  ......
+	</ul>
+  </div>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>上面我们给navbar设置上[text-align:center]，对应就需要吧ul设置成inline-block,不然text-align是不会生效的，为了让li标签水平排列，再让li标签float:left左浮动就可以了。(这里我清除了一下浮动，防止导航栏之后的div布局异常，更多清除浮动的方法，访问<a href="#" target="_blank">CSS清除浮动</a>)</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  text-align: center;
+}
+.navbar>ul{
+  display: inline-block;
+}
+.navbar>ul li{
+  float: left;
+}
+
+.navbar:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p>上面的代码目前是兼容到IE8的，如果要兼容IE7的话，许修改下这个ul</p>
+<div class="code_box">
+<xmp>
+.navbar>ul{
+  display: inline;
+  zoom: 1;
+}
+</xmp>
+</div>
+
+<h2 style="background-color:#e6e6da;" id="way2">方法2：position:relative</h2>
+<p>利用这个方法需要多一个div来装载导航ul</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <div>
+      <ul>
+	    <li><a href="#">首页</a></li>
+	    ......
+      </ul>
+	</div>
+  </div>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  overflow: hidden;
+  position: relative;
+}
+.navbar>div{
+  position: relative;
+  left: 50%;
+  float: left;
+}
+.navbar ul{
+  position: relative;
+  left: -50%;
+  float: left;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar>div:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+
+<h2 style="background-color:#e6e6da;" id="way3">方法3：display:table</h2>
+<p>这个方法用到了最少的代码，可以省不少事，有句话说的好，少写少填坑，如果为了省事还能有想要的效果，那你可以使用这个方法。</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <ul>
+	<li><a href="#">首页</a></li>
+	......
+  </ul>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  display: table;
+  margin: 0 auto;
+}
+.navbar ul{
+  display: table-cell;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar>div:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p style="color: red;">注意：此方法不适用于IE7及以下浏览器</p>
+
+<h2 style="background-color:#e6e6da;" id="way4">方法4：display:inline-flex</h2>
+<p>有关flex layout的知识自己查下吧</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <ul>
+	  <li><a href="#">首页</a></li>
+	  ......
+	</ul>
+  </div>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  text-align: center;
+}
+.navbar>ul{
+  display:-webkit-inline-box;
+  display:-moz-inline-box;
+  display:-ms-inline-flexbox;
+  display:-webkit-inline-flex;
+  display:inline-flex;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p style="color: red;">注意：此方法不适用于IE7及以下浏览器</p>
+
+
+
+
+
+
+
+
+
