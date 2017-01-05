@@ -7,7 +7,7 @@ body {
     margin: 0;
     height: 100%;
     color: #384452;
-    font-family: Calibri, 微软雅黑, sans-serif;
+    font-family: Calibri, "Microsoft YaHei", sans-serif;
     font-weight: 400;
 }
 
@@ -496,6 +496,12 @@ csmall2 {
     overflow: auto;
     margin: 5px 0;
     color: #000;
+}
+.code_box xmp{
+    font-family: "Microsoft YaHei";
+    color: red;
+    margin-top: 0;
+    line-height: 1.8em;
 }
 /*效果链接样式*/
 a.demolink {
