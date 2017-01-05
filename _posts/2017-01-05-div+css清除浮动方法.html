@@ -1,0 +1,94 @@
+---
+layout: post
+title:  div+css清除浮动方法
+author: Tim
+date:   2017-01-05 18:00:00
+categories: issue
+---
+<p>自从div+css布局开始流行后，伴随的问题也就出来了，其中浮动的问题当然也是必不可少的了，每次用float都很爽，可是如果忘清除浮动，那当你看到页面是，估计更“更爽”。如果不清除浮动，那么接下来的布局会全乱套喽，所以，清除浮动必不可少，下面总结三种常用的清除浮动的方法。</p>
+<h3>CSS导航菜单水平居中的多种方法</h3>
+<p><a href="#way1">方法1：使用空标签清除浮动</a></p>
+<p><a href="#way2">方法2：使用overflow清除浮动</a></p>
+<p><a href="#way3">方法3：使用after伪类清除浮动</a></p>
+
+<p id="way1">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法1：使用空标签清除浮动</h2>
+<p>怎么说呢，我感觉这个也是不错的方法，萝卜白菜各有所爱，看个人喜好吧</p>
+<h3>HTML代码</h3>
+{% highlight ruby%}
+<style type="text/css">
+  .main{background: yellow;}
+  .left{float:left;width:100px;height:100px;line-height: 100px;background: red;}
+  .right{float:right;width:100px;height:100px;line-height: 100px;background: blue;}
+</style>
+<div class="main">
+  <div class="left">左侧</div>
+  <div class="right">右侧</div>
+</div>
+{% endhighlight %}
+<h3>修改后的HTML代码</h3>
+<p>上面代码按理说，一个靠左，一个靠右，我们应该可以看到main的背景色黄色，可是事实是，运行代码看不到main的背景色，造成这个的原因其实就是因为两个div浮动了，可之后没有清除浮动。下面增加一个div来清除浮动，当然，这个标签其实可以是任何标签的。</p>
+{% highlight ruby%}
+<style type="text/css">
+  .main{background: yellow;}
+  .left{float:left;width:100px;height:100px;line-height: 100px;background: red;}
+  .right{float:right;width:100px;height:100px;line-height: 100px;background: blue;}
+</style>
+<div class="main">
+  <div class="left">左侧</div>
+  <div class="right">右侧</div>
+  <!-- 增加空div -->
+  <div style="clear:both;"></div>
+</div>
+{% endhighlight %}
+<p>上面代码运行后就可以看到我们想要的结果了，虽然我们增加了无意义的标签，不过还是值得一用的。</p>
+
+<p id="way2">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法2：使用overflow清除浮动</h2>
+<p>这个方法可以避免使用无意义的空标签。使用这个办法只需要在清除浮动的元素中设置css属性overflow：auto就可以了。兼容IE6则再增加zoom：1。</p>
+<h3>HTML代码，依旧用上面的模板</h3>
+{% highlight ruby%}
+<style type="text/css">
+  .main{
+    background: yellow;
+    /*增加overflow属性*/
+    overflow: auto;
+    /*兼容IE6*/
+    zoom: 1;
+  }
+  .left{float:left;width:100px;height:100px;line-height: 100px;background: red;}
+  .right{float:right;width:100px;height:100px;line-height: 100px;background: blue;}
+</style>
+<div class="main">
+  <div class="left">左侧</div>
+  <div class="right">右侧</div>
+</div>
+{% endhighlight %}
+
+<p id="way3">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法3：使用after伪类清除浮动</h2>
+<p>这是我目前比较喜欢的方法，我可以专门写一个类，当我需要清除浮动时只要给对应元素增加这个类就可以了，还是挺方便的。</p>
+<h3>HTML代码，依旧用上面的模板</h3>
+{% highlight ruby%}
+<style type="text/css">
+  .main{background: yellow;}
+  .left{float:left;width:100px;height:100px;line-height: 100px;background: red;}
+  .right{float:right;width:100px;height:100px;line-height: 100px;background: blue;}
+  .clear:after{content:"";clear:both;display:block;height:0;visibility:hidden;}
+</style>
+<div class="main clear">
+  <div class="left">左侧</div>
+  <div class="right">右侧</div>
+</div>
+{% endhighlight %}
+<p>上面给父容器main增加clear类就可以了，如果别的地方要清除浮动也增加这个类就行了。</p>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
