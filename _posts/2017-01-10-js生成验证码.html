@@ -1,0 +1,118 @@
+---
+layout: post
+title:  js生成验证码
+author: Tim
+date:   2017-01-10 22:00:00
+categories: issue
+---
+<p>前几天给分公司做了个网站，上面有个注册表单，上面有个验证码，开始为了方便就找了个图片放上去了，今天上面有人问了，为啥没有验证码，之前知道可以用PHP生产，不过这个分公司的的网站是在wordpress上的，说时候我还真不怎么会使，所以就上网看看有没有js生成的验证码，不用很麻烦，简单的就行，结果一看固然有，果断收下，奉上代码。</p>
+<h3>HTML代码</h3>
+{% highlight ruby %}
+<style type="text/css">
+#code { 
+	font-family:Arial; 
+	font-style:italic; 
+	font-weight:bold; 
+	border:0; 
+	letter-spacing:2px; 
+	color:blue; 
+} 
+</style> 
+<script type="text/javascript">
+	var code ; //在全局定义验证码 
+	//产生验证码 
+	window.onload = function(){
+		createCode();
+	}
+
+	function createCode(){ 
+		code = ""; 
+		var codeLength = 4;//验证码的长度 
+		var checkCode = document.getElementById("code"); 
+		var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 
+		'S','T','U','V','W','X','Y','Z');//随机数 
+		for(var i = 0; i < codeLength; i++) {//循环操作 
+			var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
+			code += random[index];//根据索引取得随机数加到code上 
+		} 
+		checkCode.value = code;//把code值赋给验证码 
+	} 
+	//校验验证码 
+	function validate(){ 
+		var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写 
+		if(inputCode.length <= 0) { //若输入的验证码长度为0 
+			alert("请输入验证码！"); //则弹出请输入验证码 
+		}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时 
+			alert("验证码输入错误！@_@"); //则弹出验证码输入错误 
+			createCode();//刷新验证码 
+			document.getElementById("input").value = "";//清空文本框 
+		}else { //输入正确时 
+			alert("^-^"); //弹出^-^ 
+		} 
+	}
+</script> 
+<div> 
+	<input type = "text" id = "input"/> 
+	<input type = "button" id="code" onclick="createCode()"/> 
+	<input type = "button" value = "验证" onclick = "validate()"/> 
+</div> 
+{% endhighlight %}
+<h3>效果如下</h3>
+<style type="text/css">
+#code { 
+	font-family:Arial; 
+	font-style:italic; 
+	font-weight:bold; 
+	border:0; 
+	letter-spacing:2px; 
+	color:blue; 
+} 
+</style> 
+<script type="text/javascript">
+	var code ; //在全局定义验证码 
+	//产生验证码 
+	window.onload = function(){
+		createCode();
+	}
+
+	function createCode(){ 
+		code = ""; 
+		var codeLength = 4;//验证码的长度 
+		var checkCode = document.getElementById("code"); 
+		var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 
+		'S','T','U','V','W','X','Y','Z');//随机数 
+		for(var i = 0; i < codeLength; i++) {//循环操作 
+			var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
+			code += random[index];//根据索引取得随机数加到code上 
+		} 
+		checkCode.value = code;//把code值赋给验证码 
+	} 
+	//校验验证码 
+	function validate(){ 
+		var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写 
+		if(inputCode.length <= 0) { //若输入的验证码长度为0 
+			alert("请输入验证码！"); //则弹出请输入验证码 
+		}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时 
+			alert("验证码输入错误！@_@"); //则弹出验证码输入错误 
+			createCode();//刷新验证码 
+			document.getElementById("input").value = "";//清空文本框 
+		}else { //输入正确时 
+			alert("^-^"); //弹出^-^ 
+		} 
+	}
+</script>
+<div style="width:300px;border:1px solid #ccc;border-radius:6px;">
+	<input type = "text" id = "input" style="display:block;width:80%;margin:0 auto;" /> 
+	<input type = "button" id="code" onclick="createCode()" style="display:block;width:100px;height:40px;margin-left:10%;" /> 
+	<input type = "button" value = "验证" onclick = "validate()" style="display:block;margin-left:10%;" />
+</div>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
