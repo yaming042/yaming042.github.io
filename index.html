@@ -89,7 +89,7 @@ function loadPer(){
         var str;
         if(percent > 100){
             str = 100;
-            window.location.href = "https://yaming042.github.io/issue/2017/01/10/js生成验证码.html";
+            window.location.href = "https://yaming042.github.io/notes/";
         }else{
             str = percent;
         }
@@ -113,6 +113,7 @@ $(window).ready(function(){
         });        
     },function(){
         $(".process-bar").slideUp("slow",function(){
+            percent = 0;
             $("#load_bar").css("width",0).html("");
             stopTime(time);
         });        
