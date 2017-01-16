@@ -140,7 +140,7 @@ permalink: /notes/
 <p class="grey">暂无</p>
 <h4 id="pos54">5月4周</h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 
 <h4 id="pos61">6月1周</h4>
 <p class="red">两列等高</p>
@@ -213,7 +213,7 @@ clear:after{
 {% endhighlight %}
 <p class="indent2">3.父容器设置overflow:hidden;属性</p>
 <p class="red">注：元素同时用float和position:absolute时，清除浮动会有兼容问题，此时可以用1,3的办法</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos71"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos72"></h4>
@@ -222,7 +222,7 @@ clear:after{
 <p class="grey">暂无</p>
 <h4 id="pos74"></h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos81"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos82"></h4>
@@ -231,7 +231,7 @@ clear:after{
 <p class="grey">暂无</p>
 <h4 id="pos84"></h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos91"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos92"></h4>
@@ -240,7 +240,7 @@ clear:after{
 <p class="grey">暂无</p>
 <h4 id="pos94"></h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos101"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos102"></h4>
@@ -249,7 +249,7 @@ clear:after{
 <p class="grey">暂无</p>
 <h4 id="pos104"></h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos111"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos112"></h4>
@@ -258,7 +258,7 @@ clear:after{
 <p class="grey">暂无</p>
 <h4 id="pos114"></h4>
 <p class="grey">暂无</p>
-<p>&nbsp;<br>&bnsp;</p>
+<p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos121"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos122"></h4>
