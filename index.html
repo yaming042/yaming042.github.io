@@ -102,9 +102,13 @@ $(window).ready(function(){
     });
 
     $(".notes").hover(function(){
-        loadPer();
+        $(".process-bar").slideDown(function(){
+            loadPer();
+        });        
     },function(){
-        stopTime(time);
+        $(".process-bar").slideUp(function(){
+            stopTime(time);
+        });        
     })
 }); 
 </script>
