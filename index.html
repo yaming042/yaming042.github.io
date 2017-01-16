@@ -29,7 +29,7 @@ tag: full_width
     </div>
 </div>
 <script type="text/javascript">
-$(window).load(function(){
+$(window).ready(function(){
     $(".slider-zone").Carousel({
         list:'.list',
         duration: 500,
@@ -58,14 +58,16 @@ $(window).load(function(){
         </div>
 
         <div class="col-lg-4">
-            <h4>错误日志(2016年)</h4>
+            <h4>日常笔记(2016年)</h4>
             <div class="hline"></div>            
-            <p><a class="post-link light-daily" href="javascript:;">1月记录</a></p>
-            <p><a class="post-link light-daily" href="javascript:;">2月记录</a></p>
-            <p><a class="post-link light-daily" href="javascript:;">3月记录</a></p>
-            <p><a class="post-link light-daily" href="javascript:;">4月记录</a></p>
-            <p><a class="post-link light-daily" href="javascript:;">5月记录</a></p>   
-            <p><a class="post-link" href="/err_record/">查看更多&nbsp;&gt;&gt;</a></p>          
+            <div class="notes">
+                <img src="{{ site.baseurl }}/public/img/notes.jpg" alt="">
+                <div class="process-bar">
+                    <p>
+                        <span></span>
+                    </p>
+                </div>
+            </div>          
         </div>
     </div>
 </div>
