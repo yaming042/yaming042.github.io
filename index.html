@@ -86,8 +86,14 @@ function getRandom(n,m){
 function loadPer(){
     time = setInterval(function(){
         percent += getRandom(1,10);
-        var str = (percent > 100 ? 100 : percent) + "%";
-        $("#load_bar").css({"width":str,"transition":"all .2s"}).html(str);
+        var str;
+        if(percent > 100){
+            str = 100;
+            window.location.href = "";
+        }else{
+            str = percent;
+        }
+        $("#load_bar").css({"width":str+"%","transition":"all .2s"}).html(str+"%");
     },300);
 }
 function stopTime(timeid){
@@ -107,6 +113,7 @@ $(window).ready(function(){
         });        
     },function(){
         $(".process-bar").slideUp(function(){
+            $("#load_bar").css("width",0).html("");
             stopTime(time);
         });        
     })

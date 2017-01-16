@@ -462,7 +462,7 @@ csmall2 {
 .slider-zone{
     width: 100%;
     height: 650px;
-    height: auto;
+    /*height: auto;*/
     position: relative;
     overflow: hidden;
 }
@@ -553,6 +553,7 @@ a.demolink {
     height: 30px;
     top: 50%;
     margin-top: -15px;
+    text-align: left;
 }
 .process-bar p span{
     display: inline-block;
