@@ -523,3 +523,50 @@ a.demolink {
 .red{
 	color: red;
 }
+
+/*hover img css hp*/
+.notes{
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+.notes img{
+    width: 200px;
+    padding-top: 10px;
+}
+.process-bar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0,0,0,0.6);
+}
+.process-bar p{
+    background-color: #fff;
+    order:1px solid #ccc;
+    border-radius:4px;
+}
+.process-bar p span{
+    display: inline-block;
+    height: 100%;
+    background-color: #6FB934;
+    text-align:center;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+}
+@media \0screen\,screen\9 {
+  .process-bar{
+    background-color:#000000;
+    filter:Alpha(opacity=50);
+    position:static; 
+    *zoom:1; 
+  }
+  .process-bar p{
+    position: relative;
+  }  
+}
+.notes:hover .process-bar{
+    display: block;
+}
