@@ -529,10 +529,10 @@ a.demolink {
     text-align: center;
     cursor: pointer;
     position: relative;
+    padding: 10px 0;
 }
 .notes img{
     width: 200px;
-    padding-top: 10px;
 }
 .process-bar{
     position: absolute;
@@ -545,8 +545,14 @@ a.demolink {
 }
 .process-bar p{
     background-color: #fff;
-    order:1px solid #ccc;
+    border:1px solid #ccc;
     border-radius:4px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
 }
 .process-bar p span{
     display: inline-block;
@@ -562,11 +568,6 @@ a.demolink {
     filter:Alpha(opacity=50);
     position:static; 
     *zoom:1; 
-  }
-  .process-bar p{
-    position: relative;
-  }  
+  } 
 }
-.notes:hover .process-bar{
-    display: block;
-}
+

@@ -28,15 +28,6 @@ tag: full_width
         <a href="javascript:;" id="next" class="arrow">&gt;</a>
     </div>
 </div>
-<script type="text/javascript">
-$(window).ready(function(){
-    $(".slider-zone").Carousel({
-        list:'.list',
-        duration: 500,
-        listitem:'.slider-item'
-    });
-}); 
-</script>
 
 <div class="container mtb">
     <div class="row">
@@ -64,7 +55,7 @@ $(window).ready(function(){
                 <img src="{{ site.baseurl }}/public/img/notes.jpg" alt="">
                 <div class="process-bar">
                     <p>
-                        <span></span>
+                        <span id="load_bar"></span>
                     </p>
                 </div>
             </div>          
@@ -84,3 +75,36 @@ $(window).ready(function(){
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+var percent = 0,
+    time;
+function getRandom(n,m){
+    var c = m - n + 1;  
+    return Math.floor(Math.random() * c + n);
+}
+function loadPer(){
+    time = setInterval(function(){
+        percent += getRandom(1,10);
+        var str = (percent > 100 ? 100 : percent) + "%";
+        $("#load_bar").css({"width":str,"transition":"all .2s"}).html(str);
+    },300);
+}
+function stopTime(timeid){
+    clearInterval(timeid);
+}
+
+$(window).ready(function(){
+    $(".slider-zone").Carousel({
+        list:'.list',
+        duration: 500,
+        listitem:'.slider-item'
+    });
+
+    $(".notes").hover(function(){
+        loadPer();
+    },function(){
+        stopTime(time);
+    })
+}); 
+</script>
