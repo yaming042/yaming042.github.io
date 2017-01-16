@@ -85,7 +85,7 @@ function getRandom(n,m){
 }
 function loadPer(){
     time = setInterval(function(){
-        percent += getRandom(1,10);
+        percent += getRandom(1,20);
         var str;
         if(percent > 100){
             str = 100;
@@ -108,7 +108,7 @@ $(window).ready(function(){
     });
 
     $(".notes").hover(function(){
-        $(".process-bar").slideDown("slow",function(){
+        $(".process-bar").slideDown("fast",function(){
             loadPer();
         });        
     },function(){

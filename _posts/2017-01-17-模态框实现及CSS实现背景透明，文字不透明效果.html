@@ -1,0 +1,137 @@
+---
+layout: post
+title:  模态框实现及CSS实现背景透明，文字不透明效果
+author: Tim
+date:   2017-01-17 14:31:22
+categories: issue
+---
+
+<p>在最近的工作中常常接触到遮罩层这东东，这东东大概就是有个一个透明色的遮罩层，然后遮罩层上有些文字啥的，更普遍的应该是表单了吧，不管是啥原理都大同小异，现在就先奉上两份代码，到底怎么用，更需要自己揣摩。</p>
+<h3>1.通过html+css+js实现模态对话框</h3>
+<p>首先在html上定义两个div元素，其中外出div元素表示模态框外面的覆盖层，内层的div表示模态框。</p>
+{% highlight ruby %}
+<div id="modal-overlay"> 
+    <div class="modal-data">		
+        <p>一个很简单的模态对话框 </p>
+        <p>点击<a onclick="overlay()" href="">这里</a>关闭</p>
+    </div>
+</div>
+{% endhighlight %}
+<p>下面是对应的css样式</p>
+{% highlight ruby %}
+/* 定义模态对话框外面的覆盖层样式 */
+#modal-overlay {
+    visibility: hidden;    
+    position: absolute;   /* 使用绝对定位或固定定位  */
+    left: 0px;    
+    top: 0px;
+    width:100%;
+    height:100%;
+    text-align:center;
+    z-index: 1000;
+    background-color: #333; 
+    opacity: 0.5;   /* 背景半透明 */
+}
+/* 模态框样式 */
+.modal-data{
+    width:300px;
+    margin: 100px auto;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
+}
+{% endhighlight %}
+<p>下面是对应的操作函数</p>
+{% highlight ruby %}
+function overlay(){
+    var e1 = document.getElementById('modal-overlay');			
+    e1.style.visibility =  (e1.style.visibility == "visible"  ) ? "hidden" : "visible";
+}
+{% endhighlight %}
+
+<h3>效果如下：</h3>
+<style type="text/css">
+/* 定义模态对话框外面的覆盖层样式 */
+#modal-overlay {
+    visibility: hidden;    
+    position: absolute;   /* 使用绝对定位或固定定位  */
+    left: 0px;    
+    top: 0px;
+    width:100%;
+    height:100%;
+    text-align:center;
+    z-index: 1000;
+    background-color: #333; 
+    opacity: 0.5;   /* 背景半透明 */
+}
+/* 模态框样式 */
+.modal-data{
+    width:300px;
+    margin: 100px auto;
+    background-color: #fff;
+    border:1px solid #000;
+    padding:15px;
+    text-align:center;
+}
+</style>
+<script type="text/javascript">
+function overlay(){
+	var e1 = document.getElementById('modal-overlay');			
+	e1.style.visibility =  (e1.style.visibility == "visible"  ) ? "hidden" : "visible";
+}
+</script>
+<div style="width: 300px;height:60px;background: #7f9f7f;border:1px solid #7f9f7f;border-radius:4px;text-align: center;line-height: 60px;">
+	<div id="modal-overlay"> 
+	    <div class="modal-data">		
+	        <p>一个很简单的模态对话框 </p>
+	        <p>点击<a onclick="overlay()" href="">这里</a>关闭</p>
+	    </div>
+	</div>
+	<a href="javascript:;" onclick="overlay()">显示模态对话框</a>
+</div>
+<p>&nbsp;</p>
+<h3>2.CSS实现背景透明，文字不透明效果</h3>
+<p>直接奉上代码，更多详情可访问<a href="http://www.w2bc.com/Article/10636" target="_blank">【原】CSS实现背景透明，文字不透明，兼容所有浏览器</a>。</p>
+{% highlight ruby %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>背景透明，文字不透明</title>
+<style>
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    padding: 50px;
+}
+
+.demo{
+    padding: 25px;
+    background-color: rgba(0,0,0,0.5);/* IE9、标准浏览器、IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂 */
+}
+.demo p{
+    color: #FFFFFF;
+}
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+    .demo{
+        background-color:#000000;
+        filter:Alpha(opacity=50);
+        position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+        *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+    }
+    .demo p{
+        position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值 */
+    }  
+}
+</style>
+</head>
+<body>    
+    <div class="demo">
+        <p>背景透明，文字不透明</p>
+    </div>
+</html>
+{% endhighlight %}
