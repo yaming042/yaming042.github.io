@@ -125,16 +125,18 @@ permalink: /notes/
    
       var w = X < 0 ? X*-1 : X;     //x轴的滑动值
       var h = Y < 0 ? Y*-1 : Y;     //y轴的滑动值
-      if(w > h){                //如果是在x轴中滑动
+      if(w < h){                //如果是在x轴中滑动
          event.preventDefault();
-         console.log("dfdfdfd");
+         console.log("preventDefault");
       }else{
         if ( X > 0 ) {
             direction = 3;
             console.log(direction);
+             $("#wrapper-250").css("width","15px");
         }else if ( X < 0 ) {
             direction = 4;
             console.log(direction);
+             $("#wrapper-250").css("width","250px");
         }else if ( Y > 0) {
             direction = 1;
             console.log(direction);
