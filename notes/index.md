@@ -83,7 +83,7 @@ permalink: /notes/
   </ul>
 </div>
 <script type="text/javascript">
-$(window).ready(function(){
+
   var accordion_head = $('.accordion > li > a'),
       accordion_body = $('.accordion li > .sub-menu');
       
@@ -146,7 +146,7 @@ $(window).ready(function(){
             direction = 0;
         }
   });
-});
+
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
