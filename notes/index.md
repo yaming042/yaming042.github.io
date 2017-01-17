@@ -109,33 +109,47 @@ permalink: /notes/
       return isMobile;
   }
 
-  var direction;//0:点击,1:上到下,2:下到上,3:左到右,4:右到左
+  var direction;//1:上到下,2:下到上,3:左到右,4:右到左
+  var startX,startY;
   $("#wrapper-250").on("touchstart", function(e) {
-    e.preventDefault();
+    // e.preventDefault();
     startX = e.originalEvent.changedTouches[0].pageX,
     startY = e.originalEvent.changedTouches[0].pageY;
   });
   $("#wrapper-250").on("touchmove", function(e) {
-      e.preventDefault();
-      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      // e.preventDefault();
+      var moveEndX = e.originalEvent.changedTouches[0].pageX,
       moveEndY = e.originalEvent.changedTouches[0].pageY,
       X = moveEndX - startX,
       Y = moveEndY - startY;
    
-      if ( X > 0 && isMobile()) {
-          direction = 3;
-          $("#wrapper-250").css("width","15px");
-      }else if ( X < 0 && isMobile()) {
-          direction = 4;
-          $("#wrapper-250").css("width","250px");
-      }else if ( Y > 0 && isMobile()) {
-          direction = 1;
-      }else if ( Y < 0 && isMobile()) {
-          direction = 2;
+      var w = X < 0 ? X*-1 : X;     //x轴的滑动值
+      var h = Y < 0 ? Y*-1 : Y;     //y轴的滑动值
+      if(w > h){                //如果是在x轴中滑动
+         event.preventDefault();
+         console.log("dfdfdfd");
       }else{
-          direction = 0;
+        if ( X > 0 ) {
+            direction = 3;
+            console.log(direction);
+        }else if ( X < 0 ) {
+            direction = 4;
+            console.log(direction);
+        }else if ( Y > 0) {
+            direction = 1;
+            console.log(direction);
+        }else if ( Y < 0 ) {
+            direction = 2;
+            console.log(direction);
+        }else{
+            console.log("just touch");
+        }
       }
   });
+
+  if(isMobile()){
+    console.log("isMobile");
+  }
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
