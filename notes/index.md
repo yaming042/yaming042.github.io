@@ -122,28 +122,22 @@ permalink: /notes/
       X = moveEndX - startX,
       Y = moveEndY - startY;
    
-      if ( X > 0 ) {
+      if ( X > 0 && isMobile()) {
           direction = 3;
-      }else if ( X < 0 ) {
+          $("#wrapper-250").css("width","250px");
+      }else if ( X < 0 && isMobile()) {
           direction = 4;
-      }else if ( Y > 0) {
+          $("#wrapper-250").css("width","50px");
+      }else if ( Y > 0 && isMobile()) {
           direction = 1;
-      }else if ( Y < 0 ) {
+          $("#wrapper-250").css("width","250px");
+      }else if ( Y < 0 && isMobile()) {
           direction = 2;
+          $("#wrapper-250").css("width","50px");
       }else{
           direction = 0;
       }
   });
-
-  if(isMobile()){
-    console.log("isMobile");
-    console.log("direction is "+direction);
-    if(direction == 3 || direction == 1){
-      $("#wrapper-250").css("width","250px");
-    }else if(direction == 4 || direction == 2){
-      $("#wrapper-250").css("width","5px");
-    }
-  }
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
