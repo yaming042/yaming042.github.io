@@ -112,37 +112,38 @@ $(window).ready(function(){
   }
 
   var direction;//0:点击,1:上到下,2:下到上,3:左到右,4:右到左
-  $("#wrapper-250").mousedown(function(){
-    var me = $(this);
-    me.on("touchstart", function(e) {
-      e.preventDefault();
-      startX = e.originalEvent.changedTouches[0].pageX,
-      startY = e.originalEvent.changedTouches[0].pageY;
-    });
-    me.on("touchmove", function(e) {
-      e.preventDefault();
+  var startX,startY,X,Y;
+  $("#wrapper-250").on("touchstart", function(e) {
+    // e.preventDefault();
+    startX = e.originalEvent.changedTouches[0].pageX,
+    startY = e.originalEvent.changedTouches[0].pageY;
+  });
+  $("#wrapper-250").on("touchmove", function(e) {
+      // e.preventDefault();
       moveEndX = e.originalEvent.changedTouches[0].pageX,
       moveEndY = e.originalEvent.changedTouches[0].pageY,
       X = moveEndX - startX,
       Y = moveEndY - startY;
    
-      if ( X > 0 && isMobile()) {
-          direction = 3;
-          $("#wrapper-250").css("width","15px");
-      }else if ( X < 0 && isMobile()) {
-          direction = 4;
-          $("#wrapper-250").css("width","250px");
-      }else if ( Y > 0 && isMobile()) {
-          direction = 1;
-      }else if ( Y < 0 && isMobile()) {
-          direction = 2;
-      }else{
-          direction = 0;
+      var w = X<0?X*-1:x;     //x轴的滑动值
+      var h = Y<0?Y*-1:y;     //y轴的滑动值
+      if(w > h){                //如果是在x轴中滑动
+         event.preventDefault();
+
+        if ( X > 0 && isMobile()) {
+            direction = 3;
+            $("#wrapper-250").css("width","15px");
+        }else if ( X < 0 && isMobile()) {
+            direction = 4;
+            $("#wrapper-250").css("width","250px");
+        }else if ( Y > 0 && isMobile()) {
+            direction = 1;
+        }else if ( Y < 0 && isMobile()) {
+            direction = 2;
+        }else{
+            direction = 0;
+        }
       }
-    });
-  });
-  $("#wrapper-250").mouseup(function(){
-    $(this).off("touchmove");
   });
 });
 </script>
