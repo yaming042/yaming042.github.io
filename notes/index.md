@@ -109,12 +109,40 @@ permalink: /notes/
       return isMobile;
   }
 
+  var direction;//0:点击,1:上到下,2:下到上,3:左到右,4:右到左
+  $("#wrapper-250").on("touchstart", function(e) {
+    e.preventDefault();
+    startX = e.originalEvent.changedTouches[0].pageX,
+    startY = e.originalEvent.changedTouches[0].pageY;
+  });
+  $("#wrapper-250").on("touchmove", function(e) {
+      e.preventDefault();
+      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      moveEndY = e.originalEvent.changedTouches[0].pageY,
+      X = moveEndX - startX,
+      Y = moveEndY - startY;
+   
+      if ( X > 0 ) {
+          direction = 3;
+      }else if ( X < 0 ) {
+          direction = 4;
+      }else if ( Y > 0) {
+          direction = 1;
+      }else if ( Y < 0 ) {
+          direction = 2;
+      }else{
+          direction = 0;
+      }
+  });
+
   if(isMobile()){
-    $("#wrapper-250").toggle(function(){
+    console.log("isMobile");
+    console.log("direction is "+direction);
+    if(direction == 3 || direction == 1){
       $("#wrapper-250").css("width","250px");
-    },function(){
+    }else if(direction == 4 || direction == 2){
       $("#wrapper-250").css("width","5px");
-    });
+    }
   }
 </script>
 <div class="alert alert-warning" role="alert">
