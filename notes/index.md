@@ -124,10 +124,10 @@ $(window).ready(function(){
       X = moveEndX - startX,
       Y = moveEndY - startY;
    
-      if ( X > 0 && isMobile()) {
+      if ( X > 15 && isMobile()) {
           direction = 3;
           $("#wrapper-250").css("width","15px");
-      }else if ( X < 0 && isMobile()) {
+      }else if ( X*(-1) > 15 && isMobile()) {
           direction = 4;
           $("#wrapper-250").css("width","250px");
       }else if ( Y > 0 && isMobile()) {
@@ -137,8 +137,6 @@ $(window).ready(function(){
       }else{
           direction = 0;
       }
-  }).on('touchend', function() {
-      $("#wrapper-250").off('touchmove');
   });
 });
 </script>
