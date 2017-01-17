@@ -99,6 +99,12 @@ permalink: /notes/
           $(this).addClass('active');
       }
   });
+  $(".sub-menu li a").on("click",function(event){
+    event.preventDefault();
+    var href = $(this).attr("href").slice(1);
+    var pos = $("#"+href).offset().top - 72;
+    $(document.body).animate({scrollTop:pos+'px'},500);
+  });
 
   var ua = navigator.userAgent;
   function isMobile(){
@@ -129,29 +135,22 @@ permalink: /notes/
          event.preventDefault();
          console.log("preventDefault");
       }else{
-        if ( X > 0 ) {
+        if ( X > 0 && isMobile()) {
             direction = 3;
-            console.log(direction);
              $("#wrapper-250").css("width","15px");
-        }else if ( X < 0 ) {
+        }else if ( X < 0 && isMobile()) {
             direction = 4;
-            console.log(direction);
              $("#wrapper-250").css("width","250px");
-        }else if ( Y > 0) {
+        }else if ( Y > 0 && isMobile()) {
             direction = 1;
-            console.log(direction);
-        }else if ( Y < 0 ) {
+        }else if ( Y < 0 && isMobile()) {
             direction = 2;
-            console.log(direction);
         }else{
             console.log("just touch");
         }
       }
   });
 
-  if(isMobile()){
-    console.log("isMobile");
-  }
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
