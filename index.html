@@ -12,7 +12,7 @@ tag: full_width
             </a>
         </h3>
     </div>
-    <div class="slider-zone">           
+    <!-- <div class="slider-zone">           
         <div class="list">
             <div class="slider-item">
                 <img src="{{ site.baseurl }}/public/img/slider1.jpg" alt="" >
@@ -26,7 +26,8 @@ tag: full_width
         </div>
         <a href="javascript:;" id="prev" class="arrow">&lt;</a>
         <a href="javascript:;" id="next" class="arrow">&gt;</a>
-    </div>
+    </div> -->
+    <img src="{{ site.baseurl }}/public/img/banner.jpg" alt="" style="width:100%;">    
 </div>
 
 <div class="container mtb">
@@ -89,6 +90,7 @@ function loadPer(){
         var str;
         if(percent > 100){
             str = 100;
+            stopTime(time);
             window.location.href = "https://yaming042.github.io/notes/";
         }else{
             str = percent;
@@ -101,21 +103,21 @@ function stopTime(timeid){
 }
 
 $(window).ready(function(){
-    $(".slider-zone").Carousel({
-        list:'.list',
-        duration: 500,
-        listitem:'.slider-item'
-    });
+    // $(".slider-zone").Carousel({
+    //     list:'.list',
+    //     duration: 500,
+    //     listitem:'.slider-item'
+    // });
 
     $(".notes").hover(function(){
         $(".process-bar").slideDown("fast",function(){
             loadPer();
         });        
     },function(){
+        stopTime(time);
         $(".process-bar").slideUp("slow",function(){
             percent = 0;
             $("#load_bar").css("width",0).html("");
-            stopTime(time);
         });        
     })
 }); 
