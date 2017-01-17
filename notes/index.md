@@ -83,6 +83,7 @@ permalink: /notes/
   </ul>
 </div>
 <script type="text/javascript">
+$(window).ready(function(){
   var accordion_head = $('.accordion > li > a'),
       accordion_body = $('.accordion li > .sub-menu');
       
@@ -98,6 +99,8 @@ permalink: /notes/
           $(this).addClass('active');
       }
   });
+
+
 
   var ua = navigator.userAgent;
   function isMobile(){
@@ -134,7 +137,10 @@ permalink: /notes/
       }else{
           direction = 0;
       }
+  }).on('touchend', function() {
+      $("#wrapper-250").off('touchmove');
   });
+});
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
