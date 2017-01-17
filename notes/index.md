@@ -130,7 +130,9 @@ $(window).ready(function(){
       if(w > h){                //如果是在x轴中滑动
          // event.preventDefault();
 
-        if ( X > 0 && isMobile()) {
+        
+      }
+      if ( X > 0 && isMobile()) {
             direction = 3;
             $("#wrapper-250").css("width","15px");
         }else if ( X < 0 && isMobile()) {
@@ -143,7 +145,6 @@ $(window).ready(function(){
         }else{
             direction = 0;
         }
-      }
   });
 });
 </script>
