@@ -114,12 +114,12 @@ $(window).ready(function(){
   var direction;//0:点击,1:上到下,2:下到上,3:左到右,4:右到左
   var startX,startY;
   $("#wrapper-250").on("touchstart", function(e) {
-    // e.preventDefault();
+    e.preventDefault();
     startX = e.originalEvent.changedTouches[0].pageX,
     startY = e.originalEvent.changedTouches[0].pageY;
   });
   $("#wrapper-250").on("touchmove", function(e) {
-      // e.preventDefault();
+      e.preventDefault();
       var moveEndX = e.originalEvent.changedTouches[0].pageX,
         moveEndY = e.originalEvent.changedTouches[0].pageY,
         X = moveEndX - startX,
@@ -128,7 +128,7 @@ $(window).ready(function(){
       var w = X < 0 ? X*-1 : X;     //x轴的滑动值
       var h = Y < 0 ? Y*-1 : Y;     //y轴的滑动值
       if(w > h){                //如果是在x轴中滑动
-         event.preventDefault();
+         // event.preventDefault();
 
         if ( X > 0 && isMobile()) {
             direction = 3;
