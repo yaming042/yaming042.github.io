@@ -85,13 +85,12 @@ permalink: /notes/
 <script type="text/javascript">
   var accordion_head = $('.accordion > li > a'),
       accordion_body = $('.accordion li > .sub-menu');
-      // Open the first tab on load
+      
   accordion_head.first().addClass('active').next().slideDown('normal');
-  // Click function
+  
   accordion_head.on('click', function(event) {
-      // Disable header links
       event.preventDefault();
-      // Show and hide the tabs on click
+      console.log("ckick"+"|"+event);
       if ($(this).attr('class') != 'active'){
           accordion_body.slideUp('normal');
           $(this).next().stop(true,true).slideToggle('normal');
@@ -130,10 +129,8 @@ permalink: /notes/
           $("#wrapper-250").css("width","250px");
       }else if ( Y > 0 && isMobile()) {
           direction = 1;
-          $("#wrapper-250").css("width","250px");
       }else if ( Y < 0 && isMobile()) {
           direction = 2;
-          $("#wrapper-250").css("width","15px");
       }else{
           direction = 0;
       }
