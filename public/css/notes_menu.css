@@ -176,4 +176,27 @@
 	width:250px;
 	top: 166px;
 	left: 66px;
+	z-index: 2;
+}
+@media screen and (min-width: 1024px) and (max-width: 1640px){
+	.alert-warning {
+		width: 70%;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	#wrapper-250{
+		left: 6px;
+	}
+}
+@media screen and (max-width: 640px){
+	#wrapper-250{
+		width: 5px;
+		top: 70px;
+		left: auto;
+		right: 10px;
+		transition: width .8s;
+	}
+	.alert-warning {
+		word-wrap: break-word;
+	}
 }

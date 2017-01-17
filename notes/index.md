@@ -99,6 +99,23 @@ permalink: /notes/
           $(this).addClass('active');
       }
   });
+
+  var ua = navigator.userAgent;
+  function isMobile(){
+    var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+        isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+        isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+        isMobile = isIphone || isAndroid;
+      return isMobile;
+  }
+
+  if(isMobile()){
+    $("#wrapper-250").toggle(function(){
+      $("#wrapper-250").css("width","250px");
+    },function(){
+      $("#wrapper-250").css("width","5px");
+    });
+  }
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
