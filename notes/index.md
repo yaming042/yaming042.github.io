@@ -124,16 +124,16 @@ permalink: /notes/
    
       if ( X > 0 && isMobile()) {
           direction = 3;
-          $("#wrapper-250").css("width","250px");
+          $("#wrapper-250").css("width","15px");
       }else if ( X < 0 && isMobile()) {
           direction = 4;
-          $("#wrapper-250").css("width","50px");
+          $("#wrapper-250").css("width","250px");
       }else if ( Y > 0 && isMobile()) {
           direction = 1;
           $("#wrapper-250").css("width","250px");
       }else if ( Y < 0 && isMobile()) {
           direction = 2;
-          $("#wrapper-250").css("width","50px");
+          $("#wrapper-250").css("width","15px");
       }else{
           direction = 0;
       }
