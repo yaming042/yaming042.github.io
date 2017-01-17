@@ -121,9 +121,9 @@ $(window).ready(function(){
   $("#wrapper-250").on("touchmove", function(e) {
       // e.preventDefault();
       var moveEndX = e.originalEvent.changedTouches[0].pageX,
-      var moveEndY = e.originalEvent.changedTouches[0].pageY,
-      var X = moveEndX - startX,
-      var Y = moveEndY - startY;
+        moveEndY = e.originalEvent.changedTouches[0].pageY,
+        X = moveEndX - startX,
+        Y = moveEndY - startY;
    
       var w = X < 0 ? X*-1 : X;     //x轴的滑动值
       var h = Y < 0 ? Y*-1 : Y;     //y轴的滑动值
