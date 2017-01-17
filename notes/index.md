@@ -83,15 +83,15 @@ permalink: /notes/
   </ul>
 </div>
 <script type="text/javascript">
-
   var accordion_head = $('.accordion > li > a'),
       accordion_body = $('.accordion li > .sub-menu');
-      
+      // Open the first tab on load
   accordion_head.first().addClass('active').next().slideDown('normal');
-  
+  // Click function
   accordion_head.on('click', function(event) {
+      // Disable header links
       event.preventDefault();
-      console.log("ckick"+"|"+event);
+      // Show and hide the tabs on click
       if ($(this).attr('class') != 'active'){
           accordion_body.slideUp('normal');
           $(this).next().stop(true,true).slideToggle('normal');
@@ -99,8 +99,6 @@ permalink: /notes/
           $(this).addClass('active');
       }
   });
-
-
 
   var ua = navigator.userAgent;
   function isMobile(){
@@ -112,7 +110,6 @@ permalink: /notes/
   }
 
   var direction;//0:点击,1:上到下,2:下到上,3:左到右,4:右到左
-  var startX,startY;
   $("#wrapper-250").on("touchstart", function(e) {
     e.preventDefault();
     startX = e.originalEvent.changedTouches[0].pageX,
@@ -120,33 +117,25 @@ permalink: /notes/
   });
   $("#wrapper-250").on("touchmove", function(e) {
       e.preventDefault();
-      var moveEndX = e.originalEvent.changedTouches[0].pageX,
-        moveEndY = e.originalEvent.changedTouches[0].pageY,
-        X = moveEndX - startX,
-        Y = moveEndY - startY;
+      moveEndX = e.originalEvent.changedTouches[0].pageX,
+      moveEndY = e.originalEvent.changedTouches[0].pageY,
+      X = moveEndX - startX,
+      Y = moveEndY - startY;
    
-      var w = X < 0 ? X*-1 : X;     //x轴的滑动值
-      var h = Y < 0 ? Y*-1 : Y;     //y轴的滑动值
-      if(w > h){                //如果是在x轴中滑动
-         // event.preventDefault();
-
-        
-      }
       if ( X > 0 && isMobile()) {
-            direction = 3;
-            $("#wrapper-250").css("width","15px");
-        }else if ( X < 0 && isMobile()) {
-            direction = 4;
-            $("#wrapper-250").css("width","250px");
-        }else if ( Y > 0 && isMobile()) {
-            direction = 1;
-        }else if ( Y < 0 && isMobile()) {
-            direction = 2;
-        }else{
-            direction = 0;
-        }
+          direction = 3;
+          $("#wrapper-250").css("width","15px");
+      }else if ( X < 0 && isMobile()) {
+          direction = 4;
+          $("#wrapper-250").css("width","250px");
+      }else if ( Y > 0 && isMobile()) {
+          direction = 1;
+      }else if ( Y < 0 && isMobile()) {
+          direction = 2;
+      }else{
+          direction = 0;
+      }
   });
-
 </script>
 <div class="alert alert-warning" role="alert">
 <h2>2016</h2>
