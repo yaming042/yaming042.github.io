@@ -41,7 +41,7 @@ function scrollTxt(){
     var controls={}, 
         values={},
         t1=500, /*播放动画的时间*/
-        t2=3000, /*播放时间间隔*/
+        t2=10000, /*播放时间间隔*/
         si;
     controls.rollWrap=$("#roll-wrap");/*滚动容器*/
     controls.rollWrapUl=controls.rollWrap.children();/*ul容器*/
@@ -96,5 +96,5 @@ $(window).ready(function(){
     //     listitem:'.slider-item'
     // });
     notesFun();
-    beginList();
+    //beginList();
 }); 
