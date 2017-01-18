@@ -592,8 +592,10 @@ a.demolink {
 .top-left, .top-right{
     width: 50%;
     float: left;
-    padding: 10px;
     overflow: hidden;
+}
+.top-right{
+    padding: 10px;
 }
 .top-left img{
     width: 100%;
