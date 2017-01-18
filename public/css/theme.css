@@ -583,9 +583,6 @@ a.demolink {
 .img70{width:70%;}
 @media screen and (max-width: 640px){
     .img70{width: 98%;}
-    .top-left, .top-right{
-        width: 100%;
-    }
 }
 
 /*homepage top list css*/
@@ -640,4 +637,26 @@ a.demolink {
     margin-right: 5px;
 }
 .roll-wrap a:hover{color: red;}
+@media screen and (max-width: 640px){
+    .top-left, .top-right{
+        width: 100%;
+    }
+}
+
+/*articles css style*/
+.article-right{
+	width: 200px;
+	float: right;
+	border: 1px solid #000;
+	height: 400px;
+}
+.article-left{
+	width: 100%;
+	padding-right: 240px;
+}
+@media screen and (max-width: 640px){
+	.article-right{display:none;}
+    .article-left{padding-right: 15px;}
+}
+
 
