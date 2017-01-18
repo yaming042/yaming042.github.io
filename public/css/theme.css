@@ -626,6 +626,7 @@ a.demolink {
     color: #fff;
     background-color: blue;
     font-size: 13px;
+    margin-right: 5px;
 }
 .roll-wrap a:hover{color: red;}
 
