@@ -583,5 +583,30 @@ a.demolink {
 .img70{width:70%;}
 @media screen and (max-width: 640px){
     .img70{width: 98%;}
+    .top-left, .top-right{
+        width: 100%;
+    }
+}
+
+/*homepage top list css*/
+.top-left, .top-right{
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+.top-left img{
+    width: 100%;
+}
+.top-text{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #000;
+}
+.top-text h4{
+    border-bottom: 1px dashed #ccc;
+}
+.roll-wrap{
+    height: 90px;
+    overflow: hidden;
 }
 

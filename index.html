@@ -27,7 +27,32 @@ tag: full_width
         <a href="javascript:;" id="prev" class="arrow">&lt;</a>
         <a href="javascript:;" id="next" class="arrow">&gt;</a>
     </div> -->
-    <img src="{{ site.baseurl }}/public/img/banner.jpg" alt="" style="width:100%;">    
+    <div class="container">
+        <div class="top-left">
+            <a href="/">
+                <img src="{{ site.baseurl }}/public/img/web.jpg" alt="">
+            </a>
+        </div>
+        <div class="top-right">
+            <div class="top-text">
+                <h3>从菜鸟到巅峰的四个阶段</h3>
+                <p>程序开发都会经历那些阶段呢,看看前辈的总结,让你认清自己,不要再盲目自大,把自己放低一点,你将会进步de快一点<a href="#" style="color:blue;">[查看全文]</a></p>
+                <h4>热门阅读</h4>
+                <div class="roll-wrap" id="roll-wrap">
+                    <ul>
+                        <li>JS文本向上滚动1</li>
+                        <li>JS文本向上滚动2</li>
+                        <li>JS文本向上滚动3</li>
+                        <li>JS文本向上滚动4</li>
+                        <li>JS文本向上滚动5</li>
+                        <li>JS文本向上滚动6</li>
+                        <li>JS文本向上滚动7</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
 </div>
 
 <div class="container mtb">
@@ -77,48 +102,4 @@ tag: full_width
     </div>
 </div>
 
-<script type="text/javascript">
-var percent = 0,
-    time;
-function getRandom(n,m){
-    var c = m - n + 1;  
-    return Math.floor(Math.random() * c + n);
-}
-function loadPer(){
-    time = setInterval(function(){
-        percent += getRandom(1,20);
-        var str;
-        if(percent > 100){
-            str = 100;
-            stopTime(time);
-            window.location.href = "https://yaming042.github.io/notes/";
-        }else{
-            str = percent;
-        }
-        $("#load_bar").css({"width":str+"%","transition":"all .2s"}).html(str+"%");
-    },300);
-}
-function stopTime(timeid){
-    clearInterval(timeid);
-}
-
-$(window).ready(function(){
-    // $(".slider-zone").Carousel({
-    //     list:'.list',
-    //     duration: 500,
-    //     listitem:'.slider-item'
-    // });
-
-    $(".notes").hover(function(){
-        $(".process-bar").slideDown("fast",function(){
-            loadPer();
-        });        
-    },function(){
-        stopTime(time);
-        $(".process-bar").slideUp("slow",function(){
-            percent = 0;
-            $("#load_bar").css("width",0).html("");
-        });        
-    })
-}); 
-</script>
+<script type="text/javascript" src="{{ site.baseurl }}/public/js/index.js"></script>
