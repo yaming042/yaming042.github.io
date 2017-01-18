@@ -645,18 +645,18 @@ a.demolink {
 
 /*articles css style*/
 .article-right{
-	width: 200px;
+	width: 300px;
 	float: right;
-	border: 1px solid #000;
+	border: 1px solid #ccc;
 	height: 400px;
 }
 .article-left{
 	width: 100%;
-	padding-right: 240px;
+	padding-right: 340px;
 }
 @media screen and (max-width: 640px){
 	.article-right{display:none;}
-    .article-left{padding-right: 15px;}
+    .article-left{padding-right: 0;}
 }
 
 
