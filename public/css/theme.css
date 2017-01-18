@@ -593,9 +593,18 @@ a.demolink {
     width: 50%;
     float: left;
     padding: 10px;
+    overflow: hidden;
 }
 .top-left img{
     width: 100%;
+    transition: all 1s;
+}
+.top-left:hover img{
+    transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
 }
 .top-text{
     border: 1px solid #ccc;
