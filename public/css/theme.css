@@ -580,8 +580,8 @@ a.demolink {
     text-indent: 2em;
 }
 
-.img60{width:60%;}
+.img70{width:70%;}
 @media screen and (max-width: 640px){
-    .img60{width: 98%;}
+    .img70{width: 98%;}
 }
 
