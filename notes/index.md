@@ -266,10 +266,25 @@ clear:after{
 <p class="indent2">3.父容器设置overflow:hidden;属性</p>
 <p class="red">注：元素同时用float和position:absolute时，清除浮动会有兼容问题，此时可以用1,3的办法</p>
 <p>&nbsp;<br>&nbsp;</p>
-<h4 id="pos71"></h4>
-<p class="grey">暂无</p>
-<h4 id="pos72"></h4>
-<p class="grey">暂无</p>
+<h4 id="pos71">7月1周</h4>
+<p class="red">placeholder用js统一兼容问题</p>
+{% highlight ruby %}
+<input type="text" onfocus="if(this.value == 'xxx'){this.value = 'sss';}" onblur="if(this.value == 'xxxx'){this.value = 'aaaa';}" />
+控制其样式：
+input{color:#777;} => input:focus{display:block;color:#000;}
+{% endhighlight %}
+<p>&nbsp;</p>
+<h4 id="pos72">7月2周</h4>
+<p class="red">一般div错位：</p>
+<p class="indent2">1.检查是否position:absolute后是否没设置高度</p>
+<p class="indent2">2.检查float后是否没有清除浮动</p>
+<p class="indent2">3.检查元素的z-index值，是否被覆盖</p>
+<p class="indent2">4.检查是否用了iframe，iframe默认是撑不开父容器的</p>
+<p class="indent2">5.检查div标签是否正确闭合</p>
+<p class="indent2">6.absolute后top:20%无效，确认各父容器的height存在且正确</p>
+<p class="indent2">7.float后位置不对也可能是各容器高度不一样导致的</p>
+
+<p>&nbsp;</p>
 <h4 id="pos73"></h4>
 <p class="grey">暂无</p>
 <h4 id="pos74"></h4>
