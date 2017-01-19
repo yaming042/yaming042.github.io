@@ -54,11 +54,9 @@ function scrollTxt(){
     this.init=function(){
         autoPlay();
         pausePlay();
-        console.log(controls.rollWrapLIs);
     }
     /*滚动*/
     function play(){
-    	console.log("play");
         controls.rollWrapUl.animate({"margin-top" : "-"+values.liHeight}, t1, function(){
             $(this).css("margin-top" , "0").children().eq(0).appendTo($(this));
         });

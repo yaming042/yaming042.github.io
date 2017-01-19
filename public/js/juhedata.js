@@ -3,7 +3,7 @@ $(function(){
 });
 
 window.getNews = function(){
-	var url = "http://yaming.site/juhedata/data.php";
+	var newsUrl = "http://yaming.site/juhedata/data.php";
 
 	function renderNews(data){
 		var len = data.length,
