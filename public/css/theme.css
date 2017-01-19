@@ -659,4 +659,21 @@ a.demolink {
     .article-left{padding-right: 0;}
 }
 
-
+/*news css style*/
+.news-item{
+    width:100%;
+    border-bottom: 1px dashed #dcdcdc;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    overflow: hidden;
+}
+.news-item img{
+    width:100px;
+    height:75px;
+    float:right;
+    margin-left: 10px;
+}
+.news-item p{
+    overflow: hidden;
+    margin:0;
+}
