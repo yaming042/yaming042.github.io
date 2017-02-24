@@ -286,7 +286,11 @@ input{color:#777;} => input:focus{display:block;color:#000;}
 
 <p>&nbsp;</p>
 <h4 id="pos73"></h4>
-<p class="grey">暂无</p>
+<p class="red">image加载错误时加载默认图片</p>
+{% highlight ruby %}
+<img src="应该加载的图片地址" onerror="this.src='默认的图片加载地址'">
+{% endhighlight %}
+<p>&nbsp;</p>
 <h4 id="pos74"></h4>
 <p class="grey">暂无</p>
 <p>&nbsp;<br>&nbsp;</p>
