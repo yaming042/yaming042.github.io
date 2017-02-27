@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>js算法测试</title>
+	<link rel="stylesheet" href="sort.css">
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+
+</head>
+<body>
+	<!--1.随机生成乱序数据-->
+	<div class="">
+		<input type="text" id="creatData" value="" placeholder="数组最大值(最小值默认0)">
+		<input type="text" id="countData" value="" placeholder="数组的长度">
+		<input type="button" class="default" value="生成数据">
+		<label for="beforeValue">待排序数据</label>
+		<input type="text" id="testValue" value="">
+
+	</div>
+
+	<div class="btn-zone">
+		<button id="sort1">冒泡排序</button>
+		<button id="sort2" disabled="disabled">选择排序</button>
+		<button id="sort3" disabled="disabled">插入排序</button>
+		<button id="sort4" disabled="disabled">希尔排序</button>
+		<button id="sort5" disabled="disabled">归并排序</button>
+		<button id="sort6" disabled="disabled">快递排序</button>
+		<button id="sort7" disabled="disabled">堆排序</button>
+		<button id="sort8" disabled="disabled">计数排序</button>
+		<button id="sort9" disabled="disabled">桶排序</button>
+		<button id="sort10" disabled="disabled">基数排序</button>
+	</div>
+	<hr>
+	<div class="time-zone"></div>
+	<hr>
+	<div class="list-zone">	</div>
+
+	<script type="text/javascript">
+		var Time = 0,
+			lenTime,
+			afterArr;
+		var dataArr = new Array();
+		//获取随机数
+		function getRandom(n,m){
+	        var c = m - n + 1;  
+	        return Math.floor(Math.random() * c + n);
+	    }
+		function creatData(){
+			var rang = $("#creatData").val();
+			var count = $("#countData").val();
+			var isNumber = /^\+?[1-9][0-9]*$/;
+			var data = "",temp;
+
+			if(isNumber.test(rang) && isNumber.test(count)){
+				for(var i=0;i<count;i++){
+					if(i >= count-1){
+						temp = getRandom(0,rang)
+					}else{
+						temp = getRandom(0,rang) + ',';
+					}					
+					data += temp;
+				}
+			}
+			return data;
+		}
+		function rendArr(){
+			$(".default").on("click",function(){
+				$("#testValue").val(creatData());
+			});
+		}
+
+		function creatTime(){
+			var d = new Date();
+			return (d.getTime());
+		}
+		function cacuTime(){
+			var d = new Date();
+			return(d.getTime() - Time);
+		}
+
+		function renderList(type){
+			var html = '<div class="afterSort type'+type+'"><p class="item">排序类型：<span>'+dataArr[0]+'</span></p><p class="item">数组：<span>'+dataArr[1]+'</span></p><p class="item">排序时间：<span>'+dataArr[2]+'ms</span></p></div><hr />';
+
+			var timeHtml = '<span id="s'+type+'">'+dataArr[2]+'ms</span>';
+
+			$(timeHtml).appendTo($('.time-zone'));
+			$(html).appendTo($('.list-zone'));
+			dataArr.splice(0,dataArr.length);
+		}
+
+		function beginSort(){
+			var data, testArr;
+			$(".btn-zone button").hover(function(){
+				data = $("#testValue").val();
+				testArr = data.split(",");
+			});
+
+			$(".btn-zone button").on("click",function(){
+				dataArr.push($(this).text());
+				var sortType = $(this).attr("id").substring(4);
+
+				if($(".afterSort").hasClass('type'+sortType)){					
+					return ;
+				}
+				var len = testArr.length;
+				for(var i=0;i<len;i++){
+					testArr[i] = Number(testArr[i]);
+				}
+
+				switch (sortType){
+					case '1':
+						Time = creatTime();
+						afterArr = sortByBubble(testArr);
+						lenTime = cacuTime();
+
+						dataArr.push(afterArr);
+						dataArr.push(lenTime);
+						break;
+					default:
+						//...
+				}
+
+				renderList(sortType);
+			});
+		}
+
+		$(window).ready(function(){
+			rendArr();
+			beginSort();
+		});
+
+		//冒泡排序
+		function sortByBubble(arr){
+			var len = arr.length;
+			var temp;
+			for(var i=0;i<len-1;i++){
+				for(var j=0;j<len-1-i;j++){
+					if(arr[j+1] > arr[j]){
+						temp = arr[j+1];
+						arr[j+1] = arr[j];
+						arr[j] = temp;
+					}
+				}
+			}
+			return arr;
+		}
+	</script>
+</body>
+</html>
