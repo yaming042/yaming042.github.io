@@ -38,11 +38,13 @@ permalink: /fe/jq/
 			lenTime,
 			afterArr;
 		var dataArr = new Array();
+		
 		//获取随机数
 		function getRandom(n,m){
 	        var c = m - n + 1;  
 	        return Math.floor(Math.random() * c + n);
 	    }
+
 		function creatData(){
 			var rang = $("#creatData").val();
 			var count = $("#countData").val();
@@ -61,29 +63,42 @@ permalink: /fe/jq/
 			}
 			return data;
 		}
+
 		function rendArr(){
 			$(".default").on("click",function(){
 				$("#testValue").val(creatData());
 			});
 		}
 
-		function creatTime(){
-			var d = new Date();
-			return (d.getTime());
-		}
-		function cacuTime(){
-			var d = new Date();
-			return(d.getTime() - Time);
+		function cacuTime(type,arr){
+			var start,end;
+			switch (type){
+				case '1':
+					start = new Date().getTime();
+					afterArr = sortByBubble(arr);
+					end = new Date().getTime();
+					break;
+				case '2':
+					start = new Date().getTime();
+					afterArr = sortBySelect(arr);
+					end = new Date().getTime();
+					break;
+				default:
+					//...
+			}
+			dataArr.push(afterArr,end-start);
 		}
 
 		function renderList(type){
 			var html = '<div class="afterSort type'+type+'"><p class="item">排序类型：<span>'+dataArr[0]+'</span></p><p class="item">数组：<span>'+dataArr[1]+'</span></p><p class="item">排序时间：<span>'+dataArr[2]+'ms</span></p></div><hr />';
 
-			var timeHtml = '<span id="s'+type+'">'+dataArr[2]+'ms</span>';
+			var timeHtml = '<span id="s'+type+'" data-attr="'+dataArr[0]+'">'+dataArr[2]+'ms</span>';
 
 			$(timeHtml).appendTo($('.time-zone'));
 			$(html).appendTo($('.list-zone'));
 			dataArr.splice(0,dataArr.length);
+
+			timeZhover();
 		}
 
 		function beginSort(){
@@ -105,20 +120,20 @@ permalink: /fe/jq/
 					testArr[i] = Number(testArr[i]);
 				}
 
-				switch (sortType){
-					case '1':
-						Time = creatTime();
-						afterArr = sortByBubble(testArr);
-						lenTime = cacuTime();
-
-						dataArr.push(afterArr);
-						dataArr.push(lenTime);
-						break;
-					default:
-						//...
-				}
-
+				cacuTime(sortType,testArr);
 				renderList(sortType);
+			});
+		}
+
+		function timeZhover(){
+			$(".time-zone span").hover(function(){
+				console.log("hover");
+				var me = $(this),
+					typeId = me.attr("id").substring(1),
+					name = $("#sort"+typeId).text();
+				me.addClass("showTip");
+			},function(){
+				$(this).removeClass("showTip");
 			});
 		}
 
@@ -139,6 +154,24 @@ permalink: /fe/jq/
 						arr[j] = temp;
 					}
 				}
+			}
+			return arr;
+		}
+		//选择排序
+		function sortBySelect(arr){
+			var len = arr.length,
+				temp,
+				maxIndex;
+			for(var i=0;i<len-1;i++){
+				maxIndex = i;
+				for(var j=i;j<len;j++){
+					if(arr[maxIndex] < arr[j+1]){
+						maxIndex = j + 1;
+					}
+				}
+				temp = arr[i];
+				arr[i] = arr[maxIndex];
+				arr[maxIndex] = temp;
 			}
 			return arr;
 		}

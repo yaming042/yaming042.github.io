@@ -1,9 +1,15 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Microsoft YaHei';margin:5px;}
 input[type='text']{display:block;margin:4px 0;height:30px;padding:0 4px;}
-input[type='button']{display:block;margin:10px 0;height:30px;cursor:pointer;}
+input[type='button']{display:block;margin:10px 0;height:30px;cursor:pointer;padding:5px;}
+#testValue{color:red;width:100%;}
 .btn-zone{margin:10px 0;}
 .btn-zone button{margin:4px;padding:4px;cursor:pointer;}
 .time-zone{margin:20px 0;}
-.time-zone span{display:inline-block;border:1px solid #ccc;padding:5px 10px;}
+.time-zone span{display:inline-block;border:1px solid #ccc;padding:5px 10px;margin:0 4px;color:red;position:relative;}
 .list-zone{}
+.afterSort{}
+.afterSort p{margin:4px 0;}
+.afterSort p span{color:red;word-wrap:break-word;}
+.showTip:after{content:attr(data-attr);display:inline-block;height:30px;width:100px;right:-70px;color:#fff;top:-40px;text-align:center;line-height:30px;background-color:#00b0ff;position:absolute;border-radius:2px;}
+.showTip:before{content:'';display:inline-block;width:0;border:10px solid;border-color:#00b0ff transparent transparent transparent;position: absolute;top:-10px;right:0px;}
