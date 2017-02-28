@@ -8,8 +8,8 @@ permalink: /fe/jq/
 <link rel="stylesheet" href="{{ site.baseurl }}/public/css/sort.css" />
 <!--1.随机生成乱序数据-->
 	<div class="">
-		<input type="text" id="creatData" value="" placeholder="数组最大值(最小值默认0)">
-		<input type="text" id="countData" value="" placeholder="数组的长度">
+		<input type="text" id="creatData" value="" placeholder="数组最大值">
+		<input type="text" id="countData" value="" placeholder="数组长度">
 		<input type="button" class="default" value="生成数据">
 		<label for="beforeValue">待排序数据</label>
 		<input type="text" id="testValue" value="">
@@ -18,7 +18,7 @@ permalink: /fe/jq/
 
 	<div class="btn-zone">
 		<button id="sort1">冒泡排序</button>
-		<button id="sort2" disabled="disabled">选择排序</button>
+		<button id="sort2">选择排序</button>
 		<button id="sort3" disabled="disabled">插入排序</button>
 		<button id="sort4" disabled="disabled">希尔排序</button>
 		<button id="sort5" disabled="disabled">归并排序</button>
@@ -124,6 +124,7 @@ permalink: /fe/jq/
 				renderList(sortType);
 			});
 		}
+ 
 
 		function timeZhover(){
 			$(".time-zone span").hover(function(){
