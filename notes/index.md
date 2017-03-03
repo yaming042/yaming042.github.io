@@ -285,14 +285,30 @@ input{color:#777;} => input:focus{display:block;color:#000;}
 <p class="indent2">7.float后位置不对也可能是各容器高度不一样导致的</p>
 
 <p>&nbsp;</p>
-<h4 id="pos73"></h4>
+<h4 id="pos73">2017-3月1周</h4>
 <p class="red">image加载错误时加载默认图片</p>
 {% highlight ruby %}
 <img src="应该加载的图片地址" onerror="this.src='默认的图片加载地址'">
 {% endhighlight %}
 <p>&nbsp;</p>
-<h4 id="pos74"></h4>
-<p class="grey">暂无</p>
+<h4 id="pos74">2017-3月1周</h4>
+<p class="red">一种左右结构的HTML</p>
+<p>两个标签均为块元素，然后浮动第一个，第二个overflow:hidden;这样就能左右排列，然后清除浮动，在父元素上overflow:hidden; 这样的结构主要避免后面元素内内容过多导致包裹的现象。例如</p>
+<img src="{{ site.baseurl }}/public/img/170303-1.png" alt="" style="width:250px;">
+{% highlight ruby %}
+<style type="text/css">
+  .main{overflow: hidden;}
+  .img{float: left;}
+  .main p{overflow: hidden;}
+</style>
+<div class="main">
+  <img src="xxx.jpg" alt="" class="img">
+  <p>dffdfsdfsdfasfdsfsdfasfasdfsdfsdfddfffaff</p>
+</div>
+{% endhighlight %}
+<p>之后就是这样</p>
+<img src="{{ site.baseurl }}/public/img/170303-2.png" alt="" style="width:250px;">
+<p>&nbsp;</p>
 <p>&nbsp;<br>&nbsp;</p>
 <h4 id="pos81"></h4>
 <p class="grey">暂无</p>
