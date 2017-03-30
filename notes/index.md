@@ -283,6 +283,7 @@ input{color:#777;} => input:focus{display:block;color:#000;}
 <p class="indent2">5.检查div标签是否正确闭合</p>
 <p class="indent2">6.absolute后top:20%无效，确认各父容器的height存在且正确</p>
 <p class="indent2">7.float后位置不对也可能是各容器高度不一样导致的</p>
+<p class="indent2">8.检查盒模型是否一致</p>
 
 <p>&nbsp;</p>
 <h4 id="pos73">2017-3月1周</h4>
