@@ -93,12 +93,12 @@ layout: space
 			createCode();//刷新验证码 
 			document.getElementById("input").value = "";//清空文本框 
 		}else { //输入正确时 
-			alert("^-^"); //弹出^-^ 
+			alert("验证码正确^-^"); //弹出^-^ 
 		} 
 	}
 </script>
-<div style="width:300px;border:1px solid #ccc;border-radius:6px;padding:10px 0;">
-	<input type = "text" id = "input" style="display:block;width:80%;margin:0 auto;" /> 
+<div style="width:300px;border:1px solid #ccc;border-radius:6px;padding:10px 0;margin: 10px 0;">
+	<input type = "text" id = "input" style="display:block;width:80%;height:34px;margin:0 auto;" /> 
 	<input type = "button" id="code" onclick="createCode()" style="display:block;width:60px;height:30px;margin: 10px auto 10px 10%;" /> 
 	<input type = "button" value = "验证" onclick = "validate()" style="display:block;margin-left:10%;" />
 </div>
