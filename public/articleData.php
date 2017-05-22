@@ -1,7 +1,9 @@
-[
-	{'name':'article1','time':'2017.05.20','author':'test1'},
-	{'name':'article2','time':'2017.05.21','author':'test2'},
-	{'name':'article3','time':'2017.05.22','author':'test3'},
-	{'name':'article4','time':'2017.05.23','author':'test4'},
-	{'name':'article5','time':'2017.05.24','author':'test5'}
-]
+{
+	'data':[
+		{'name':'article1','time':'2017.05.20','author':'test1'},
+		{'name':'article2','time':'2017.05.21','author':'test2'},
+		{'name':'article3','time':'2017.05.22','author':'test3'},
+		{'name':'article4','time':'2017.05.23','author':'test4'},
+		{'name':'article5','time':'2017.05.24','author':'test5'}
+	]
+}
