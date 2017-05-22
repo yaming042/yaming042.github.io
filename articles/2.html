@@ -1,107 +1,192 @@
 ---
-layout: space
+layout: post
+title:  CSS导航菜单水平居中
+author: Tim
+date:   2017-01-04 22:00:00
+categories: issue
 ---
-<p>前几天给分公司做了个网站，上面有个注册表单，上面有个验证码，开始为了方便就找了个图片放上去了，今天上面有人问了，为啥没有验证码，之前知道可以用PHP生产，不过这个分公司的的网站是在wordpress上的，说时候我还真不怎么会使，所以就上网看看有没有js生成的验证码，不用很麻烦，简单的就行，结果一看固然有，果断收下，奉上代码。</p>
+<p>水平导航栏应该是一个网页上最重要的部分了吧，之前也做过好多页面，不过之前的水平导航栏都是定宽啥的，这样就可以根据导航内容的多少均分这个宽度，虽然当时感觉这样做肯定不太好，毕竟这样的复用会不好，而且考虑到响应式，估计问题就更多了。后来没事的时候就到网上查些资料，看了看别人的思路，然后总结下，以备以后用。</p>
+<h3>CSS导航菜单水平居中的多种方法</h3>
+<p><a href="#way1">方法1：display:inline-block</a></p>
+<p><a href="#way2">方法2：position:relative</a></p>
+<p><a href="#way3">方法3：display:table</a></p>
+<p><a href="#way4">方法4：display:inline-flex</a></p>
+
+<p id="way1">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法1：display:inline-block</h2>
+<p>其实这个方法就是利用[text-align:center],用这个属性前应该知道，text-align是无法作用与块级元素的，但对非块级元素是可以的，所以，我们要吧ul变成非块级元素，这个可以使用[display:inline-block],这样配合text-align就可以让ul这个导航栏水平居中了。</p>
 <h3>HTML代码</h3>
-{% highlight ruby %}
-<style type="text/css">
-#code { 
-	font-family:Arial; 
-	font-style:italic; 
-	font-weight:bold; 
-	border:0; 
-	letter-spacing:2px; 
-	color:blue; 
-} 
-</style> 
-<script type="text/javascript">
-	var code ; //在全局定义验证码 
-	//产生验证码 
-	window.onload = function(){
-		createCode();
-	}
-
-	function createCode(){ 
-		code = ""; 
-		var codeLength = 4;//验证码的长度 
-		var checkCode = document.getElementById("code"); 
-		var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 
-		'S','T','U','V','W','X','Y','Z');//随机数 
-		for(var i = 0; i < codeLength; i++) {//循环操作 
-			var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
-			code += random[index];//根据索引取得随机数加到code上 
-		} 
-		checkCode.value = code;//把code值赋给验证码 
-	} 
-	//校验验证码 
-	function validate(){ 
-		var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写 
-		if(inputCode.length <= 0) { //若输入的验证码长度为0 
-			alert("请输入验证码！"); //则弹出请输入验证码 
-		}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时 
-			alert("验证码输入错误！@_@"); //则弹出验证码输入错误 
-			createCode();//刷新验证码 
-			document.getElementById("input").value = "";//清空文本框 
-		}else { //输入正确时 
-			alert("^-^"); //弹出^-^ 
-		} 
-	}
-</script> 
-<div> 
-	<input type = "text" id = "input"/> 
-	<input type = "button" id="code" onclick="createCode()"/> 
-	<input type = "button" value = "验证" onclick = "validate()"/> 
-</div> 
-{% endhighlight %}
-<h3>效果如下</h3>
-<style type="text/css">
-#code { 
-	font-family:Arial; 
-	font-style:italic; 
-	font-weight:bold; 
-	border:0; 
-	letter-spacing:2px; 
-	color:blue; 
-} 
-</style> 
-<script type="text/javascript">
-	var code ; //在全局定义验证码 
-	//产生验证码 
-	window.onload = function(){
-		createCode();
-	}
-
-	function createCode(){ 
-		code = ""; 
-		var codeLength = 4;//验证码的长度 
-		var checkCode = document.getElementById("code"); 
-		var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 
-		'S','T','U','V','W','X','Y','Z');//随机数 
-		for(var i = 0; i < codeLength; i++) {//循环操作 
-			var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
-			code += random[index];//根据索引取得随机数加到code上 
-		} 
-		checkCode.value = code;//把code值赋给验证码 
-	} 
-	//校验验证码 
-	function validate(){ 
-		var inputCode = document.getElementById("input").value.toUpperCase(); //取得输入的验证码并转化为大写 
-		if(inputCode.length <= 0) { //若输入的验证码长度为0 
-			alert("请输入验证码！"); //则弹出请输入验证码 
-		}else if(inputCode != code ) { //若输入的验证码与产生的验证码不一致时 
-			alert("验证码输入错误！@_@"); //则弹出验证码输入错误 
-			createCode();//刷新验证码 
-			document.getElementById("input").value = "";//清空文本框 
-		}else { //输入正确时 
-			alert("验证码正确^-^"); //弹出^-^ 
-		} 
-	}
-</script>
-<div style="width:300px;border:1px solid #ccc;border-radius:6px;padding:10px 0;margin: 10px 0;">
-	<input type = "text" id = "input" style="display:block;width:80%;height:34px;margin:0 auto;" /> 
-	<input type = "button" id="code" onclick="createCode()" style="display:block;width:60px;height:30px;margin: 10px auto 10px 10%;" /> 
-	<input type = "button" value = "验证" onclick = "validate()" style="display:block;margin-left:10%;" />
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <ul>
+	  <li><a href="#">首页</a></li>
+	  ......
+	</ul>
+  </div>
+</xmp>
 </div>
+<h3>CSS代码</h3>
+<p>上面我们给navbar设置上[text-align:center]，对应就需要吧ul设置成inline-block,不然text-align是不会生效的，为了让li标签水平排列，再让li标签float:left左浮动就可以了。(这里我清除了一下浮动，防止导航栏之后的div布局异常，更多清除浮动的方法，访问<a href="/issue/2017/01/05/div+css清除浮动方法.html" target="_blank">CSS清除浮动</a>)</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  text-align: center;
+}
+.navbar>ul{
+  display: inline-block;
+}
+.navbar>ul li{
+  float: left;
+}
+
+.navbar:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p>上面的代码目前是兼容到IE8的，如果要兼容IE7的话，许修改下这个ul</p>
+<div class="code_box">
+<xmp>
+.navbar>ul{
+  display: inline;
+  zoom: 1;
+}
+</xmp>
+</div>
+
+<p id="way2">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法2：position:relative</h2>
+<p>利用这个方法需要多一个div来装载导航ul</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <div>
+      <ul>
+	    <li><a href="#">首页</a></li>
+	    ......
+      </ul>
+	</div>
+  </div>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  overflow: hidden;
+  position: relative;
+}
+.navbar>div{
+  position: relative;
+  left: 50%;
+  float: left;
+}
+.navbar ul{
+  position: relative;
+  left: -50%;
+  float: left;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar>div:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+
+<p id="way3">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法3：display:table</h2>
+<p>这个方法用到了最少的代码，可以省不少事，有句话说的好，少写少填坑，如果为了省事还能有想要的效果，那你可以使用这个方法。</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <ul>
+	<li><a href="#">首页</a></li>
+	......
+  </ul>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  display: table;
+  margin: 0 auto;
+}
+.navbar ul{
+  display: table-cell;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar>div:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p style="color: red;">注意：此方法不适用于IE7及以下浏览器</p>
+
+<p id="way4">&nbsp;</p>
+<h2 style="background-color:#e6e6da;margin-top:70px;">方法4：display:inline-flex</h2>
+<p>有关flex layout的知识自己查下吧</p>
+<h3>HTML代码</h3>
+<div class="code_box">
+<xmp>
+  <div class="navbar">
+    <ul>
+	  <li><a href="#">首页</a></li>
+	  ......
+	</ul>
+  </div>
+</xmp>
+</div>
+<h3>CSS代码</h3>
+<p>这里我们需要让父容器overflow:hidden一下，这样等下移动导航栏时超出屏幕的就可以隐藏了。</p>
+<div class="code_box">
+<xmp>
+.navbar{
+  text-align: center;
+}
+.navbar>ul{
+  display:-webkit-inline-box;
+  display:-moz-inline-box;
+  display:-ms-inline-flexbox;
+  display:-webkit-inline-flex;
+  display:inline-flex;
+}
+.navbar li{
+  float: left;
+}
+
+.navbar:after{
+  content: "";
+  clear: both;
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+</xmp>
+</div>
+<p style="color: red;">注意：此方法不适用于IE7及以下浏览器</p>
 <p>&nbsp;</p>
 
 

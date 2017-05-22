@@ -1,0 +1,40 @@
+---
+layout: post
+title:  CSS的继承
+author: Tim
+date:   2017-01-18 10:50:30
+categories: issue
+---
+<p class="indent2">七哥厉害了，问的一个问题让我想起了来北京第一次面试时的情景，人家问我对CSS继承有啥想法，现在想想当时一脸懵逼的样子也是无奈，俺是真不知道，当时刚入门一切几乎还都是零蛋呢。到现在也算是了解了些，所以温故知新一下下。</p>
+<h4>什么是CSS的继承</h4>
+<p>这个东西说的通俗点就是遗传。比如下面</p>
+{% highlight ruby %}
+<p style="color:red;">我是父元素--<span>我是子元素</span>--我是父元素</p>
+{% endhighlight %}
+<p>按理说这里我只设置了父元素p的字体颜色，子元素span我是没有设置他的字体颜色的，可是运行发现span子元素字体也是红色。其实这就是css的继承了，子元素"遗传"了父元素的color属性。</p>
+<p>其实所有的css语句都是基于各个标签之间的父子关系的，比如下面这幅图展示的html结构，各个标签之间呈现"树"型关系。</p>
+<p style="text-align: center;"><img src="{{ site.baseurl }}/public/img/css_tree.png" alt="" class="img70"></p>
+
+<h3>CSS中可继承性</h3>
+<h4>一、不可继承的属性</h4>
+<p class="red">文本属性，比如：</p>
+<p>vertical-align:垂直文本对齐(当然text-align:center;水平文本对齐是可以继承的)</p>
+<p>text-decoration:规定添加到文本的修饰(text-decoration:underline;这样就可以在文字下面添加一条横线，更多查看<a href="http://www.w3school.com.cn/cssref/pr_text_text-decoration.asp" target="_blank">CSS text-decoration 属性</a>)</p>
+<p>text-shadow:文本阴影效果(具体介绍查看<a href="http://www.w3school.com.cn/cssref/pr_text-shadow.asp" target="_blank">CSS text-decoration 属性</a>)</p>
+<p>white-spacs:空白符的处理</p>
+<p>unicode-bidi:设置文本的方向</p>
+<p class="red">盒子模型相关的属性</p>
+<p>比如长、宽、margin***、border***、padding***，这些其实都是不能继承的</p>
+<p class="red">背景相关的属性</p>
+<p>background和他相关的其他属性，比如background-size,background-color等等</p>
+<p class="red">定位用的属性</p>
+<p>比如float、position(当然他的top,bottom,left,right这些也不能继承了)、overflow等等</p>
+
+<h4>可继承的属性</h4>
+<p class="red">字体系列的属性</p>
+<p>比如font-family(有的时候可能一个页面就一个字体，那就给body设置一下就OK了)，font**这些都可以继承的</p>
+<p class="red">文本系列</p>
+<p>line-height,color,text-align等等</p>
+<p>&nbsp;</p>
+<p>其实还有很多属性都是可以或不可继承的，不过我感觉上面应该是比较常见到的，所以就不一一列举了，可以查看原文<a href="http://www.cnblogs.com/thislbq/p/5882105.html" target="_blank">CSS中可以和不可以继承的属性</a>,这篇博客列的也是比较详细的。</p>
+

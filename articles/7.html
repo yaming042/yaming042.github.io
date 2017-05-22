@@ -1,0 +1,178 @@
+---
+layout: post
+title:  按钮覆盖效果
+author: Tim
+date:   2017-01-04 17:06:00
+categories: issue
+---
+<p>今天老大说要仿照我们官网的一个页面再做一个页面放到另一个网站上用，我大概看了一下，都挺简单的，其中有个按钮，鼠标覆盖上去背景色会先变浅蓝，再变成深蓝，心想应该不难，用transition配合延迟应该就行了。真的是想的太美，到我动手时发现，原来我还没那么强，于是看看样式表，这才茅塞顿开，先将代码留下</p>
+<div class="code_box">
+<xmp>
+a{
+  text-decoration: none;
+}
+.button.button--aylen {
+  color: #37474f;
+  overflow: hidden;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.button--aylen::before, .button--aylen::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+  left: 0;
+  z-index: -1;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button--aylen::before {
+  background: #0170a7;
+}
+.button--aylen::after {
+  background: #084370;
+}
+.button--aylen:hover {
+  color: #fff;
+}
+.button--aylen:hover::before, .button--aylen:hover::after {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.button--aylen:hover::after {
+  -webkit-transition-delay: 0.175s;
+  transition-delay: 0.175s;
+}
+.button {
+  float: left;
+  display: block;
+  margin: 1em 5px;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.plt-btn-zone{
+  width:100%;
+}
+.plt-btn-zone:after{
+	content: "";
+	clear: both;
+	height: 0;
+	display: block;
+	visibility: hidden;
+}
+.plt-btn-zone a {
+  display: inline-block;
+  width: 44%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 0 2%;
+  background: #D4AB4B;
+  padding: 1px;
+}
+</style>
+
+
+<div class="plt-btn-zone">
+    <a class="button button--aylen" href="#" target="_blank">鼠标覆盖查看效果</a> 
+    <a class="button button--aylen" href="#" target="_blank">鼠标覆盖查看效果</a>
+</div>
+</xmp>
+</div>
+
+<h3>效果如下：</h3>
+<style>
+a{
+  text-decoration: none;
+}
+.button.button--aylen {
+  color: #37474f;
+  overflow: hidden;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.button--aylen::before, .button--aylen::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: 100%;
+  left: 0;
+  z-index: -1;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+  transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button--aylen::before {
+  background: #0170a7;
+}
+.button--aylen::after {
+  background: #084370;
+}
+.button--aylen:hover {
+  color: #fff;
+}
+.button--aylen:hover::before, .button--aylen:hover::after {
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.button--aylen:hover::after {
+  -webkit-transition-delay: 0.175s;
+  transition-delay: 0.175s;
+}
+.button {
+  float: left;
+  display: block;
+  margin: 1em 5px;
+  border: none;
+  background: none;
+  color: inherit;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.plt-btn-zone{
+  width:100%;
+}
+.plt-btn-zone:after{
+	content: "";
+	clear: both;
+	height: 0;
+	display: block;
+	visibility: hidden;
+}
+.plt-btn-zone a {
+  display: inline-block;
+  width: 44%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 0 2%;
+  background: #D4AB4B;
+  padding: 1px;
+}
+</style>
+
+
+<div class="plt-btn-zone">
+    <a class="button button--aylen" href="#" target="_blank">鼠标覆盖查看效果</a> 
+    <a class="button button--aylen" href="#" target="_blank">鼠标覆盖查看效果</a>
+</div>
+<p>&nbsp;</p>
