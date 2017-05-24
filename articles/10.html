@@ -1,0 +1,138 @@
+---
+layout: space
+---
+
+<p>现在这社会，移动设备太普遍了，而在网页设计上要求也更高，不仅需要网页在PC端完美展现，更要考虑移动设备，不然即使你PC再强大也不会又多少流量，正如以前的BAT已经变成了现在的TAB，百度之所以落后就是在移动端没做到腾讯，阿里的普及，你听说过买手机必装支付宝，QQ的，有人说必装百度的么？说那么多其实还是想说移动设备的重要性，现在移动设备已是半壁江山了</p>
+<h3>一。图片100%自适应</h3>
+<p>利用media，设置图片在不同设备下的宽，而图片的高度就会自适应</p>
+{% highlight ruby %}
+<style>
+    *{box-sizing: border-box;}
+    .imgbox{width:1000px;}
+    .imgbox{width: 100%;}
+    @media screen and (min-width: 640px) and (max-width: 1024px){
+        .imgbox{width: 300px;}
+    }
+    @media screen and (max-width: 640px){
+        .imgbox{width: 100%}/*手机端宽度充满全屏*/
+    }
+</style>
+<div class="imgbox"> 
+    <img src="xxx.jpg" alt="">
+</div>
+{% endhighlight %}
+<p>这样就可以做到PC端，iPad端，手机端图片做到自适应，这种办法简单明了，自适应的也比较好，没有太大问题。</p>
+<p>当然，这种办法也不是哪都能用的，如果是一张单独的图片要做自适应，这种办法比较好使，但是如果是字和图的混搭，那这时候这种方法就不怎么好使了，更合适的则是背景图办法。</p>
+<p>&nbsp;</p>
+
+<h3>二。背景图片</h3>
+<p>背景图片法其实就是给一个容器增加背景图片</p>
+{% highlight ruby %}
+<style>
+    *{box-sizing: border-box;}
+    .bgbox{background: url(xxx.jpg) no-repeat center top;background-size: 100% 100%;padding: 50px;}
+</style>
+<div class="bgbox">
+    <p>文字文字文字文字文字</p>
+    <p>文字文字文字文字文字</p>
+    <p>文字文字文字文字文字</p>
+    <p>文字文字文字文字文字</p>
+    <p>文字文字文字文字文字</p>
+    <p>文字文字文字文字文字</p>
+</div>
+{% endhighlight %}
+<p>上面.bgbox是一个容器，给容器增加背景图片，利用内容撑大容器，然后再用background-size:100% 100%,让背景图片充满整个.bgbox容器，这样，在不同设备下因为内容的不同，所以撑大的容器宽高也不一定，这样也可以实现图片的自适应</p>
+<p>这种方法有点不好就是，图片可能会有拉伸会压缩，因为你用的是background-size:100% 100%，所有用的时候也要合理的布置代码和样式</p>
+<p>&nbsp;</p>
+<p>在有文字有图且要求图片自适应的时候，背景图片法就很实用，当然，背景图片法还有很多种写法</p>
+{% highlight ruby %}
+<style>
+    .bgbox{position: relative;}
+    .bg{height: 500px;background: url(xx.jpg) no-repeat center top;background-size: 100% 100%;position: absolute;left: 0;top: 0;}
+</style>
+<div class="bgbox">
+    <div class="bg"></div>
+    <div class="inner_bgbox">
+        <p>文字文字文字文字文字</p>
+        <p>文字文字文字文字文字</p>
+        <p>文字文字文字文字文字</p>
+        <p>文字文字文字文字文字</p>
+        <p>文字文字文字文字文字</p>
+        <p>文字文字文字文字文字</p>
+    </div>
+</div>
+{% endhighlight %}
+<p>这种方法也行，有一段时间我就经常在我们的landing page上这么用，利用media就可以比较合适的让图片做到自适应</p>
+<p>这种方法有一点我感觉不好，那就是得给容器设置高度，虽然不好可是也有一点好，那就是可以精确控制容器的高度，你想让图片在不同设备下达到多高都好控制。</p>
+<p>总之有利有弊吧，还是得在实际项目总看情况而定</p>
+<p>&nbsp;</p>
+
+<h3>三。利用js让图片做到自适应</h3>
+<p></p>
+{% highlight ruby %}
+window.Index = function(){
+/*
+        data:{
+            id:{class1,class2,....},
+            src:{src1,src2,....}
+        }
+*/
+    function creatEle(data){
+        var screen = document.body.clientWidth,
+            count = data.id.length,
+            className,imageSrc;
+            
+        var startTime = new Date();
+        
+        
+        for(var i=0;i<count;i++){
+            (function(j){
+                className = "#" + data.id[j];
+                if(screen > 640){
+                    imageSrc = data.src.pc[j];
+                }else{
+                    imageSrc = data.src.mobile[j];
+                }
+                
+                $(className).attr("src",imageSrc).css("width","100%");
+            })(i);
+        }
+        
+        var endTime = new Date();
+        console.log(endTime - startTime);
+    }
+    
+    return {
+        init: function(data){
+            creatEle(data);
+        },
+        autoResize: function(){
+            $(window).resize(function(){
+                window.location.reload();
+            });
+        }
+    }
+}();
+/*用法*/
+$(function(){
+    Index.init({
+        id:["bg1","bg2"],
+        src:{
+            "pc":["xxxx1.jpg","xxxx2.jpg"],
+            "mobile":["xxxx1x3.jpg","xxxx2x3.jpg"]
+        }
+    });
+    Index.autoResize();
+})
+{% endhighlight %}
+<p>HTML代码</p>
+{% highlight ruby %}
+<div>
+    <img id="bg1" src="" alt="">
+    <img id="bg2" src="" alt="">
+</div>
+{% endhighlight %}
+<p>上面init为初始化函数，id中分别是需要自适应的img标签的id，src则为对应id在pc和移动端的图片地址。autoResize是在窗口改变时重新加载，不然窗口改变时图片是不会自适应的（可以改善）</p>
+<p>这种办法我也就在一个landing page上用过，效果也就那样，因为是用js，所以如果浏览器禁用脚本，那这个办法就嗝屁了，所以这种办法也就当没事玩玩吧，真做图片自适应，还是多试试上面的两种办法吧。</p>
+<p>&nbsp;</p>
+<p style="font-size: 12px;">持续更新。。。</p>
