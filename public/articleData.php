@@ -1,7 +1,7 @@
 {
 	'blog':[
 		{'tittle':'HTML中图片自适应方案','time':'2017.05.24','href':'10','author':'tim'},
-		{'tittle':'模态框实现及CSS实现背景透明，文字不透明效果','time':'2017.05.01','href':'9','author':'tim'},
+		{'tittle':'模态框实现及背景透明，文字不透明效果','time':'2017.05.01','href':'9','author':'tim'},
 		{'tittle':'公告滚动效果的制作(js)','time':'2017.05.01','href':'8','author':'tim',},
 		{'tittle':'按钮覆盖效果','time':'2017.05.01','href':'7','author':'tim'},
 		{'tittle':'js生成验证码','time':'2017.05.01','href':'6','author':'tim'},
