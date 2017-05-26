@@ -141,6 +141,9 @@ hoverFun();//执行函数
             loadPer();
             var mobile_time = setInterval(function(){
                 if(str >= 100){
+                    stopTime(time);
+                    percent = 0;
+                    $("#load_bar").css("width",0).html("");
                     loadPer();
                 }else{
                     console.log('not 100');
