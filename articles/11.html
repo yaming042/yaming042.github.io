@@ -107,7 +107,7 @@ hoverFun();//执行函数
 </div>
 <script>
     var percent = 0,
-        time;
+        time, str;
     function getRandom(n,m){//获取随机数，这个随机数会让进度条每次的进度不一样，这样更逼真
         var c = m - n + 1;  
         return Math.floor(Math.random() * c + n);
@@ -115,7 +115,6 @@ hoverFun();//执行函数
     function loadPer(){//每过0.3秒更新一下进度条
         time = setInterval(function(){
             percent += getRandom(1,20);
-            var str;
             if(percent > 100){
                 str = 100;
                 stopTime(time);
