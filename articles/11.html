@@ -1,0 +1,145 @@
+---
+layout: space
+title: JS实现简单的进度条
+---
+
+<p class="indent2">之前在做公司视频部分代码时遇到了一点问题，就是视频列表的加载需要时间，看人家的网站在加载的时间都会有个加载动画，所以就寻思着写个简单的加载进度条，然后再配上一些代码判断视频列表是否加载完成，这样就可以给用户带来更好的体验。</p>
+<p>我的思路很简单，其实就是用一个大容器套一个小容器，给小容器一个背景色来充当进度条，利用小容器的宽度改变进度条的进度。</p>
+<p>这就是我想到的最简单的办法，虽然简单但功能还是可以的。</p>
+<p>&nbsp;</p>
+<h3>HTML代码</h3>
+{% highlight ruby %}
+<style>
+.process-bar{
+    background-color: #fff;
+    border:1px solid #ccc;
+    border-radius:4px;
+    width: 300px;
+    margin: 0 auto;
+    position: relative;
+    height: 30px;
+    top: 50%;
+    margin-top: -15px;
+    text-align: left;
+}
+.process-bar span{
+    display: inline-block;
+    height: 100%;
+    background-color: #6FB934;
+    text-align:center;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+}
+</style>
+<div class="process-bar">
+    <span id="load_bar"></span>
+</div>
+{% endhighlight %}
+<p>&nbsp;</p>
+<h3>JS代码</h3>
+{% highlight ruby %}
+var percent = 0,
+    time;
+function getRandom(n,m){//获取随机数，这个随机数会让进度条每次的进度不一样，这样更逼真
+    var c = m - n + 1;  
+    return Math.floor(Math.random() * c + n);
+}
+function loadPer(){//每过0.3秒更新一下进度条
+    time = setInterval(function(){
+        percent += getRandom(1,20);
+        var str;
+        if(percent > 100){
+            str = 100;
+            stopTime(time);
+        }else{
+            str = percent;
+        }
+        $("#load_bar").css({"width":str+"%","transition":"all .2s"}).html(str+"%");
+    },300);
+}
+function stopTime(timeid){
+    clearInterval(timeid);
+}
+
+function hoverFun(){
+    $(".process-bar").hover(function(){
+        loadPer();     
+    },function(){
+        stopTime(time);
+        percent = 0;
+        $("#load_bar").css("width",0).html("");     
+    });
+}
+hoverFun();//执行函数
+{% endhighlight %}
+<p>&nbsp;</p>
+<h3 class="pc-show">电脑端测试样例</h3>
+<h3 class="mobile-show">手机端测试样例</h3>
+<style>
+.process-bar{
+    background-color: #fff;
+    border:1px solid #ccc;
+    border-radius:4px;
+    width: 300px;
+    height: 30px;
+    text-align: left;
+}
+.process-bar span{
+    display: inline-block;
+    height: 100%;
+    background-color: #6FB934;
+    text-align:center;
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+}
+</style>
+<div class="process-bar">
+    <span id="load_bar"></span>
+</div>
+<script>
+    var percent = 0,
+        time;
+    function getRandom(n,m){//获取随机数，这个随机数会让进度条每次的进度不一样，这样更逼真
+        var c = m - n + 1;  
+        return Math.floor(Math.random() * c + n);
+    }
+    function loadPer(){//每过0.3秒更新一下进度条
+        time = setInterval(function(){
+            percent += getRandom(1,20);
+            var str;
+            if(percent > 100){
+                str = 100;
+                stopTime(time);
+            }else{
+                str = percent;
+            }
+            $("#load_bar").css({"width":str+"%","transition":"all .2s"}).html(str+"%");
+        },300);
+    }
+    function stopTime(timeid){
+        clearInterval(timeid);
+    }
+
+    function hoverFun(){
+        if($(window).width() > 1024){//PC端
+            $(".process-bar").hover(function(){
+                loadPer();     
+            },function(){
+                stopTime(time);
+                percent = 0;
+                $("#load_bar").css("width",0).html("");     
+            });
+        }else{//移动端
+            loadPer();
+            var mobile_time = setInterval(function(){
+                if(str >= 100){
+                    loadPer();
+                }else{
+                    console.log('not 100');
+                }
+            },1000);            
+        }
+    }
+    hoverFun();//执行函数
+</script>
+<p>&nbsp;</p>
