@@ -2,7 +2,7 @@
 	'blog':[
 		{'title':'JS实现简单的进度条','time':'2017.05.26','href':'11','author':'tim'},
 		{'title':'HTML中图片自适应方案','time':'2017.05.24','href':'10','author':'tim'},
-		{'title':'模态框实现及背景透明，文字不透明效果','time':'2017.05.01','href':'9','author':'tim'},
+		{'title':'模态框及背景透明，文字不透明效果','time':'2017.05.01','href':'9','author':'tim'},
 		{'title':'公告滚动效果的制作(js)','time':'2017.05.01','href':'8','author':'tim',},
 		{'title':'按钮覆盖效果','time':'2017.05.01','href':'7','author':'tim'},
 		{'title':'js生成验证码','time':'2017.05.01','href':'6','author':'tim'},
