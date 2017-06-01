@@ -1,0 +1,20 @@
+---
+layout: space
+title: title滚动函数
+---
+
+<p>&nbsp;</p>
+{% highlight ruby %}
+<script type="text/javascript">
+    //title滚动用的函数
+    var text=document.title;
+    var timerID;
+    function newtext() {
+        clearTimeout(timerID);
+        document.title=text.substring(1,text.length)+text.substring(0,1);
+        text=document.title.substring(0,text.length);
+        timerID = setTimeout("newtext()", 500);
+    }
+</script>
+{% endhighlight %}
+<p>&nbsp;</p>
