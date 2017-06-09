@@ -19,7 +19,7 @@ permalink: /fe/jq/
 	<div class="btn-zone">
 		<button id="sort1">冒泡排序</button>
 		<button id="sort2">选择排序</button>
-		<button id="sort3" disabled="disabled">插入排序</button>
+		<button id="sort3">插入排序</button>
 		<button id="sort4" disabled="disabled">希尔排序</button>
 		<button id="sort5" disabled="disabled">归并排序</button>
 		<button id="sort6" disabled="disabled">快递排序</button>
@@ -81,6 +81,11 @@ permalink: /fe/jq/
 				case '2':
 					start = new Date().getTime();
 					afterArr = sortBySelect(arr);
+					end = new Date().getTime();
+					break;
+				case '3':
+					start = new Date().getTime();
+					afterArr = insertSort(arr);
 					end = new Date().getTime();
 					break;
 				default:
@@ -173,6 +178,21 @@ permalink: /fe/jq/
 				temp = arr[i];
 				arr[i] = arr[maxIndex];
 				arr[maxIndex] = temp;
+			}
+			return arr;
+		}
+		// 插入排序
+		function insertSort(arr){
+			var len = arr.length;
+			var prevIndex,curVal;
+			for(var i=1;i<len;i++){
+				prevIndex = i - 1;
+				curVal = arr[i];
+				while(prevIndex >= 0 && arr[prevIndex] > curVal){
+					arr[prevIndex + 1] = arr[prevIndex];
+					prevIndex--;
+				}
+				arr[prevIndex + 1] = curVal;
 			}
 			return arr;
 		}
