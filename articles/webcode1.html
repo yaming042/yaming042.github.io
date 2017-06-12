@@ -1,0 +1,218 @@
+---
+layout: space
+title: 瀑布流布局的实现
+---
+<p>网站上像文章啥的展示的比较好的方式是用瀑布流的布局来展示，虽然之前有写过瀑布流的代码，可是因为当时也没怎么细想，长时间也没写了，理所应当的给忘了。找到之前的代码，看了看，好像懂了点。</p>
+<p>瀑布流有个特点就是，等宽不等高。</p>
+<p>也就是说瀑布流只是每一列的高度不一样，但是每一列的宽度总是一样的，那么思路就差不多是这样的</p>
+<h2>HTML代码结构如下</h2>
+{% highlight ruby %}
+<div class="main">
+	<div class="item"></div>
+	<div class="item"></div>
+	<div class="item"></div>
+	...
+</div>
+{% endhighlight %}
+<p>1.获取main的宽度（暂用mainW）和item的宽度（暂用itemW），这样做是为了知道这个瀑布流有几列（Math.floor(mainW / itemW)）。</p>
+<p>2.新建一个数组rowArr,用来装每列的数据，具体我装的是[第n个item的left值,第n个item的top值,第n个item的高度值（height）]，当然，这是一个二维数组，类似于这样
+rowArr = [[left0,top0,H0],[left1,top1,H1],[left2,top2,H2],[left3,top03,H3]...];这里rowArr的长度就是瀑布流的列数，下标就是第几列第几列。</p>
+<p>3.遍历item，这里要填充rowArr这个数组，这里需要注意的是，填充到列数头的时候要做个判断，不然填充的数据会不正确的，具体为啥，其实画个图想想就知道了。在这里可能会用到很多工具函数，比如获取最大值，最小值（这些用来设置父容器的宽高），这个可以自己写下就行了。数组的填充过程中要始终保持数组长度等于列数，比如有5列，那数组长度就是5，当填充到第6个数据时，需要先找到rowArr中top值最小的那个数组索引（用自己写的工具函数），然后替换掉里面的值就行，这样数组就不会增大了。</p>
+<p>4.设置item的位置，根据rowArr数组内的值来分别填充到item的样式上</p>
+<p>5.在页面上，我不可能一次性把所有的item都渲染出来，这样加载可能会很慢，用户体验不好，这可不是我想要的，所以，这时候就需要scroll事件来处理了，用到scroll就不得不用到setTimeout，不然就会重复触发scroll事件，当然，想用scroll还需要一个调用scroll的条件，这可能需要看情况来。想提高用户体验就可以写个事件来处理动态加载的问题。</p>
+<p>用jq插件的方式写这个瀑布流代码，其实我就是想练练自己的写插件能力，虽然还不是很成熟，不过以后要努力写的有模有样</p>
+<p>&nbsp;</p>
+{% highlight ruby %}
+;(function($){
+	var WaterFull = function(ele,opt){
+		this.element = ele;
+		this.defaults = {
+			main:".main",
+			item:".item"
+		};
+		this.options = $.extend(true,this.defaults,opt||{});
+
+		var me = this,
+			main = $(me.options.main),
+			item = $(me.options.item),
+			perItemW = parseInt(item.eq(0).outerWidth()),
+			perItemNum = Math.floor(main.width() / perItemW),
+			scrollFlag = true,
+			rowArr = [],
+			//scroll时item的模拟数据，这个后期可以改成ajax调用
+			dataArr = [
+						{"img":'pic01.jpg',"id":"10","des":"aaaaaaaaaaaa"},
+						{"img":'pic02.jpg',"id":"11","des":"aaaaaaaaaaaa"},
+						{"img":'pic03.jpg',"id":"12","des":"aaaaaaaaaaaa"},
+						{"img":'pic04.jpg',"id":"13","des":"aaaaaaaaaaaa"},
+						{"img":'pic05.jpg',"id":"14","des":"aaaaaaaaaaaa"},
+						];
+
+		this.initPosition = function(){//初始化item的位置信息，并且设置
+			main.find(me.options.item).each(function(index,value){				
+				var _H = $(value).outerHeight(),
+					pos;
+				if(index >= perItemNum){
+					var min = me.getMinIndex(rowArr,2),	//高度的最小值的index				
+						minH = rowArr[min][2] + _H;
+
+					rowArr[min] = [rowArr[min][2],min*perItemW,minH];
+					pos = min;
+				}else{
+					rowArr[index] = [0,index*perItemW,_H];
+					pos = index;
+				}
+				$(value).css({"position":"absolute","top":rowArr[pos][0]+"px","left":rowArr[pos][1]+"px"});								
+			});
+			
+			var maxH = rowArr[me.getMaxIndex(rowArr,2)][2];
+			main.css({"height":maxH+"px","width":perItemW*perItemNum+"px"});
+		} 
+
+		this.setPosition = function(arr){
+			//scroll后调用的设置item位置的函数
+			//若是没增加一个item就调用一次，则调用频率太快，有可能上一个还没加载完成呢
+			arr.each(function(index,value){
+				var _H = $(value).outerHeight(),
+					min = me.getMinIndex(rowArr,2),	//高度的最小值的index				
+					minH = rowArr[min][2] + _H,
+					pos;
+
+				rowArr[min] = [rowArr[min][2],min*perItemW,minH];
+				pos = min;
+				$(value).css({"position":"absolute","top":rowArr[pos][0]+"px","left":rowArr[pos][1]+"px"});	
+			});
+			
+			var maxH = rowArr[me.getMaxIndex(rowArr,2)][2];
+			main.css("height",maxH+"px");
+		}
+
+		this.scrollItem = function(type){//scroll事件函数
+			var obj;
+			if(!type){
+				obj = $(window);
+			}else{
+				obj = $(type);
+			}
+
+			obj.scroll(function(){
+				var num = main.find(me.options.item).length;
+				if(num <= 40){
+					if(scrollFlag){
+						setTimeout(function(){
+							me.addItem(dataArr);
+							scrollFlag = true;
+						},300);
+						scrollFlag = false;
+					}					
+				}				
+			});
+		}
+
+		this.getMinIndex = function(arr,pos){//获取最小值的index，arr要查找的数组，pos要查找的是top值还是left值，还是高度值
+			var len = arr.length,
+				minH,
+				num,
+				minIndex = 0;
+			switch(pos){
+				case 0://top值
+					num = 0;
+					break;
+				case 1://left值
+					num = 1;
+					break;
+				default://高度值
+					num = 2;
+					break
+			}
+			minH = rowArr[0][num];
+			for(var i=1;i<len;i++){				
+				if(minH > rowArr[i][num]){
+					minH = rowArr[i][num];
+					minIndex = i;
+				}
+			}
+			return minIndex;			
+		}
+		this.getMaxIndex = function(arr,pos){//获取最大值的index，arr要查找的数组，pos要查找的是top值还是left值，还是高度值
+			var len = arr.length,
+				maxH,
+				num,
+				maxIndex = 0;
+			switch(pos){
+				case 0://top值
+					num = 0;
+					break;
+				case 1://left值
+					num = 1;
+					break;
+				default://高度值
+					num = 2;
+					break
+			}
+			maxH = rowArr[0][num];
+			for(var i=1;i<len;i++){				
+				if(maxH < rowArr[i][num]){
+					maxH = rowArr[i][num];
+					maxIndex = i;
+				}
+			}
+			return maxIndex;
+		}
+		this.addItem = function(dataArr){//滚动时的增加item的函数
+			var len = dataArr.length,
+				cloneNode,
+				newArr;
+
+			for(var i=0;i<len;i++){
+				cloneNode = item.eq(0).clone(true);
+				(function(i){
+					cloneNode.find("img").attr("src","images/"+dataArr[i].img);
+					cloneNode.find("p").eq(0).html(dataArr[i].id);
+					cloneNode.find("p").eq(1).html(dataArr[i].des);
+					cloneNode.appendTo(main);
+				})(i);				
+			}
+			newArr = main.find(me.options.item).slice(-len);
+			me.setPosition(newArr);
+		}
+		this.canScroll = function(){
+			//设置定时器，防止频繁加载（应该加上滚动判断的，根据滚动的临界值判断是否加载）			
+		}
+
+		this.resize = function(){
+			$(window).resize(function(){
+				me.initPosition();//变量是在函数外赋值的，所以每次的值都是固定的，所以就不会重新加载新的数据
+			});			
+		}
+	};
+
+	WaterFull.prototype = {
+		init:function(){
+			var me = this;
+			me.initPosition();
+
+			me.scrollItem();
+			me.resize();
+		},
+	};
+	$.fn.test = function(options){
+		test = new WaterFull(this,options);
+		return test.init();
+	}
+
+})(jQuery);
+{% endhighlight %}
+<p>&nbsp;</p>
+<p>调用方式也很简单</p>
+{% highlight ruby %}
+<script>
+	$(".container").test({
+		main: ".container",
+		item: ".item"
+	});
+</script>
+{% endhighlight %}
+<p>我还是把效果放下面吧，这样以后再找的时候就方便了</p>
+<p><a href="https://yaming042.github.io/demo/1.html" target="_blank">瀑布流Demo</a></p>
+
