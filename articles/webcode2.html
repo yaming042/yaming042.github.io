@@ -1,0 +1,152 @@
+---
+layout: space
+title: PHP分页代码的实现
+---
+<p>上次为了解决列表布局问题写了个瀑布流代码，用着也还凑合，可是和大神相比还是很菜。既然用到瀑布流了其实分页也是很常用的，虽说thinkPHP自带了分页，可是我看了一下，老是搞的不对，况且目前我还不准备动用数据库，所以还是自己想想分页的逻辑自己做吧，自己动手，丰衣足食。（如果忘了怎么写的，就先写成一个页面，然后再提取成函数）</p>
+<p>我想，这个分页函数用的时候只需要传入2个参数就行了，一个是数据的总数total，二是每页的数据个数perNum，根据这两个参数就可以得到很多数据。</p>
+<p>首先，这个分页应该是ul+li的组合，例如</p>
+{% highlight ruby %}
+<div class="main">
+	<ul>
+		<li><span>1/7页</span></li>
+		<li><a href="">首页</a></li>
+		<li><a href="">上一页</a></li>
+		<li><a href="">1</a></li>
+		.....		
+		<li><a href="">n</a></li>
+		<li><a href="">下一页</a></li>
+		<li><a href="">尾页</a></li>
+	</ul>
+</div>
+{% endhighlight %}
+<p>为了展示的更好，可以加上分页进度，首页，尾页的按钮，当然，不要也行，不过因为这个分页我写的不太好，要是不要的话还得改代码，之后要是方便就再完善一下好了。</p>
+<p>在这个分页中，分页的跳转时根据URL上的参数决定的，比如第一页就是?id=1,第二页就是?id=2....，所以在下面的分页代码中，也要加上配合处理URL的函数才行。</p>
+<p>看看网上人家的分页，有的分页多了就会省略号，有的就没有，思前想后应该还是带省略号的好吧，毕竟比较人性化。不过要加省略号，代码的复杂程度应该得上去，毕竟得判断啥时候应该显示...，什么时候不显示...。</p>
+<p>下面理一理步骤</p>
+<p>1. url处理步骤</p>
+<p style="text-indent: 2em;">$_SERVER['QUERY_STRING'],这个可以获取当前的URL字符串，这一步的主要目的是拿到URL方便分页跳转用，另外也是为了定位分页的位置，到底是第几页第几页。这里应该注意，当前页不一定是我要开始渲染的位置，比如当前页是7，可我总共才10页，（这里我规定死了，最多显示6个分页，其余的就变成中间的...），所以这时候应该从第5页开始渲染，而第7页只是当前激活的分页而已。</p>
+<p>2. 是否开启...判断</p>
+<p style="text-indent: 2em;">因为函数需要传入数据总数和每页个数，这样就可以计算出来一共应该有几页，（规定最多显示6个分页，其中一个还得是...），和6比较，大于则开启...，小于则不开启。这里面也应该加入一个判断，用来判断分页应该从第几页开始渲染。</p>
+<p>3. 分页的链接地址</p>
+<p style="text-indent: 2em;">这个就好办了，根据当前分页位置来判断就行，如果小于等于1，说明到头了，首页就应该没有链接，而下一页就应该是当前位置加1；如果当前位置大于等于总页码数，尾页就应该没有链接，而上一页就应该是当前页减1；首页，尾页应该分别是1，和分页总数</p>
+<p>4. 分页的渲染</p>
+<p style="text-indent: 2em;">利用for循环进行渲染，for的开始值应该是上面判断好的开始渲染的数值，结束条件应该是分页总数加1，每循环一次，循环值加1。像当前页面的样式就应该在这里面添加，还有就是渲染应该分两种情况，分别的开启...的渲染和不开启...的渲染。渲染完后直接返回这个代码串儿就行了。</p>
+<p>&nbsp;</p>
+
+<h2>PHP代码如下</h2>
+{% highlight ruby %}
+function mypagination($total,$perNum=15){
+	$urlPara = $_SERVER['QUERY_STRING'];
+	
+	$url = (!isset($urlPara) || empty($urlPara)) ? explode('?',$_SERVER['QUERY_STRING'])[0] . '?id=' : explode('=',$_SERVER['REQUEST_URI'])[0] . '=';
+	$curPos = (!isset($urlPara) || empty($urlPara)) ? 1 : explode('=',$urlPara)[1];
+	$totalPage = floor($total / $perNum) + 1;
+	
+	$curIndex;
+	$curClass = '';
+	
+	//处理curpos不合法的情况
+	if($curPos < 1 || $curPos > $totalPage || !is_numeric($curPos)){
+		$curPos = 1;					
+	}
+	$curIndex = $curPos;
+	
+	if($totalPage > 6){//如果大于6页，是否启用...还需要判断，如果你curpos小于totalpage-6则启用...，否则直接从totalpage-6开始渲染
+		$renderCount = 6;//渲染次数
+		if($curPos <= $totalPage - 5){//启用...
+			if($curPos == 1){//从哪个位置开始渲染，乳沟curPos=1,则fromrender=1
+				$fromRender = 1;
+			}else{				
+				$fromRender = $curPos - 1;
+			}
+			$centerPos = $fromRender + floor($renderCount / 2);//...的位置
+		}else{
+			$fromRender = $totalPage - 5;	
+			$renderCount = $totalPage;			
+		}
+	}else{//如果小于6页，则从1开始渲染
+		$fromRender = 1;
+		$renderCount = $totalPage;		
+	}
+	
+	//首页，上下一页链接
+	if($curIndex == 1){
+		$prevUrl = '';
+		$firstUrl = '';
+	}else{
+		$prevUrl = 'href="' . $url . ($curIndex - 1) . '"';
+		$firstUrl = 'href="' . $url . '1' . '"';
+	}
+	if($curIndex == $totalPage){
+		$nextUrl = '';
+		$endUrl = '';
+	}else{
+		$nextUrl = 'href="' . $url . ($curIndex + 1) . '"';
+		$endUrl = 'href="' . $url . $totalPage . '"';
+	}
+	
+	if(isMobile()){
+		$perPage = 10;
+	}else{
+		$perPage = 20;
+	}
+	
+	//循环渲染
+	$str = $curIndex .'/'. $totalPage;
+	$html = '<div class="pagination" data-per="'.$perPage.'"><ul><li><span>'.$str.' 页</span></li><li><a '.$firstUrl.' id="page-home">首页</a></li><li><a '.$prevUrl.' id="page-pre">上一页</a></li>';
+	for($i=$fromRender,$j=1;$i<$renderCount+1;$i++){
+		if($i == $curPos){
+			$curClass = 'on';
+		}else{
+			$curClass = '';
+		}
+		
+		if($totalPage > 6){
+			if(isset($centerPos)){//说明是curpos小于totalpage-6，需要启用...
+				if($i == $curPos){//当前页码不让点击
+					$temp = '<li class="'.$curClass.'"><a>'.$i.'</a></li>';
+				}else{
+					$temp = '<li class="'.$curClass.'"><a href="'.$url.($i).'">'.$i.'</a></li>';
+				}
+				
+				if($i == $centerPos){//渲染...及改变i的值
+					$temp = '<li class="andsoon"><a>...</a></li>';
+				}
+				
+				if($i > $centerPos){
+					if($i == $curPos){//当前页码不让点击
+						$temp = '<li class="'.$curClass.'"><a>'.($totalPage - $j).'</a></li>';
+					}else{
+						$temp = '<li class="'.$curClass.'"><a href="'.$url.($totalPage - $j).'">'.($totalPage - $j).'</a></li>';
+					}					
+					$j--;
+				}
+				$html .= $temp;
+			}else{//直接从$totalPage - 5的位置开始渲染，不需要...
+				if($i == $curPos){//当前页码不让点击
+					$temp = '<li class="'.$curClass.'"><a>'.$i.'</a></li>';
+				}else{
+					$temp = '<li class="'.$curClass.'"><a href="'.$url.($i).'">'.$i.'</a></li>';
+				}				
+				$html .= $temp;
+			}
+		}else{
+			if($i == $curPos){//当前页码不让点击
+				$temp = '<li class="'.$curClass.'"><a>'.$i.'</a></li>';
+			}else{
+				$temp = '<li class="'.$curClass.'"><a href="'.$url.($i).'">'.$i.'</a></li>';
+			}	
+			
+			$html .= $temp;
+		}		
+	}
+	$html .= '<li><a '.$nextUrl.' id="page-next">下一页</a></li><li><a '.$endUrl.' id="page-end">尾页</a></li>';
+	
+	return $html;
+}
+{% endhighlight %}
+<p>&nbsp;</p>
+<h2>效果可查看</h2>
+<p><a href="/articlelist">博客列表</a></p>
+
+
