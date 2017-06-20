@@ -142,7 +142,7 @@
 			for(var i=0;i<len;i++){
 				cloneNode = item.eq(0).clone(true);
 				(function(i){
-					cloneNode.find("img").attr("src","images/"+dataArr[i].img);
+					cloneNode.find("img").attr("src","/public/img/waterfull/"+dataArr[i].img);
 					cloneNode.find("p").eq(0).html(dataArr[i].id);
 					cloneNode.find("p").eq(1).html(dataArr[i].des);
 					cloneNode.appendTo(main);
