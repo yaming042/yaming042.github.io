@@ -6,7 +6,7 @@ title: input安卓下移位问题
 <p>其实准确的说应该是，form表单在安卓设备下当input获取焦点，虚拟键盘弹出来时，可能会把整个form顶上去，让我看不到我当前输入的是哪个input。这个问题在IOS下倒还好，iOS下不会把form顶上去。</p>
 <p>我的思路应该是这样的，利用setinterval来循环判断浏览器窗口是否变化 -> 如果窗口变化了就获取input的top值（我在页面上用的是fixed定位，所以这个top值应该是position().top,应该根据情况应用offset().top还是position().top），然后获取form的高度 -> 当input聚焦时则用animate来移动form（这个地方因为用到了animate，所以应该在每个动画开始执行前应该stop()一下，清除动画，不然setinterval下animate会有意想不到的结果） -> 继续判断浏览器窗口高度，若高度又变小了说明键盘关闭了，这时候应该让form回到之前的位置，并清除计时</p>
 <p>这里的重要点我想应该是animate和数据的处理，比如，form原始的位置，需要记录，键盘关闭后又要恢复，还有浏览器窗口高度，计时期间要来回判断窗口高度有没有变化</p>
-<p>下面代码是官网英文博客用的，<a href="https://yaming042.github.io/demo/enblog.html" target="_blank">英文Blog模板</a></p>
+<p>下面代码是官网英文博客用的，<a href="http://yaming.space/public/demo/enblog.html" target="_blank">英文Blog模板</a></p>
 <p>他们做的时候连着改了10多遍，也是服了，到现在的要求是pc的话连个悬浮的form，移动端就是底部有fixed按钮，点击弹出form表单，问题就是在安卓下出现的。</p>
 <p>以下是部分代码，先参考，起码能知道思路是啥。</p>
 <p>&nbsp;</p>
