@@ -1,0 +1,65 @@
+---
+layout: space
+title: 原型和原型链（1）
+---
+
+<p>接下来我可能会连续来几个关于JavaScript的原型和原型链的文章，原因很简单，我不会，但是面试时又次次问，所以上网看看人家的理解，不管自己是否理解吧，起码看了自己还是有收获的，书读百遍其义自见，我想我现在就在这么做，希望我看的多了也就理解了。</p>
+<h2>我们经常会这么写代码</h2>
+{% highlight ruby %}
+function Person(){
+    this.name = 'Tim';
+}
+var person = new Person();
+person.prototype.say = function(){
+    console.log('Hello,' + this.name);
+}
+person.say();//输出Hello,Tim
+{% endhighlight %}
+<p>上面的代码很简单，Person原型对象定义了公共的say方法，虽然这个定义实在构造出实例(person)后出现的，但因为原型方法在调用之前已经声明，所以之后的每个实例都将拥有这个say方法，从这里可以看出</p>
+<p style="color:red;">原型对象的用途是为每个实例对象存储共享的方法和属性，它只是一个普通的对象。并且所有的实例是共享同一个原型对象的，因此有别于实例方法或属性，原型对象只有一份。</p>
+<p>&nbsp;</p>
+<h2>我们也可能会这么写</h2>
+{% highlight ruby %}
+function Person(){
+    this.name = 'Tim';
+}
+var person = new Person();
+Person.prototype = {
+    say:function(){
+        console.log("Hello," + this.name);
+    }
+}
+person.say();//error
+{% endhighlight %}
+<p>上面代码运行会出错，其实这样写的目的是好的：因为如果想在原型对象上添加更多的属性和方法，那就不得不要写很多Person.prototype，还不如提炼成一个Object的好。但是这个例子的构造实例操作出现在了添加原型方法的前面，这样就会有一个问题：</p>
+<p>当<span style="color:blue;">var person = new Person()</span>时，Person.prototype为<span style="color:blue;">Person{}</span>（当然，内部还有constructor属性），即Person.prototype指向一个空的对象{}。而对于实例person而言，其内部有一个原型链指针proto，该指针指向了Person.prototype指向的对象，即{}。接下来重置了Person的原型对象，使其指向了另外一个对象，即</p>
+<p style="color: blue;font-size: 0.9em;">Object {say: function}</p>
+<p>这时Person.proto的指向还是没变的，他指向的{}对象里面还是没有say方法的，所以报错。</p>
+<p>从这个现象可以得出</p>
+<p style="color:red;font-size: 0.9em;">在js中，对象在调用一个方法时首先在自身寻找是否有该方法，若没有，则去原型链上寻找，一次层层递进，这里的原型链就是实例对象的__proto__属性</p>
+<p>&nbsp;</p>
+<p>简单改变下上面代码的顺序这段代码就可以正常运行了。</p>
+{% highlight ruby %}
+function Person(){
+    this.name = 'Tim';
+}
+
+Person.prototype = {
+    say:function(){
+        console.log("Hello," + this.name);
+    }
+}
+
+var person = new Person();
+person.say();//error
+{% endhighlight %}
+<p>&nbsp;</p>
+<p>其实，只要能看懂原型的结构就行了</p>
+Function.prototype = {
+    constructor : Function,
+    __proto__ : parent prototype,
+    some prototype properties : ... 
+}
+{% endhighlight %}
+<p><strong>总结：</strong><span style="color:red;">函数的原型对象constructor默认指向函数本身，原型对象除了有原型属性外，为了实现继承，还有一个原型链指针__proto__，该指针指向上一层的原型对象，而上一层的原型对象的结构依然类似，这样，利用__proto__一直指向Object的原型对象上，而Object的原型对象用Object.prototype.__proto__ = null表示原型链的最顶端，如此便形成了JavaScript的原型链继承，同时也解释了为什么所有的JavaScript对象都具有Object的基本方法。</span></p>
+<p style="font-size: 12px;color: #ccc;">原文链接：<a href="http://www.jianshu.com/p/aa1ebfdad661" target="_blank">一个例子让你彻底明白原型对象和原型链</a></p>
