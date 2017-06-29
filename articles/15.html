@@ -1,0 +1,34 @@
+---
+layout: space
+title: 原型和原型链（2）
+---
+
+<p>今天才发现，其实因为自己太懒了所以很多东西不一定能经常看，所以还是好记性不如烂笔头吧，读的多，写的多，还是比没有强。</p>
+<h2>原型与构造函数</h2>
+<p>js所有的函数都有一个prototype属性，这个属性引用了一个对象，就是原型对象，即原型。这个函数包含构造函数和普通函数，大家讲的更多的是构造函数的原型，但是也补鞥呢否定普通函数也有原型，例如普通函数：</p>
+{% highlight ruby %}
+function foo(){
+    
+}
+console.log(foo.prototype instanceof Object); //true
+{% endhighlight %}
+<h2>下面了解下通过构造函数实例化对象的过程</h2>
+{% highlight ruby %}
+function Foo(x){
+    this.x = x;
+}
+var obj = new Foo(1);
+{% endhighlight %}
+<p>实例化obj对象一般分三步</p>
+<p>1.创建obj对象，obj = new Object();</p>
+<p>2.将obj的内部__proto__指向构造他的函数A的prototype，同时</p>
+<p></p>
+<p></p>
+{% highlight ruby %}
+
+{% endhighlight %}
+
+{% highlight ruby %}
+
+{% endhighlight %}
+http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html
