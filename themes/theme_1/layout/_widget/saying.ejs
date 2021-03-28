@@ -1,0 +1,29 @@
+<div class="saying-sidebar-box box-item" id="saying" style="display:none">
+    <div class="sidebar-title">
+        <h2>每日一言</h2>
+    </div>
+    <div class="famous_sayings_box">
+        <div class="famous_sayings">
+            <p><span id="saying-content"></span></p>
+            <p> -- <span id="saying-author"></span></p>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function(){
+        $.ajax({
+            type: 'GET',
+            url: 'https://v1.alapi.cn/api/mingyan?typeid=1',
+            success: (res) => {
+                if( res.code == 200 ){
+                    $('#saying').css('display', 'block');
+                    $('#saying-content').text( res.data.content || '' );
+                    $('#saying-author').text( res.data.author || '' );
+                }
+            },
+            error: (e) => {
+                console.warn( `saying get error` );
+            }
+        });
+    }
+</script>

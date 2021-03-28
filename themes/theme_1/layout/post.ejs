@@ -1,0 +1,16 @@
+<div class="web-article">
+    <div class="web-article-container">
+        <div class="web-article-view">
+            <div class="article-baseinfo">
+                <h2><%= page.title %></h2>
+                <div class="other-info">
+                    <span>发布时间：<%= date(page.date) %></span>
+                    <span>作者：<%= page.author %></span>
+                    <span>阅读：999</span>
+                </div>
+            </div>
+            <%- page.content %>
+        </div>
+    </div>
+    
+</div>

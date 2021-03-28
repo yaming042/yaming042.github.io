@@ -1,0 +1,4 @@
+<!-- index.ejs是页面主体 -->
+<% theme.sections.forEach(function (section) {%>
+    <%- partial('_sections/' + section.section) %>
+<%})%>

@@ -1,0 +1,20 @@
+<% if (site.posts.length){ %>
+    <div class="web-sidebar-box box-item">
+        <div class="sidebar-title">
+            <h2>最新文章</h2>
+        </div>
+        <div class="latest-list">
+            <ul class="item-box">
+                <% site.posts.sort('date', -1).limit(8).each(function(post, index){ %>
+                    <% if(!post.hide) {%>
+                        <li>
+                            <a href="<%- url_for(post.path) %>">
+                                <%= index+1 %>. <%= post.title || '(no title)' %>
+                            </a>
+                        </li>
+                    <% } %>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+<% } %>

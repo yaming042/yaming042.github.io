@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- partial('_partial/head') %>
+</head>
+<body>
+
+    <div class="main-container">
+        <%- partial('_partial/header') %>
+        <div class="container-box">
+            <div class="container-body">
+                <%- body %>
+            </div>
+            <% if( is_post() ){ %>
+                <%- partial('_partial/aside_post') %>
+            <% }else{ %>
+                <%- partial('_partial/aside_page') %>
+            <% } %>
+            </div>
+        <%- partial('_partial/footer') %>
+    </div>
+
+
+</body>
+</html>

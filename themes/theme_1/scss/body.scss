@@ -1,0 +1,179 @@
+body{
+    background: linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 0), linear-gradient(
+        90deg
+        , rgba(255, 255, 255, 0.5) 1px, transparent 0), linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 0), linear-gradient(
+        90deg
+        , rgba(255, 255, 255, 0.25) 1px, transparent 0), #eaeaea;
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+}
+
+.container-box{
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    padding-top: 25px;
+
+    .container-body{
+      width: 801px;
+      //box-shadow: rgb(74, 74, 74) 0px 1px 2px 0px;
+      margin-right: 39px;
+      padding-right: 40px;
+      border-right: 1px solid #eee;
+
+      .block-box{
+        background: #fff;
+        margin: 0 0 50px;
+
+        .block-title{
+            padding: 10px;
+            font-weight: bold;
+            box-shadow: rgb(74, 74, 74) 0px 1px 3px -2px;
+            position: relative;
+          
+            & > a{
+                position: absolute;
+                right: 10px;
+                font-size: 12px;
+                display: flex;
+                width: 32px;
+                height: 32px;
+                align-items: center;
+                justify-content: center;
+                top: 50%;
+                margin-top: -16px;
+                cursor: pointer;
+
+                svg{
+                    fill: #666;
+                }
+            }
+        }
+
+        .blog-list{
+            position: relative;
+
+            .blog-list-item{
+                position: relative;
+                box-shadow: #848484 0px 1px 3px -2px;
+
+                .item-post-name{
+                    margin: 20px 0 10px 0;
+                    font-weight: 500;
+                    padding: 0 20px;
+                    font-size: 14px;
+                }
+                .item-post-body{
+                    color: #756F71;
+                    overflow: hidden;
+                    padding-left: 10px;
+
+                    .item-post-thumb{
+                        width: 200px;
+                        height: 133px;
+                        float: left;
+                        background-size: cover;
+                        background-position: center center;
+                    }
+                    .item-post-article{
+                        overflow: hidden;
+                        font-size: 13px;
+                        padding: 0 10px;
+                        max-height: 110px;
+                        text-indent: 2em;
+                        overflow: hidden;
+
+                        &.nothumb{
+                            text-indent: unset;
+                        }
+                    }
+                }
+                .item-post-footer{
+                    display: flex;
+                    color: #838383;
+                    font-size: 12px;
+                    margin: 10px 0 0;
+                    padding: 6px 20px;
+                    justify-content: flex-end;
+                    background: #fbfbfb;
+
+                    &>div{
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+
+        .project-list{
+          padding: 20px 10px;
+          position: relative;
+          display: flex;
+
+          .project-item{
+            width: 240px;
+            border: 1px solid #eee;
+
+            .project-img{
+              width: 100%;
+              height: 160px;
+
+              img{
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            &:nth-of-type(2){
+              margin: 0 10px;
+            }
+
+            .project-info{
+              padding: 5px 10px 10px;
+
+              .info-title{
+                font-size: 14px;
+              }
+              .info-desc{
+                font-size: 12px;
+                color: #756F71;
+              }
+            }
+          }
+        }
+
+        .notes-list{
+          padding: 20px 10px;
+          position: relative;
+
+          .notes-item{
+            border-bottom: 1px solid #f9f9f9;
+            padding: 10px;
+
+            .notes-item-desc{
+              color: #756F71;
+              font-size: 13px;
+            }
+
+            .notes-tags{
+              display: flex;
+              color: #838383;
+              font-size: 12px;
+              align-items: center;
+              padding-top: 10px;
+
+              label{
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+
+                svg{
+                  padding-right: 4px;
+                  fill: #666;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+}

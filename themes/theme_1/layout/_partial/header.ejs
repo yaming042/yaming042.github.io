@@ -1,0 +1,27 @@
+<div class="web-header">
+    <div class="logo">TYM042</div>
+
+    <div class="web-menu">
+        <div class="menu-list clearfix">
+            <% theme.menu.forEach(function (item) {%>
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="<%- item.url%>"
+                            <% if (item.newTab) { %>
+                            target="_blank"
+                            <% } %>
+                        >
+                            <%= __(item.name) %>
+                        </a>
+                    </h2>
+                    <span><%= __(item.subName) %></span>
+                </div>
+            <%})%>
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <img src="/images/banner.jpeg" alt="">
+</div>

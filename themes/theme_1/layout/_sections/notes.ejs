@@ -1,0 +1,50 @@
+<% if (site.categories.length){ %>
+    <% 
+        site.categories.sort('name').forEach(function (categories) {
+            if( categories.name == '笔记'){
+    %>
+        <div class="block-box">
+            <div class="block-title">
+                <h2><%= categories.name %></h2>
+                <a href="<%= url_for(categories.path) %>">
+                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+                        <path d="M213.333333 447.99999999a64 64 0 0 1 64.00000001 64.00000001 64 64 0 0 1-64.00000001 64.00000001 64 64 0 0 1-64.00000001-64.00000001 64 64 0 0 1 64.00000001-64.00000001m213.333334 1e-8a64 64 0 0 1 64 64 64 64 0 0 1-64 64 64 64 0 0 1-64-64 64 64 0 0 1 64-64m213.333333 0A64 64 0 0 1 704 512 64 64 0 0 1 640 576a64 64 0 0 1-63.99999999-64A64 64 0 0 1 640 448M85.333333 896L725.333333 896c29.44 0 52.48-14.933333 67.84-37.546667L1024 512l-230.826667-346.026667c-15.36-22.613333-40.96-37.973333-70.4-37.973333L85.333333 128a85.333333 85.333333 0 0 0-85.333333 85.333333L0 810.666667a85.333333 85.333333 0 0 0 85.333333 85.333333z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="notes-list">
+                <%
+                if( categories.posts.length ){
+                    categories.posts.sort('-date').forEach(function(post, index){
+                        if( index > 2){
+                            return false;
+                        }
+
+                        let url = url_for(post.path);
+                %>
+                    <div class="notes-item">
+                        <div class="notes-item-desc">
+                            <a href="<%= url %>"><%- post.excerpt || clearHtml(post.content) %></a>    
+                        </div>
+                        <div class="notes-tags">
+                            <%
+                                post.tags.forEach(function(tag){
+                            %>
+                                <label>
+                                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+                                        <path d="M379.808 123.36l-256.032 263.072c-35.32800001 36.448-35.392 105.76 0.096 142.304l319.904 327.04c54.72 56.416 76.704 70.72 150.976 70.72l143.936 0c132.76799999 0 192-26.976 192-186.912l0-131.872c0-81.12-46.656-128.448-111.264-193.95199999l-297.696-290.01600001c-17.984-18.592-43.968-29.248-71.264-29.248C423.36 94.496 397.6 105.024 379.808 123.36zM786.75199999 700.992c0 52.92799999-43.072 95.99999999-95.99999999 95.99999999s-95.99999999-43.072-96-95.99999999 43.072-95.99999999 96-95.99999999S786.752 648.064 786.75199999 700.992z"></path>
+                                    </svg>
+                                    <%= tag.name || ''%>
+                                </label>
+                            <%
+                                })
+                            %>
+                        </div>
+                    </div>
+                <%})}else{%>
+                    <p class="empty-post">暂无文章~</p>
+                <%}%>
+            </div>
+        </div>
+    <%}})%>  
+<% } %>

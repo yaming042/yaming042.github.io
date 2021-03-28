@@ -1,0 +1,44 @@
+<% if (site.categories.length){ %>
+    <% 
+        site.categories.sort('name').forEach(function (categories) {
+            if( categories.name == '项目'){
+    %>
+        <div class="block-box">
+            <div class="block-title">
+                <h2><%= categories.name %></h2>
+                <a href="<%= url_for(categories.path) %>">
+                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="14" height="14">
+                        <path d="M213.333333 447.99999999a64 64 0 0 1 64.00000001 64.00000001 64 64 0 0 1-64.00000001 64.00000001 64 64 0 0 1-64.00000001-64.00000001 64 64 0 0 1 64.00000001-64.00000001m213.333334 1e-8a64 64 0 0 1 64 64 64 64 0 0 1-64 64 64 64 0 0 1-64-64 64 64 0 0 1 64-64m213.333333 0A64 64 0 0 1 704 512 64 64 0 0 1 640 576a64 64 0 0 1-63.99999999-64A64 64 0 0 1 640 448M85.333333 896L725.333333 896c29.44 0 52.48-14.933333 67.84-37.546667L1024 512l-230.826667-346.026667c-15.36-22.613333-40.96-37.973333-70.4-37.973333L85.333333 128a85.333333 85.333333 0 0 0-85.333333 85.333333L0 810.666667a85.333333 85.333333 0 0 0 85.333333 85.333333z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="project-list">
+                <%
+                if( categories.posts.length ){
+                    categories.posts.sort('-date').forEach(function(post, index){
+                        if( index > 2){
+                            return false;
+                        }
+
+                        let thumbnails = getThumb(post.content),
+                            url = url_for(post.path),
+                            hasThumb = thumbnails.length;
+                %>
+                    <div class="project-item">
+                        <div class="project-img">
+                            <a href="<%= url %>">
+                                <img src='<%= thumbnails[0] || theme.defaultThumb %>' alt='<%= post.title %>' />
+                            </a>
+                        </div>
+                        <div class="project-info">
+                            <div class="info-title"><a href="<%= url %>"><%= post.title %></a></div>
+                            <div class="info-desc"><a href="<%= url %>"><%- post.excerpt || clearHtml(post.content) %></a></div>
+                        </div>
+                    </div>
+                <%})}else{%>
+                    <p class="empty-post">暂无文章~</p>
+                <%}%>
+            </div>
+        </div>
+    <%}})%>  
+<% } %>

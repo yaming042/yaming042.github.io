@@ -1,0 +1,28 @@
+<div class="web-sidebar-box box-item">
+    <div class="sidebar-title">
+        <h2>网络博文</h2>
+    </div>
+    <div class="net-list">
+        <%
+            site.categories.sort('name').forEach(function (categories) {
+                if( categories.name == '网络博文' ){
+                    categories.posts.sort('-date').forEach(function(post, index){
+                        if( index > 2){
+                            return false;
+                        }
+
+                        let thumbnails = getThumb(post.content),
+                            url = url_for(post.path),
+                            hasThumb = thumbnails.length;
+        %>
+            <div class="net-item">
+                <div class="net-img">
+                    <img src="<%= thumbnails[0] || theme.defaultThumb %>" alt=""/>
+                </div>
+                <div class="net-details">
+                    <a href="<%= url %>"><%- post.excerpt || post.content %></a>    
+                </div>
+            </div>
+        <%})}})%>
+    </div>
+</div>
