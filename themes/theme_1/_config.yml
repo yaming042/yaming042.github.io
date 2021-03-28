@@ -39,3 +39,14 @@ author: 博落回
 slogan: 流连矣 忘景幻云催 峦栈醺醺说旧梦 重山迟迟映霞辉 向晚共邀归 —— 忆江南
 
 defaultThumb: /images/default.jpeg
+
+#count and time
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false
+  awl: 4
+  wpm: 275
+  suffix: 'min'

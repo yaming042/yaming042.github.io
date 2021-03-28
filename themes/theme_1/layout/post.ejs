@@ -7,6 +7,12 @@
                     <span>发布时间：<%= date(page.date) %></span>
                     <span>作者：<%= page.author %></span>
                     <span>阅读：999</span>
+                    <%
+                        let time = symbolsTime(page.content);
+                        time = (time||'').split(' ')[0] || '';
+                    %>
+                    <span>本文字数：<%= symbolsCount(page.content) %></span>
+                    <span>阅读时长 ≈ <%= time %> 分钟</span>
                 </div>
             </div>
             <%- page.content %>

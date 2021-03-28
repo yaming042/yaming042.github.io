@@ -107,4 +107,6 @@ theme: theme_1
 deploy:
   type: ''
 
+#百度统计
+baidutongji: 0bb2321117b8ad1f07d1fca35aa1199a
 
