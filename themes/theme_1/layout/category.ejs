@@ -24,7 +24,7 @@
                 <div class="content"><%- post.excerpt || clearHtml(post.content) %></div>
                 <div class="articles-info">
                     <span>发布时间: <%= date(post.date) %></span>
-                    <span>阅读量: 999</span>
+                    <span>阅读量: <i class="visitor" id="<%= url %>">-</i> 次</span>
                 </div>
             </div>
         <%})}%>

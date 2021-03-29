@@ -108,7 +108,10 @@ deploy:
   type: ''
 
 #百度统计
-baidutongji: 0bb2321117b8ad1f07d1fca35aa1199a
-tongjitoken: 123.ed498f6a8cd4c00bb6bc727a7d2c486e.Y3Wq-4RiLW_NznSrAJYFDFgvhXuzW68g34CzLcD.x6XBeQ
-siteid: 16469669
+baidu: 0bb2321117b8ad1f07d1fca35aa1199a
+
+leancloud_visitors:
+  enable: true
+  app_id: 1lDgPz8SjxTtvmbx7wEyRr5K-gzGzoHsz
+  app_key: yjGRwyBaWyarq9iIrOOE07zN
 

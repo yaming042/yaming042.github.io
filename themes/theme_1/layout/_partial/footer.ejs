@@ -8,20 +8,21 @@
         <span class="dotted">|</span>
         <span>Powered by <a href="https://hexo.io/">Hexo</a></span>
         <span class="dotted">|</span>
-        <span>Theme by <a href="javascript:">yaming042</a></span>
+        <span>Theme by <i>yaming042</i></span>
         <% if( !is_post()){ %>
-        <span class="visitor_area" style="display:none;">
-            <span class="dotted">|</span>
-            <span>访问量 <i id="visit_count"></i></span>
-        </span>
+            <span class="visitor_area" style="display:none;">
+                <span class="dotted">|</span>
+                <span>总访问量 <i id="visit_count">-</i> 次</span>
+            </span>
         <% } %>
         <!-- <span class="dotted">|</span>
         <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备17028068号</a></span> -->
     </div>
+
     <script>
-        var Y38adQ = '<%= config.tongjitoken %>',
-            GgLpVi = '<%= config.siteid %>',
-            ZayyCP = '<%= is_post() %>';
+        var APP_ID = '<%- config.leancloud_visitors.app_id %>',
+            APP_KEY = '<%- config.leancloud_visitors.app_key %>',
+            IS_POST = '<%= is_post() %>' === 'true';
     </script>
     <%- js('js/tg.min.js') %>
 </div>

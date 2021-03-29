@@ -31,12 +31,13 @@
 <link rel="icon" href="<%- theme.favicon %>">
 <%- css('css/style.css') %>
 <%- js('js/jquery.min.js') %>
+<%- js('js/av.min.js') %>
 
 <script>
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?<%= config.baidutongji %>";
+      hm.src = "https://hm.baidu.com/hm.js?<%= config.baidu %>";
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
     })();

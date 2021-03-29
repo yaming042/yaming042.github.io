@@ -6,7 +6,11 @@
                 <div class="other-info">
                     <span>发布时间：<%= date(page.date) %></span>
                     <span>作者：<%= page.author %></span>
-                    <span class="visitor_area" style="display:none;">阅读量：<i id="visit_count"></i></span>
+                    <% if(config.leancloud_visitors.enable){ %>
+                        <span>
+                            阅读量：<i id="<%= url_for(page.path) %>" class="leancloud_visitors" data-flag-title="<%- page.title %>">-</i> 次
+                        </span>
+                    <% } %>
                     <%
                         let time = symbolsTime(page.content);
                         time = (time||'').split(' ')[0] || '';
@@ -18,7 +22,5 @@
             <%- page.content %>
         </div>
     </div>
-    <%
-        
-    %>
+    
 </div>
