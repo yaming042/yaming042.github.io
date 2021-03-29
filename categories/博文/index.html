@@ -29,6 +29,9 @@
 <script src="/js/jquery.min.js"></script>
 
 
+<script src="/js/av.min.js"></script>
+
+
 <script>
     var _hmt = _hmt || [];
     (function() {
@@ -127,17 +130,16 @@
                 <div class="content">1. 修改本地hosts文件
 windows系统的hosts文件的位置如下：C:\Windows\System32\drivers\etc\hostsmac/linux系统的hosts文件的位置如下：/etc/hosts
 
-2. 增加http://github.global.ssl.fastly.net和http://github.com的映射
+2. 增加 http://github.global.ssl.fastly.net 和 http://github.com 的映射
 获取Github相关网站的ip访问https://www.ipaddress.com，拉下来，找到页面中下方的“IP Address Tools – Quick Links”分别输入github.global.ssl.fastly.net和github.com，查询ip地址配置完如下：140.82.114.4    github.com199.232.5.194    github.global.ssl.fastly.net
 
-#####注：
-
+注：
 配置完成后，GitHub还是会有偶尔的缓慢
 
 </div>
                 <div class="articles-info">
                     <span>发布时间: 2021-03-28</span>
-                    <span>阅读量: 999</span>
+                    <span>阅读量: <i class="visitor" id="/20210328/2021328/">-</i> 次</span>
                 </div>
             </div>
         
@@ -234,20 +236,21 @@ windows系统的hosts文件的位置如下：C:\Windows\System32\drivers\etc\hos
         <span class="dotted">|</span>
         <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span>
         <span class="dotted">|</span>
-        <span>Theme by <a href="javascript:">yaming042</a></span>
+        <span>Theme by <i>yaming042</i></span>
         
-        <span class="visitor_area" style="display:none;">
-            <span class="dotted">|</span>
-            <span>访问量 <i id="visit_count"></i></span>
-        </span>
+            <span class="visitor_area" style="display:none;">
+                <span class="dotted">|</span>
+                <span>总访问量 <i id="visit_count">-</i> 次</span>
+            </span>
         
         <!-- <span class="dotted">|</span>
         <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备17028068号</a></span> -->
     </div>
+
     <script>
-        var Y38adQ = '123.ed498f6a8cd4c00bb6bc727a7d2c486e.Y3Wq-4RiLW_NznSrAJYFDFgvhXuzW68g34CzLcD.x6XBeQ',
-            GgLpVi = '16469669',
-            ZayyCP = 'false';
+        var APP_ID = '1lDgPz8SjxTtvmbx7wEyRr5K-gzGzoHsz',
+            APP_KEY = 'yjGRwyBaWyarq9iIrOOE07zN',
+            IS_POST = 'false' === 'true';
     </script>
     
 <script src="/js/tg.min.js"></script>
