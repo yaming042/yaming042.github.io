@@ -9,16 +9,19 @@
         <span>Powered by <a href="https://hexo.io/">Hexo</a></span>
         <span class="dotted">|</span>
         <span>Theme by <a href="javascript:">yaming042</a></span>
+        <% if( !is_post()){ %>
+        <span class="visitor_area" style="display:none;">
+            <span class="dotted">|</span>
+            <span>访问量 <i id="visit_count"></i></span>
+        </span>
+        <% } %>
         <!-- <span class="dotted">|</span>
         <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备17028068号</a></span> -->
     </div>
-
-    <%
-        if( is_post() ){
-            
-        }else{
-            
-        }
-    %>
+    <script>
+        var Y38adQ = '<%= config.tongjitoken %>',
+            GgLpVi = '<%= config.siteid %>',
+            ZayyCP = '<%= is_post() %>';
+    </script>
     <%- js('js/tg.min.js') %>
 </div>
