@@ -31,7 +31,7 @@
             words: url
         }).then(function (object) {
 
-        })
+        });
     }
     function renderVisitor(Counter){
         var query = new AV.Query("Counter"),
@@ -45,7 +45,7 @@
             }else{
                 visitors[words] = 1;
             }
-        })
+        });
         
         var t = setTimeout(function(){
             clearTimeout( t );
@@ -60,7 +60,9 @@
     }
 
     var Counter = AV.Object.extend("Counter");
-    addCount(Counter);
-    showTime(Counter);
-    renderVisitor(Counter);
+    if( location.host.indexOf('localhost') == -1 ){
+        addCount(Counter);
+        showTime(Counter);
+        renderVisitor(Counter);
+    }
 })();

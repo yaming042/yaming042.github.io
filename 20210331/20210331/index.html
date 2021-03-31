@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+
+    <meta name="author" content="yaming042">
+
+
+
+    <meta name="keywords" content="JavaScript,奇淫技巧,"/>
+
+
+
+    <meta name="description" content="在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还..."/>
+
+
+<meta name="Robots" content="all">
+
+
+    <title>js 数据类型检测 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/av.min.js"></script>
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0bb2321117b8ad1f07d1fca35aa1199a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+
+    <div class="main-container">
+        <div class="web-header">
+    <div class="logo">TYM042</div>
+
+    <div class="web-menu">
+        <div class="menu-list clearfix">
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/"
+                            
+                        >
+                            首页
+                        </a>
+                    </h2>
+                    <span>Home</span>
+                </div>
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/categories/博文/"
+                            
+                        >
+                            博文
+                        </a>
+                    </h2>
+                    <span>Blog</span>
+                </div>
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/categories/项目/"
+                            
+                        >
+                            项目
+                        </a>
+                    </h2>
+                    <span>Project</span>
+                </div>
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/categories/笔记/"
+                            
+                        >
+                            笔记
+                        </a>
+                    </h2>
+                    <span>Notes</span>
+                </div>
+            
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <img src="/images/banner.jpeg" alt="">
+</div>
+        <div class="container-box">
+            <div class="container-body">
+                <div class="web-article">
+    <div class="web-article-container">
+        <div class="web-article-view">
+            <div class="article-baseinfo">
+                <h2>js 数据类型检测</h2>
+                <div class="other-info">
+                    <span>发布时间：2021-03-31</span>
+                    <span>作者：yaming042</span>
+                    
+                        <span>
+                            阅读量：<i id="/20210331/20210331/" class="leancloud_visitors" data-flag-title="js 数据类型检测">-</i> 次
+                        </span>
+                    
+                    
+                    <span>本文字数：4.2k</span>
+                    <span>阅读时长 ≈ 4 分钟</span>
+                </div>
+            </div>
+            <p>在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还是很必要的。</p>
+<p><strong>下面介绍几种常用的方法：</strong></p>
+<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>使用 <code>typeof</code> 方法来检测数据类型，基本类型大部分都能被准确检测并返回正确的字符串(除了 Null 类型，其返回 object 字符串)，而引用类型大部分都不能够被准确检测（除了 Function 类型能够准确返回 function 字符串外，其它的都返回了 object 字符串）。</p>
+<h2 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h2><p><code>Object.prototype.toString</code>返回的 [object class] 字符串中，class 准确的表示了各个数据的类型，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>) === <span class="string">&#x27;[object Number]&#x27;</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) === <span class="string">&#x27;[object Object]&#x27;</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><code>Object.prototype.toString</code>与 typeof 不同的是，class 所代表的数据类型字符串首字母是大写的，而不像 typeof 返回的是小写字符串。</p>
+<p><strong>下面封装一个通用方法：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc </span>数据类型检测</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>obj 待检测的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return </span>string 类型字符串(小写字符串)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_isType</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> toString=<span class="built_in">Object</span>.prototype.toString,</span><br><span class="line">        type = &#123;&#125;,</span><br><span class="line">        types=[<span class="string">&#x27;Undefined&#x27;</span>,<span class="string">&#x27;Null&#x27;</span>,<span class="string">&#x27;Boolean&#x27;</span>,<span class="string">&#x27;Number&#x27;</span>,<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;Object&#x27;</span>,<span class="string">&#x27;Array&#x27;</span>,<span class="string">&#x27;Function&#x27;</span>,<span class="string">&#x27;Date&#x27;</span>,<span class="string">&#x27;RegExp&#x27;</span>,<span class="string">&#x27;Error&#x27;</span>,<span class="string">&#x27;Arguments&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  types.map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>)</span>&#123;</span><br><span class="line">        type[<span class="string">&quot;[object &quot;</span> + item + <span class="string">&quot;]&quot;</span>] = item.toLowerCase();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> ? <span class="keyword">typeof</span> obj : type[toString.call(obj)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+    </div>
+    
+</div>
+            </div>
+            
+                <div class="aside">
+    
+        <div class="web-sidebar-box box-item">
+    <div class="sidebar-title">
+        <h2>关于我</h2>
+    </div>
+    <div class="tag-list">
+        目前网站处于前期调整阶段
+    </div>
+</div>
+    
+        
+    <div class="web-sidebar-box box-item">
+        <div class="sidebar-title">
+            <h2>最新文章</h2>
+        </div>
+        <div class="latest-list">
+            <ul class="item-box">
+                
+                    
+                        <li>
+                            <a href="/20210331/20210331/">
+                                1. js 数据类型检测
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li>
+                            <a href="/20210328/2021328/">
+                                2. 国内github访问速度慢怎么解决
+                            </a>
+                        </li>
+                    
+                
+            </ul>
+        </div>
+    </div>
+
+    
+</div>
+            
+            </div>
+        <div class="web-footer">
+    <h2 class="friend-state">友情声明</h2>
+    <div class="coperation">
+        <p>本网站部分资料来源于网络，如有任何问题可联系站主解决</p>
+    </div>
+    <div class="copyright">
+        <span>Copyright &copy; 2021</span>
+        <span class="dotted">|</span>
+        <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span>
+        <span class="dotted">|</span>
+        <span>Theme by <i>yaming042</i></span>
+        
+        <!-- <span class="dotted">|</span>
+        <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备17028068号</a></span> -->
+    </div>
+
+    <script>
+        var APP_ID = '1lDgPz8SjxTtvmbx7wEyRr5K-gzGzoHsz',
+            APP_KEY = 'yjGRwyBaWyarq9iIrOOE07zN',
+            IS_POST = 'true' === 'true';
+    </script>
+    
+<script src="/js/tg.min.js"></script>
+
+</div>
+    </div>
+
+
+</body>
+</html>
