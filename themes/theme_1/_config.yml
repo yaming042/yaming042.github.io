@@ -7,14 +7,14 @@ menu:
     url: /categories/博文/
     newTab: false
     subName: Blog
-  - name: 项目
-    url: /categories/项目/
-    newTab: false
-    subName: Project
-  - name: 笔记
-    url: /categories/笔记/
-    newTab: false
-    subName: Notes
+  # - name: 项目
+  #   url: /categories/项目/
+  #   newTab: false
+  #   subName: Project
+  # - name: 笔记
+  #   url: /categories/笔记/
+  #   newTab: false
+  #   subName: Notes
 
 sections:
   - section: blog
