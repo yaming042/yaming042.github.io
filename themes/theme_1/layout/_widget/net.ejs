@@ -20,7 +20,10 @@
                     <img src="<%= thumbnails[0] || theme.defaultThumb %>" alt=""/>
                 </div>
                 <div class="net-details">
-                    <a href="<%= url %>"><%- post.excerpt || post.content %></a>    
+                    <a href="<%= url %>">
+                        <p><%= post.title %></p>
+                        <div><%= getExcerpt(post.excerpt || post.content, 52) %></div>
+                    </a>    
                 </div>
             </div>
         <%})}})%>

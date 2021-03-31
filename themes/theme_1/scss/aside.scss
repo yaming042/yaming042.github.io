@@ -124,10 +124,18 @@
           }
           .net-details{
             overflow: hidden;
-            padding: 10px 10px 0;
+            padding: 8px 10px 0;
             font-size: 12px;
-            max-height: 60px;
+            max-height: 67px;
             overflow: hidden;
+
+            p{
+              font-weight: bold;
+              margin-bottom: 4px;
+            }
+            div{
+              color: #868686;
+            }
           }
 
           &:last-child{
@@ -204,6 +212,13 @@
         overflow: hidden;
         font-size: 14px;
 
+        li{
+          padding: 2px 0;
+    
+          a:hover{
+            color: red;
+          }
+        }
       }
     }
 }

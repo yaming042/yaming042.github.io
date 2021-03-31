@@ -38,7 +38,7 @@
                                     <div class="item-post-thumb" style="background-image:url('<%= thumbnails[0] %>')"></div>
                                 <% } %>
                                 <div class="item-post-article<%= hasThumb ? '' : ' nothumb' %>">
-                                    <%- post.excerpt || clearHtml(post.content) %>
+                                    <%= getExcerpt(post.excerpt || post.content, 150) + '...' %>
                                 </div>
                             </a>
                         </div>

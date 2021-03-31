@@ -11,5 +11,11 @@ hexo.extend.helper.register('getThumb', function(content){
 hexo.extend.helper.register('clearHtml', function(str){
     let reg=/<\/?.+?\/?>/g;
 
-    return str.replace(reg,'');
+    return str.replace(reg, '');
+});
+
+hexo.extend.helper.register('getExcerpt', function(content, length){
+    let reg=/<\/?.+?\/?>/g;
+
+    return content.replace(reg, '').substr(0, length);
 });
