@@ -77,32 +77,6 @@
                     <span>Blog</span>
                 </div>
             
-                <div class="menu-item">
-                    <h2>
-                        <a 
-                            class="menu-item-link" 
-                            href="/categories/项目/"
-                            
-                        >
-                            项目
-                        </a>
-                    </h2>
-                    <span>Project</span>
-                </div>
-            
-                <div class="menu-item">
-                    <h2>
-                        <a 
-                            class="menu-item-link" 
-                            href="/categories/笔记/"
-                            
-                        >
-                            笔记
-                        </a>
-                    </h2>
-                    <span>Notes</span>
-                </div>
-            
         </div>
     </div>
 </div>
@@ -127,14 +101,7 @@
                 <h4 class="title">
                     <a href="/20210331/20210331/">js 数据类型检测</a>    
                 </h4>
-                <div class="content">在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还是很必要的。
-下面介绍几种常用的方法：
-typeof使用 typeof 方法来检测数据类型，基本类型大部分都能被准确检测并返回正确的字符串(除了 Null 类型，其返回 object 字符串)，而引用类型大部分都不能够被准确检测（除了 Function 类型能够准确返回 function 字符串外，其它的都返回了 object 字符串）。
-Object.prototype.toStringObject.prototype.toString返回的 [object class] 字符串中，class 准确的表示了各个数据的类型，例如：
-12Object.prototype.toString.call(1) === &#x27;[object Number]&#x27;  // trueObject.prototype.toString.call(&#123;&#125;) === &#x27;[object Object]&#x27;  // true
-Object.prototype.toString与 typeof 不同的是，class 所代表的数据类型字符串首字母是大写的，而不像 typeof 返回的是小写字符串。
-下面封装一个通用方法：
-12345678910111213141516/** * @desc 数据类型检测 * @param obj 待检测的数据 * @return string 类型字符串(小写字符串) */function _isType(obj)&#123;    var toString=Object.prototype.toString,        type = &#123;&#125;,        types=[&#x27;Undefined&#x27;,&#x27;Null&#x27;,&#x27;Boolean&#x27;,&#x27;Number&#x27;,&#x27;String&#x27;,&#x27;Object&#x27;,&#x27;Array&#x27;,&#x27;Function&#x27;,&#x27;Date&#x27;,&#x27;RegExp&#x27;,&#x27;Error&#x27;,&#x27;Arguments&#x27;];  types.map(function(item, index)&#123;        type[&quot;[object &quot; + item + &quot;]&quot;] = item.toLowerCase();  &#125;);  return typeof obj !== &quot;object&quot; ? typeof obj : type[toString.call(obj)];&#125;</div>
+                <div class="content">在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还是很必</div>
                 <div class="articles-info">
                     <span>发布时间: 2021-03-31</span>
                     <span>阅读量: <i class="visitor" id="/20210331/20210331/">-</i> 次</span>
