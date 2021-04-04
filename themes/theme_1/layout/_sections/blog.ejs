@@ -15,11 +15,7 @@
             <div class="blog-list">
                 <%
                 if( categories.posts.length ){
-                    categories.posts.sort('-date').forEach(function(post, index){
-                        if( index > 2){
-                            return false;
-                        }
-
+                    categories.posts.sort('-date').limit(3).forEach(function(post, index){
                         let thumbnails = getThumb(post.content),
                             url = url_for(post.path),
                             hasThumb = thumbnails.length;

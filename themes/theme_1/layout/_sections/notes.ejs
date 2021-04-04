@@ -1,7 +1,7 @@
 <% if (site.categories.length){ %>
     <% 
         site.categories.sort('name').forEach(function (categories) {
-            if( categories.name == '笔记'){
+            if( categories.name == '笔记' ){
     %>
         <div class="block-box">
             <div class="block-title">
@@ -15,16 +15,12 @@
             <div class="notes-list">
                 <%
                 if( categories.posts.length ){
-                    categories.posts.sort('-date').forEach(function(post, index){
-                        if( index > 2){
-                            return false;
-                        }
-
+                    categories.posts.sort('-date').limit(3).forEach(function(post, index){
                         let url = url_for(post.path);
                 %>
                     <div class="notes-item">
                         <div class="notes-item-desc">
-                            <a href="<%= url %>"><%- post.excerpt || clearHtml(post.content) %></a>    
+                            <a href="<%= url %>"><%= getExcerpt(post.excerpt || post.content, 100) + '...' %></a>    
                         </div>
                         <div class="notes-tags">
                             <%

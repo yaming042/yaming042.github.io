@@ -11,10 +11,10 @@ menu:
   #   url: /categories/项目/
   #   newTab: false
   #   subName: Project
-  # - name: 笔记
-  #   url: /categories/笔记/
-  #   newTab: false
-  #   subName: Notes
+  - name: 笔记
+    url: /categories/笔记/
+    newTab: false
+    subName: Notes
 
 sections:
   - section: blog
