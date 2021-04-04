@@ -6,24 +6,25 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
 
-    <meta name="author" content="月正明">
+    <meta name="author" content="yaming042">
 
 
 
-    <meta name="keywords" content="工具,"/>
+    <meta name="keywords" content="bug,"/>
 
 
 
-    <meta name="description" content="1. 修改本地hosts文件
-windows系统的hosts文件的位置如下：C:\Windows\System32\drivers\etc\hostsmac/linux系统的hosts文件的位置如下：/etc/hosts
+    <meta name="description" content="今天闲来无事，忽然想起了前天在开发功能时遇到的一个问题，具体情况就是我渲染了一个邮箱列表，列表支持修改邮箱，但是发现每次改完邮箱后input框就会失去焦点，按理说input是不会失去焦点的，但bug就此发生了。
 
-2. 增加 http://github.global.ssl.fast..."/>
+
+
+需要渲染的邮箱列表数据格式 ['xiaoming@163.com','lie..."/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>国内github访问速度慢怎么解决 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>一个改变的key引发的问题 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -107,29 +108,27 @@ windows系统的hosts文件的位置如下：C:\Windows\System32\drivers\etc\hos
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>国内github访问速度慢怎么解决</h2>
+                <h2>一个改变的key引发的问题</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-03-28</span>
-                    <span>作者：月正明</span>
+                    <span>发布时间：2021-04-04</span>
+                    <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210328/2021328/" class="leancloud_visitors" data-flag-title="国内github访问速度慢怎么解决">-</i> 次
+                            阅读量：<i id="/20210404/20210404/" class="leancloud_visitors" data-flag-title="一个改变的key引发的问题">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：1.1k</span>
-                    <span>阅读时长 ≈ 1 分钟</span>
+                    <span>本文字数：3.2k</span>
+                    <span>阅读时长 ≈ 3 分钟</span>
                 </div>
             </div>
-            <h4 id="1-修改本地hosts文件"><a href="#1-修改本地hosts文件" class="headerlink" title="1. 修改本地hosts文件"></a>1. 修改本地hosts文件</h4><blockquote>
-<p>windows系统的hosts文件的位置如下：C:\Windows\System32\drivers\etc\hosts<br>mac/linux系统的hosts文件的位置如下：/etc/hosts</p>
-</blockquote>
-<h4 id="2-增加-http-github-global-ssl-fastly-net-和-http-github-com-的映射"><a href="#2-增加-http-github-global-ssl-fastly-net-和-http-github-com-的映射" class="headerlink" title="2. 增加 http://github.global.ssl.fastly.net 和 http://github.com 的映射"></a>2. 增加 <a target="_blank" rel="noopener" href="http://github.global.ssl.fastly.net/">http://github.global.ssl.fastly.net</a> 和 <a target="_blank" rel="noopener" href="http://github.com/">http://github.com</a> 的映射</h4><blockquote>
-<p>获取Github相关网站的ip<br>访问<a target="_blank" rel="noopener" href="https://www.ipaddress.com,拉下来,找到页面中下方的“ip/">https://www.ipaddress.com，拉下来，找到页面中下方的“IP</a> Address Tools – Quick Links”<br>分别输入github.global.ssl.fastly.net和github.com，查询ip地址<br>配置完如下：<br>140.82.114.4    github.com<br>199.232.5.194    github.global.ssl.fastly.net</p>
-</blockquote>
-<h5 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h5><blockquote>
-<p>配置完成后，GitHub还是会有偶尔的缓慢</p>
-</blockquote>
+            <p>今天闲来无事，忽然想起了前天在开发功能时遇到的一个问题，具体情况就是我渲染了一个邮箱列表，列表支持修改邮箱，但是发现每次改完邮箱后input框就会失去焦点，按理说input是不会失去焦点的，但bug就此发生了。</p>
+<hr>
+<p><img src="/20210404/20210404/email.png" alt="邮件列表"></p>
+<hr>
+<p>需要渲染的邮箱列表数据格式 <code>['xiaoming@163.com','lier@163.com']</code>，渲染的列表支持修改，代码如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">let</span> &#123; emails &#125; = <span class="hljs-built_in">this</span>.state;<br><br>    <span class="hljs-keyword">return</span> (<br>        &lt;div className=<span class="hljs-string">&quot;container&quot;</span>&gt;<br>            &#123;<br>                (emails || []).map(<span class="hljs-function">(<span class="hljs-params">email, index</span>) =&gt;</span> &#123;<br>                    <span class="hljs-keyword">return</span> (<br>                        &lt;div className=<span class="hljs-string">&quot;email-row&quot;</span> key=&#123; email &#125;&gt;<br>                            &lt;input <br>                                type=<span class="hljs-string">&quot;text&quot;</span> <br>                                value=&#123; email &#125; <br>                                onChange=&#123;<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>                                    emails[index] = (e.target.value || <span class="hljs-string">&#x27;&#x27;</span>).trim();<br>                                    <span class="hljs-built_in">this</span>.setState(&#123;<br>                                        emails: emails)<br>                                    &#125;);<br>                                &#125;&#125;    <br>                            /&gt;<br>                        &lt;/div&gt;<br>                    );<br>                &#125;)<br>            &#125;<br>        &lt;/div&gt;<br>    );<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>看完上面是否有发现问题。大体看上去没啥问题，但是在页面上实际测过后你会发现一个bug，每次敲击完键盘，input输入框会失去焦点，那么为什么会发生这种bug呢，其实你回想下react的渲染流程应该就会发现问题。<br><strong>先说原因：</strong>因为你每次change后email发生了改变，也就是说，你在渲染列表的时候，列表的 <code>key</code> 发生了改变，此时再次渲染，原来的dom已经被干掉换成新的dom了，只是看起来还是原来的那个input；<br><strong>再说处理办法：</strong>慎重定义 <code>key</code> 的值</p>
 
         </div>
     </div>

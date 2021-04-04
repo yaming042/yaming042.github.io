@@ -12,7 +12,7 @@
                 var url = $(".leancloud_visitors").attr('id').trim();
 
                 query.equalTo("words", url).count().then(function (number) {
-                    $(document.getElementById(url)).text( number ? number : '--' );
+                    $(document.getElementById(url)).text( typeof (number || 0) === 'number' ? number+1 : '--' );
                 }, function (error) {});
             }
         }else{
@@ -34,35 +34,42 @@
         });
     }
     function renderVisitor(Counter){
-        var query = new AV.Query("Counter"),
+        let query = new AV.Query("Counter"),
             visitors = {};
 
-        query.select(['words']).each(function(v,i){
-            var words = v.attributes['words'];
-            
-            if( visitors.hasOwnProperty(words) ){
-                visitors[words]++;
-            }else{
-                visitors[words] = 1;
-            }
-        });
-        
-        var t = setTimeout(function(){
-            clearTimeout( t );
-            $('.visitor').each(function( index, item ){
-                var url = $(item).attr('id'),
-                    number = visitors[url];
-                
-                $(document.getElementById(url)).text( number ? number : '--' );
-            });
-        }, 1000);
+        query.select(['words']).count().then(function(number){
+            let count = 0;
 
+            query.select(['words']).each(function(item, index){
+                let words = item.attributes['words'];
+                count++;
+
+                if( visitors.hasOwnProperty(words) ){
+                    visitors[words]++;
+                }else{
+                    visitors[words] = 1;
+                }
+
+                if( count == number ){
+                    $('.visitor').each(function( index, item ){
+                        let url = $(item).attr('id'),
+                            num = visitors[url];
+                    
+                        $(document.getElementById(url)).text( num ? num : '--' );
+                    });
+                }
+            });
+
+
+        }, function (error) {});
+    
     }
 
     var Counter = AV.Object.extend("Counter");
     if( location.host.indexOf('localhost') == -1 ){
         addCount(Counter);
-        showTime(Counter);
-        renderVisitor(Counter);
     }
+
+    showTime(Counter);
+    renderVisitor(Counter);
 })();
