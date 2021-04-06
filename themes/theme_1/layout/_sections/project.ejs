@@ -29,7 +29,7 @@
                         </div>
                         <div class="project-info">
                             <div class="info-title"><a href="<%= url %>"><%= post.title %></a></div>
-                            <div class="info-desc"><a href="<%= url %>"><%- post.excerpt || clearHtml(post.content) %></a></div>
+                            <div class="info-desc"><a href="<%= url %>"><%= getExcerpt(post.excerpt || post.content, 34) + '...' %></a></div>
                         </div>
                     </div>
                 <%})}else{%>
