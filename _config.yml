@@ -46,13 +46,15 @@ marked:
   postAsset: true
 relative_link: false
 future: true
+
 highlight:
   enable: true
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
-  hljs: true
+  hljs: false
+
 prismjs:
   enable: false
   preprocess: true
