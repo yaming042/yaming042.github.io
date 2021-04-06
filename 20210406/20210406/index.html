@@ -10,17 +10,21 @@
 
 
 
-    <meta name="keywords" content="JavaScript,奇淫技巧,"/>
+    <meta name="keywords" content="排序算法,"/>
 
 
 
-    <meta name="description" content="在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还..."/>
+    <meta name="description" content="无论是平时编程还是应付面试，算法都是很重要的。复杂的算法想掌握也不是一天两天的事，但是作为一个小前端，基本的排序算法还是应该数量掌握的。今天闲来无事就开始准备温习下十大经典排序算法
+
+冒泡排序
+
+"/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>js 数据类型检测 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>十大经典排序算法 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -104,28 +108,25 @@
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>js 数据类型检测</h2>
+                <h2>十大经典排序算法</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-03-31</span>
+                    <span>发布时间：2021-04-06</span>
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210331/20210331/" class="leancloud_visitors" data-flag-title="js 数据类型检测">-</i> 次
+                            阅读量：<i id="/20210406/20210406/" class="leancloud_visitors" data-flag-title="十大经典排序算法">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：4.2k</span>
-                    <span>阅读时长 ≈ 4 分钟</span>
+                    <span>本文字数：243</span>
+                    <span>阅读时长 ≈ 1 分钟</span>
                 </div>
             </div>
-            <p>在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还是很必要的。</p>
-<p><strong>下面介绍几种常用的方法：</strong></p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>使用 <code>typeof</code> 方法来检测数据类型，基本类型大部分都能被准确检测并返回正确的字符串(除了 Null 类型，其返回 object 字符串)，而引用类型大部分都不能够被准确检测（除了 Function 类型能够准确返回 function 字符串外，其它的都返回了 object 字符串）。</p>
-<h2 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h2><p><code>Object.prototype.toString</code>返回的 [object class] 字符串中，class 准确的表示了各个数据的类型，例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>) === <span class="string">&#x27;[object Number]&#x27;</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) === <span class="string">&#x27;[object Object]&#x27;</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p><code>Object.prototype.toString</code>与 typeof 不同的是，class 所代表的数据类型字符串首字母是大写的，而不像 typeof 返回的是小写字符串。</p>
-<p><strong>下面封装一个通用方法：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc </span>数据类型检测</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>obj 待检测的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return </span>string 类型字符串(小写字符串)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_isType</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> toString=<span class="built_in">Object</span>.prototype.toString,</span><br><span class="line">        type = &#123;&#125;,</span><br><span class="line">        types=[<span class="string">&#x27;Undefined&#x27;</span>,<span class="string">&#x27;Null&#x27;</span>,<span class="string">&#x27;Boolean&#x27;</span>,<span class="string">&#x27;Number&#x27;</span>,<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;Object&#x27;</span>,<span class="string">&#x27;Array&#x27;</span>,<span class="string">&#x27;Function&#x27;</span>,<span class="string">&#x27;Date&#x27;</span>,<span class="string">&#x27;RegExp&#x27;</span>,<span class="string">&#x27;Error&#x27;</span>,<span class="string">&#x27;Arguments&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  types.map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>)</span>&#123;</span><br><span class="line">        type[<span class="string">&quot;[object &quot;</span> + item + <span class="string">&quot;]&quot;</span>] = item.toLowerCase();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> ? <span class="keyword">typeof</span> obj : type[toString.call(obj)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p><img src="/20210406/20210406/sort.gif" alt="排序算法"><br>无论是平时编程还是应付面试，算法都是很重要的。复杂的算法想掌握也不是一天两天的事，但是作为一个小前端，基本的排序算法还是应该数量掌握的。<br>今天闲来无事就开始准备温习下十大经典排序算法</p>
+<ul>
+<li><a href="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">冒泡排序</a></li>
+</ul>
+
         </div>
     </div>
     
