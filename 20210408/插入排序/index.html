@@ -10,17 +10,21 @@
 
 
 
-    <meta name="keywords" content="JavaScript,奇淫技巧,"/>
+    <meta name="keywords" content="排序算法,"/>
 
 
 
-    <meta name="description" content="在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还..."/>
+    <meta name="description" content="插入排序我感觉就是遍历数组，找到最小的往前放，从第一个开始，用第一个一次和后面的比较，如果找到比第一个小的，就重置最小数下标index，直到遍历完，把index的元素插入到第一个元素的位置，直到遍历完数组，此时数组就是有序的了
+
+插入排序分两部分，前面一部分为有序序列，后面一部分为无序序列
+
+..."/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>js 数据类型检测 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>插入排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -104,28 +108,31 @@
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>js 数据类型检测</h2>
+                <h2>插入排序</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-03-31</span>
+                    <span>发布时间：2021-04-08</span>
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210331/20210331/" class="leancloud_visitors" data-flag-title="js 数据类型检测">-</i> 次
+                            阅读量：<i id="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="插入排序">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：4.2k</span>
-                    <span>阅读时长 ≈ 4 分钟</span>
+                    <span>本文字数：3.4k</span>
+                    <span>阅读时长 ≈ 3 分钟</span>
                 </div>
             </div>
-            <p>在实际前端编码过程中，对变量类型的校验是必不可少的，比如你在接收到接口返回的列表数据后直接使用sort()进行排序，此时是否有问题？大部分时候是没有问题的，但是如果数据库中没有数据，接口可能返回的是null，你对null进行sort排序，会怎么样？可能页面直接空白崩溃，所以对数据类型进行校验还是很必要的。</p>
-<p><strong>下面介绍几种常用的方法：</strong></p>
-<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p>使用 <code>typeof</code> 方法来检测数据类型，基本类型大部分都能被准确检测并返回正确的字符串(除了 Null 类型，其返回 object 字符串)，而引用类型大部分都不能够被准确检测（除了 Function 类型能够准确返回 function 字符串外，其它的都返回了 object 字符串）。</p>
-<h2 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h2><p><code>Object.prototype.toString</code>返回的 [object class] 字符串中，class 准确的表示了各个数据的类型，例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>) === <span class="string">&#x27;[object Number]&#x27;</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;) === <span class="string">&#x27;[object Object]&#x27;</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p><code>Object.prototype.toString</code>与 typeof 不同的是，class 所代表的数据类型字符串首字母是大写的，而不像 typeof 返回的是小写字符串。</p>
-<p><strong>下面封装一个通用方法：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@desc </span>数据类型检测</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>obj 待检测的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return </span>string 类型字符串(小写字符串)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_isType</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> toString=<span class="built_in">Object</span>.prototype.toString,</span><br><span class="line">        type = &#123;&#125;,</span><br><span class="line">        types=[<span class="string">&#x27;Undefined&#x27;</span>,<span class="string">&#x27;Null&#x27;</span>,<span class="string">&#x27;Boolean&#x27;</span>,<span class="string">&#x27;Number&#x27;</span>,<span class="string">&#x27;String&#x27;</span>,<span class="string">&#x27;Object&#x27;</span>,<span class="string">&#x27;Array&#x27;</span>,<span class="string">&#x27;Function&#x27;</span>,<span class="string">&#x27;Date&#x27;</span>,<span class="string">&#x27;RegExp&#x27;</span>,<span class="string">&#x27;Error&#x27;</span>,<span class="string">&#x27;Arguments&#x27;</span>];</span><br><span class="line"></span><br><span class="line">  types.map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>)</span>&#123;</span><br><span class="line">        type[<span class="string">&quot;[object &quot;</span> + item + <span class="string">&quot;]&quot;</span>] = item.toLowerCase();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span> ? <span class="keyword">typeof</span> obj : type[toString.call(obj)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>插入排序我感觉就是遍历数组，找到最小的往前放，从第一个开始，用第一个一次和后面的比较，如果找到比第一个小的，就重置最小数下标index，直到遍历完，把index的元素插入到第一个元素的位置，直到遍历完数组，此时数组就是有序的了</p>
+<blockquote>
+<p>插入排序分两部分，前面一部分为有序序列，后面一部分为无序序列</p>
+</blockquote>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
+<li>从第一个元素开始，遍历无序序列找到最小的元素，插入到有序序列(此时应该就是第一位)的<strong>前面</strong></li>
+<li>继续遍历无序序列，找到最小的，插入到有序序列的<strong>后面</strong></li>
+<li>重复步骤2，直到数组遍历完成，此时数组就为有序数组</li>
+</ol>
+<p>过程如图<br><img src="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/sort.gif" alt="插入排序"></p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length,</span><br><span class="line">        min, </span><br><span class="line">        temp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        min = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=i+<span class="number">1</span>;j&lt;length;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[min] &gt; arr[j] )&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( min !== i )&#123;</span><br><span class="line">            temp = arr[min];</span><br><span class="line"></span><br><span class="line">            arr[min] = arr[i];</span><br><span class="line">            arr[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( insertSort([<span class="number">4</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">1</span>]) )</span><br></pre></td></tr></table></figure>
         </div>
     </div>
     
