@@ -14,11 +14,11 @@
 
 
 
-    <meta name="description" content="插入算法简单理解就是，打扑克的时候你拿到一张牌就会插入到对应的数后面，这个你拿着牌找插入位置的这个过程其实就是插入算法的过程。
-这里也可以将待排序序列分为有序序列和无序序列
-算法步骤
-从第一个元素开始，假设第一个元素为有序序列
-从第二个元素开始，依次遍历无序序列，将遍历数据n插入到有序序列合适..."/>
+    <meta name="description" content="选择排序我感觉就是遍历数组，选择最小的往前放，从第一个开始，用第一个一次和后面的比较，如果找到比第一个小的，就重置最小数下标index，直到遍历完，把index的元素插入到第一个元素的位置，直到遍历完数组，此时数组就是有序的了
+
+选择排序分两部分，前面一部分为有序序列，后面一部分为无序序列
+
+..."/>
 
 
 <meta name="Robots" content="all">
@@ -114,28 +114,25 @@
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="插入排序">-</i> 次
+                            阅读量：<i id="/20210408/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="插入排序">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：3.6k</span>
+                    <span>本文字数：3.4k</span>
                     <span>阅读时长 ≈ 3 分钟</span>
                 </div>
             </div>
-            <p>插入算法简单理解就是，打扑克的时候你拿到一张牌就会插入到对应的数后面，这个你拿着牌找插入位置的这个过程其实就是插入算法的过程。</p>
-<p>这里也可以将待排序序列分为有序序列和无序序列</p>
+            <p>选择排序我感觉就是遍历数组，选择最小的往前放，从第一个开始，用第一个一次和后面的比较，如果找到比第一个小的，就重置最小数下标index，直到遍历完，把index的元素插入到第一个元素的位置，直到遍历完数组，此时数组就是有序的了</p>
+<blockquote>
+<p>选择排序分两部分，前面一部分为有序序列，后面一部分为无序序列</p>
+</blockquote>
 <h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
-<li>从第一个元素开始，假设第一个元素为有序序列</li>
-<li>从第二个元素开始，依次遍历无序序列，将遍历数据n插入到有序序列合适的位置，这里就插入到有序序列中第一个小于n的数的后面。(我感觉其实就是拿无序序列中的第一个数，到有序序列中比较，然后插入到合适位置)</li>
+<li>从第一个元素开始，遍历无序序列找到最小的元素，插入到有序序列(此时应该就是第一位)的<strong>前面</strong></li>
+<li>继续遍历无序序列，找到最小的，插入到有序序列的<strong>后面</strong></li>
+<li>重复步骤2，直到数组遍历完成，此时数组就为有序数组</li>
 </ol>
-<p>比如[1,2,4,5,3]，当拿3比较时，</p>
-<ol>
-<li>3先和5比，3比5小，那么此时5后面的一位换成5([1,2,4,<strong>5</strong>,5])，此时第一个5就 <em><strong>相当于</strong></em> 3，但并未赋值</li>
-<li>3再和4比，3比4小，那么此时4后面的一位换成4([1,2,<strong>4</strong>,4,5])，此时第一个4就 <em><strong>相当于</strong></em> 3，但并未赋值</li>
-<li>3再和2比，3比2大，那么此时不移动，只需要将2后面的一位赋值为3即可</li>
-</ol>
-<p>过程如图<br><img src="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/sort.gif" alt="插入排序"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length,</span><br><span class="line">        current,</span><br><span class="line">        preIndex;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;length;i++)&#123;</span><br><span class="line">        current = arr[i];</span><br><span class="line">        preIndex = i - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// current 每次是不变的，相当于是把值暂存起来，</span></span><br><span class="line">        <span class="comment">// 每次比较都是把前面一个元素的值赋给后面一个</span></span><br><span class="line">        <span class="keyword">while</span>( preIndex &gt;= <span class="number">0</span> &amp;&amp; current &lt; arr[preIndex] )&#123;</span><br><span class="line">            arr[preIndex+<span class="number">1</span>] = arr[preIndex];</span><br><span class="line">            preIndex--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        arr[preIndex+<span class="number">1</span>] = current;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( insertSort([<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">72</span>,<span class="number">5</span>,<span class="number">2</span>]) ) <span class="comment">//[ 1, 2, 3, 4, 5, 72 ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>过程如图<br><img src="/20210408/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/sort.gif" alt="选择排序"></p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length,</span><br><span class="line">        min, </span><br><span class="line">        temp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        min = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=i+<span class="number">1</span>;j&lt;length;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[min] &gt; arr[j] )&#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( min !== i )&#123;</span><br><span class="line">            temp = arr[min];</span><br><span class="line"></span><br><span class="line">            arr[min] = arr[i];</span><br><span class="line">            arr[i] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( selectSort([<span class="number">4</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">1</span>]) ) <span class="comment">//[ 1, 1, 4, 5, 8, 9, 23 ]</span></span><br></pre></td></tr></table></figure>
         </div>
     </div>
     
