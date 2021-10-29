@@ -10,22 +10,21 @@
 
 
 
-    <meta name="keywords" content="排序算法,"/>
+    <meta name="keywords" content="学习,"/>
 
 
 
-    <meta name="description" content="
-作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。
+    <meta name="description" content="项目开发中时常会遇到多人协作的问题，比如多人同时编辑一片稿子，或同时修改一个东西，后一个人的保存始终会覆盖之前的数据，面对这种情况，我想到的办法有俩：
 
-冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。
-算法步骤
-比较相邻的两个元素，如果第一..."/>
+
+锁 + 超时解锁，当A在编辑的时候就禁止其他人编辑，如果A在一定时间内没有动作，那么就自动解开A的锁，其他人B就可以编辑
+实时通信，当A在..."/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>冒泡排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>Express + Express-ws 实时通信 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -109,32 +108,32 @@
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>冒泡排序</h2>
+                <h2>Express + Express-ws 实时通信</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-04-06</span>
+                    <span>发布时间：2021-10-29</span>
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="冒泡排序">-</i> 次
+                            阅读量：<i id="/20211029/20211029/" class="leancloud_visitors" data-flag-title="Express + Express-ws 实时通信">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：3k</span>
-                    <span>阅读时长 ≈ 3 分钟</span>
+                    <span>本文字数：3.9k</span>
+                    <span>阅读时长 ≈ 4 分钟</span>
                 </div>
             </div>
-            <blockquote>
-<p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。</p>
-</blockquote>
-<p>冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。</p>
-<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
-<li>比较相邻的两个元素，如果第一个比第二个大，那么则交互他俩的位置；</li>
-<li>对后续的元素分别执行步骤1，直到最后一组，比对完成后，最后一个就是数组中最大的值；</li>
-<li>步骤1，2找到了第一个最大的数。此时再次遍历数组，对数组中剩余所有元素跑一遍步骤1，2；</li>
-<li>因为每次需要比较的数组越来越短，知道比较完所有元素，此时的数组就是排好序的数组；</li>
+            <p>项目开发中时常会遇到多人协作的问题，比如多人同时编辑一片稿子，或同时修改一个东西，后一个人的保存始终会覆盖之前的数据，面对这种情况，我想到的办法有俩：</p>
+<blockquote>
+<ol>
+<li>锁 + 超时解锁，当A在编辑的时候就禁止其他人编辑，如果A在一定时间内没有动作，那么就自动解开A的锁，其他人B就可以编辑</li>
+<li>实时通信，当A在编辑的时候，实时告知其他人，此时A正在编辑</li>
 </ol>
-<p>过程如图：<br><img src="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/sort.gif" alt="冒泡排序"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[j] &gt; arr[j+<span class="number">1</span>] )&#123;  <span class="comment">// 两两比较找大的</span></span><br><span class="line">                <span class="keyword">let</span> temp = arr[j+<span class="number">1</span>];  <span class="comment">// 下面交互下前后位置</span></span><br><span class="line"></span><br><span class="line">                arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( bubbleSort([<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>]) ); <span class="comment">//[ 1, 2, 4, 4, 7 ]</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>方案1，需要后端进行配合，比如新增lock等字段，表明当前是锁着的还是没有锁着的，而且还需要指定接口来锁定/解锁；前端需要控制超时逻辑(感觉利用cookie比较好，因为cookie可以设置生命周期)，而且每次都需要将超时时间重新更新；如果一个项目刚开始，我感觉还是可以用这种方案的，项目开始就规划好，勉强还是可以用的。</p>
+<p>方案2，我认为是主流，但也需要后端配合，不过还是很简单的<br>今天简单记录下express + express-ws的实时通信，首先使用express-ws的大体逻辑</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> expressWs = <span class="built_in">require</span>(<span class="string">&#x27;express-ws&#x27;</span>);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">expressWs(app);</span><br><span class="line"></span><br><span class="line">app.ws(<span class="string">&#x27;/echo&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ws, req</span>) </span>&#123;</span><br><span class="line">    ws.on(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">        ws.send(msg);</span><br><span class="line">    &#125;)</span><br><span class="line">    ws.on(<span class="string">&#x27;close&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;closed&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    ws.on(<span class="string">&#x27;error&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// bin/www.js</span></span><br><span class="line">...</span><br><span class="line">server.listen(port);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 下面这个很重要，否则即是上面都正确，websocket也无法成功链接</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;express-ws&#x27;</span>)(app, server)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
         </div>
     </div>
     
