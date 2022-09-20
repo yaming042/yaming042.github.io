@@ -5,14 +5,12 @@
         </div>
         <div class="latest-list">
             <ul class="item-box">
-                <% site.posts.sort('date', -1).limit(10).each(function(post, index){ %>
-                    <% if(!post.hide && post.sort === 1) {%>
-                        <li>
-                            <a href="<%- url_for(post.path) %>">
-                                <%= index+1 %>. <%= post.title || '(no title)' %>
-                            </a>
-                        </li>
-                    <% } %>
+                <% site.posts.sort('date', -1).limit(20).filter(function(post, i){return !post.hide && post.sort === 1 && i<10}).each(function(post, index){ %>
+                    <li>
+                        <a href="<%- url_for(post.path) %>">
+                            <%= index+1 %>. <%= post.title || '(no title)' %>
+                        </a>
+                    </li>
                 <% }) %>
             </ul>
         </div>

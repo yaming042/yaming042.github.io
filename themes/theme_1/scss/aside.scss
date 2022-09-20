@@ -212,11 +212,15 @@
         overflow: hidden;
         font-size: 14px;
 
-        li{
-          padding: 2px 0;
-    
-          a:hover{
-            color: #007fff;
+        .item-box{
+          position: relative;
+
+          li{
+            padding: 2px 0;
+      
+            a:hover{
+              color: #007fff;
+            }
           }
         }
       }
