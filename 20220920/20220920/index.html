@@ -10,22 +10,18 @@
 
 
 
-    <meta name="keywords" content="排序算法,"/>
+    <meta name="keywords" content="LeeCode刷题,"/>
 
 
 
     <meta name="description" content="
-作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。
-
-冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。
-算法步骤
-比较相邻的两个元素，如果第一..."/>
+最近处于一个怪异的状态，感觉做不完的事，但是又无事可做。感觉整个大环境都很冷，市场不景气，职场也是，老吆喝着要加班到9点。是在是不舒服，今天也啥也不想干，不过忽然想到还有个github page，那不如就随便做点啥吧，之前有看过Leecode，不过中间也丢了很久，既然不想干活就看看Leeco..."/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>冒泡排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>想起来就看看 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -109,32 +105,26 @@
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>冒泡排序</h2>
+                <h2>想起来就看看</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-04-06</span>
+                    <span>发布时间：2022-09-20</span>
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="冒泡排序">-</i> 次
+                            阅读量：<i id="/20220920/20220920/" class="leancloud_visitors" data-flag-title="想起来就看看">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：3k</span>
-                    <span>阅读时长 ≈ 3 分钟</span>
+                    <span>本文字数：321</span>
+                    <span>阅读时长 ≈ 1 分钟</span>
                 </div>
             </div>
-            <blockquote>
-<p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。</p>
-</blockquote>
-<p>冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。</p>
-<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
-<li>比较相邻的两个元素，如果第一个比第二个大，那么则交互他俩的位置；</li>
-<li>对后续的元素分别执行步骤1，直到最后一组，比对完成后，最后一个就是数组中最大的值；</li>
-<li>步骤1，2找到了第一个最大的数。此时再次遍历数组，对数组中剩余所有元素跑一遍步骤1，2；</li>
-<li>因为每次需要比较的数组越来越短，知道比较完所有元素，此时的数组就是排好序的数组；</li>
-</ol>
-<p>过程如图：<br><img src="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/sort.gif" alt="冒泡排序"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[j] &gt; arr[j+<span class="number">1</span>] )&#123;  <span class="comment">// 两两比较找大的</span></span><br><span class="line">                <span class="keyword">let</span> temp = arr[j+<span class="number">1</span>];  <span class="comment">// 下面交互下前后位置</span></span><br><span class="line"></span><br><span class="line">                arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( bubbleSort([<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>]) ); <span class="comment">//[ 1, 2, 4, 4, 7 ]</span></span><br></pre></td></tr></table></figure>
+            <p><img src="/20220920/20220920/leecode.png" alt="LeeCode刷题"></p>
+<p>最近处于一个怪异的状态，感觉做不完的事，但是又无事可做。感觉整个大环境都很冷，市场不景气，职场也是，老吆喝着要加班到9点。是在是不舒服，今天也啥也不想干，不过忽然想到还有个github page，那不如就随便做点啥吧，之前有看过Leecode，不过中间也丢了很久，既然不想干活就看看Leecode好了，也算是磨磨脑子了。</p>
+<ul>
+<li><a href="/20220920/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">两数之和</a></li>
+</ul>
+
         </div>
     </div>
     

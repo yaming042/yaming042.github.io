@@ -10,22 +10,20 @@
 
 
 
-    <meta name="keywords" content="排序算法,"/>
+    <meta name="keywords" content="LeeCode刷题,"/>
 
 
 
-    <meta name="description" content="
-作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。
-
-冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。
-算法步骤
-比较相邻的两个元素，如果第一..."/>
+    <meta name="description" content="原题给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+你可以按任意顺序返回答案。
+示例123输入：nums = ..."/>
 
 
 <meta name="Robots" content="all">
 
 
-    <title>冒泡排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+    <title>两数之和 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
 <link rel="icon" href="/images/favicon.ico">
@@ -109,32 +107,52 @@
     <div class="web-article-container">
         <div class="web-article-view">
             <div class="article-baseinfo">
-                <h2>冒泡排序</h2>
+                <h2>两数之和</h2>
                 <div class="other-info">
-                    <span>发布时间：2021-04-06</span>
+                    <span>发布时间：2022-09-20</span>
                     <span>作者：yaming042</span>
                     
                         <span>
-                            阅读量：<i id="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="leancloud_visitors" data-flag-title="冒泡排序">-</i> 次
+                            阅读量：<i id="/20220920/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="leancloud_visitors" data-flag-title="两数之和">-</i> 次
                         </span>
                     
                     
-                    <span>本文字数：3k</span>
+                    <span>本文字数：3.8k</span>
                     <span>阅读时长 ≈ 3 分钟</span>
                 </div>
             </div>
-            <blockquote>
-<p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。</p>
+            <h3 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">2</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">15</span>], target = <span class="number">9</span></span><br><span class="line">输出：[<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">解释：因为 nums[<span class="number">0</span>] + nums[<span class="number">1</span>] == <span class="number">9</span> ，返回 [<span class="number">0</span>, <span class="number">1</span>] </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><b>提示</b></p>
+<ul>
+<li>2 &lt;= nums.length &lt;= 10<sup>4</sup></li>
+<li>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></li>
+<li>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></li>
+<li><b>只会存在一个有效答案</b></li>
+</ul>
 </blockquote>
-<p>冒泡排序，通俗点说就是数组里，前后两个数依次比较，永远把最大/最小的放后面，这样当你遍历完整个数组后，数组就变成有序的了。</p>
-<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
-<li>比较相邻的两个元素，如果第一个比第二个大，那么则交互他俩的位置；</li>
-<li>对后续的元素分别执行步骤1，直到最后一组，比对完成后，最后一个就是数组中最大的值；</li>
-<li>步骤1，2找到了第一个最大的数。此时再次遍历数组，对数组中剩余所有元素跑一遍步骤1，2；</li>
-<li>因为每次需要比较的数组越来越短，知道比较完所有元素，此时的数组就是排好序的数组；</li>
-</ol>
-<p>过程如图：<br><img src="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/sort.gif" alt="冒泡排序"></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[j] &gt; arr[j+<span class="number">1</span>] )&#123;  <span class="comment">// 两两比较找大的</span></span><br><span class="line">                <span class="keyword">let</span> temp = arr[j+<span class="number">1</span>];  <span class="comment">// 下面交互下前后位置</span></span><br><span class="line"></span><br><span class="line">                arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( bubbleSort([<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>]) ); <span class="comment">//[ 1, 2, 4, 4, 7 ]</span></span><br></pre></td></tr></table></figure>
+<p><b>解法一</b><br>简单粗暴的循环遍历即可，优点就是逻辑简单，缺点就是有些人会感觉有点low</p>
+<p><b>解法二</b><br>借鉴网上的解题思路，借用map(或者object)就行</p>
+<ul>
+<li>准备个object(数据结构{value: index}, value是数组中的值，index是值对应的下标)</li>
+<li>遍历数组，判断target- num[i]的值是否存在object中，如果存在那么就可以返回对应的下标，否则继续遍历(同时将值记录到object中)，直至结束，返回异常</li>
+</ul>
+<p><b>实现代码</b></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numberSum = <span class="function">(<span class="params">arr=[], target</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> map = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++) &#123;</span><br><span class="line">		<span class="keyword">let</span> v = target - arr[i];</span><br><span class="line">		<span class="keyword">if</span>(map.hasOwnProperty(v.toString())) &#123;</span><br><span class="line">			<span class="keyword">return</span> [map[v], i];</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			map[arr[i].toString()] = i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`没有符合条件的数字`</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(numberSum([<span class="number">2</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">15</span>], <span class="number">9</span>)); <span class="comment">// [0, 1]</span></span><br></pre></td></tr></table></figure>
+
+<p><b>注意：</b></p>
+<blockquote>
+<ul>
+<li>其实这里用map或者object的原因就是为了记录index，如果只是返回对应的值，那用array来记录值也行</li>
+<li>需要对入参的合法性进行判断</li>
+<li>函数里面需要做边界判断，目前并没有做</li>
+</ul>
+</blockquote>
+
         </div>
     </div>
     
