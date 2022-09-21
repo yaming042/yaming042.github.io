@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+
+    <meta name="author" content="yaming042">
+
+
+
+    <meta name="keywords" content="LeeCode刷题,"/>
+
+
+
+    <meta name="description" content="原题给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
+请你将两个数相加，并以相同形式返回一个表示和的链表。
+你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+示例
+123456789输入：l1 = [2,4,3]..."/>
+
+
+<meta name="Robots" content="all">
+
+
+    <title>两数相加 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
+
+
+<link rel="icon" href="//cache.yaming.me/githubPage/favicon.ico">
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/av.min.js"></script>
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0bb2321117b8ad1f07d1fca35aa1199a";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+
+    <div class="main-container">
+        <div class="web-header">
+    <div class="logo">TYM042</div>
+
+    <div class="web-menu">
+        <div class="menu-list clearfix">
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/"
+                            
+                        >
+                            首页
+                        </a>
+                    </h2>
+                    <span>Home</span>
+                </div>
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/categories/博文/"
+                            
+                        >
+                            博文
+                        </a>
+                    </h2>
+                    <span>Blog</span>
+                </div>
+            
+                <div class="menu-item">
+                    <h2>
+                        <a 
+                            class="menu-item-link" 
+                            href="/categories/笔记/"
+                            
+                        >
+                            笔记
+                        </a>
+                    </h2>
+                    <span>Notes</span>
+                </div>
+            
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <img src="//cache.yaming.me/githubPage/banner.png" alt="">
+</div>
+        <div class="container-box">
+            <div class="container-body">
+                <div class="web-article">
+    <div class="web-article-container">
+        <div class="web-article-view">
+            <div class="article-baseinfo">
+                <h2>两数相加</h2>
+                <div class="other-info">
+                    <span>发布时间：2022-09-21</span>
+                    <span>作者：yaming042</span>
+                    
+                        <span>
+                            阅读量：<i id="/20220921/20220921/" class="leancloud_visitors" data-flag-title="两数相加">-</i> 次
+                        </span>
+                    
+                    
+                    <span>本文字数：5.9k</span>
+                    <span>阅读时长 ≈ 5 分钟</span>
+                </div>
+            </div>
+            <h3 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h3><p>给你两个 <b>非空</b> 的链表，表示两个非负的整数。它们每位数字都是按照 <b>逆序</b> 的方式存储的，并且每个节点只能存储 <b>一位</b> 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 <b>0</b> 开头。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><img src="//cache.yaming.me/githubPage/addtwonumber.jpeg" alt="两数相加"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：l1 = [<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>], l2 = [<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>]</span><br><span class="line">输出：[<span class="number">7</span>,<span class="number">0</span>,<span class="number">8</span>]</span><br><span class="line">解释：<span class="number">342</span> + <span class="number">465</span> = <span class="number">807</span></span><br><span class="line"></span><br><span class="line">输入：l1 = [<span class="number">0</span>], l2 = [<span class="number">0</span>]</span><br><span class="line">输出：[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">输入：l1 = [<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>], l2 = [<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>]</span><br><span class="line">输出：[<span class="number">8</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p><b>解法思路：</b><br>看了leecode上的一些解题思路，感觉大概思路就和小学的加法竖式一样，个位加个位，十位加十位，大于10就进位；以最大长度的数组长度为标准进行数组遍历，依次对各位进行相加（这里数组短的第n位可能是undefined，相加时得容错），声明一个进位变量carry用来记录进位，那么第n为的值就是 <b>(a[i]+b[i]+carry)%10 </b>，此时的进位carry就是 <b>parseInt((a[i]+b[i]+carry)/10)</b>;当数组遍历完，可能进位还存在，所以此时就需要新增一位来容纳进位。</p>
+<p><b>实现代码</b></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> addTwoNumber = <span class="function">(<span class="params">a=[], b=[]</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> carry = <span class="number">0</span>,</span><br><span class="line">		ret = [],</span><br><span class="line">		maxLength = <span class="built_in">Math</span>.max(a.length, b.length);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;maxLength;i++) &#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="literal">undefined</span> !== a[i] || <span class="literal">undefined</span> !== b[i]) &#123;</span><br><span class="line">			<span class="keyword">const</span> sum = (a[i] || <span class="number">0</span>) + (b[i] || <span class="number">0</span>) + carry;</span><br><span class="line">			<span class="keyword">const</span> value = sum % <span class="number">10</span>;</span><br><span class="line">			</span><br><span class="line">			ret[i] = value;</span><br><span class="line"></span><br><span class="line">			carry = <span class="built_in">parseInt</span>(sum / <span class="number">10</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(ret.length &amp;&amp; carry &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		ret[ret.length] = carry;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log( addTwoNumber([<span class="number">0</span>], [<span class="number">0</span>]) ); <span class="comment">// [0]</span></span><br><span class="line"><span class="built_in">console</span>.log( addTwoNumber([<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>], [<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>]) ); <span class="comment">// [8, 9, 9, 9, 0, 0, 0, 1]</span></span><br></pre></td></tr></table></figure>
+
+<p><b>注意：</b></p>
+<blockquote>
+<ul>
+<li>需要对入参的合法性进行判断</li>
+<li>函数里面需要做边界，取值语法判断，目前并没有做</li>
+</ul>
+</blockquote>
+
+        </div>
+    </div>
+    
+</div>
+            </div>
+            
+                <div class="aside">
+    
+        <div class="web-sidebar-box box-item">
+    <div class="sidebar-title">
+        <h2>关于我</h2>
+    </div>
+    <div class="tag-list">
+        目前网站处于前期调整阶段
+    </div>
+</div>
+    
+        
+    <div class="web-sidebar-box box-item">
+        <div class="sidebar-title">
+            <h2>最新文章</h2>
+        </div>
+        <div class="latest-list">
+            <ul class="item-box">
+                
+                    <li>
+                        <a href="/20220920/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
+                            1. 两数之和
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20211029/20211029/">
+                            2. Express + Express-ws 实时通信
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
+                            3. 插入排序
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210408/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+                            4. 插入排序
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
+                            5. 冒泡排序
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210404/20210404/">
+                            6. 一个改变的key引发的问题
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210331/20210331/">
+                            7. js 数据类型检测
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/20210328/2021328/">
+                            8. 国内github访问速度慢怎么解决
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+</div>
+            
+            </div>
+        <div class="web-footer">
+    <h2 class="friend-state">友情声明</h2>
+    <div class="coperation">
+        <p>本网站部分资料来源于网络，如有任何问题可联系站主解决</p>
+    </div>
+    <div class="copyright">
+        <span>Copyright &copy; 2021</span>
+        <span class="dotted">|</span>
+        <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span>
+        <span class="dotted">|</span>
+        <span>Theme by <i>yaming042</i></span>
+        
+        <!-- <span class="dotted">|</span>
+        <span><a href="http://www.beian.miit.gov.cn" target="_blank">豫ICP备17028068号</a></span> -->
+    </div>
+
+    <script>
+        var APP_ID = '1lDgPz8SjxTtvmbx7wEyRr5K-gzGzoHsz',
+            APP_KEY = 'yjGRwyBaWyarq9iIrOOE07zN',
+            IS_POST = 'true' === 'true';
+    </script>
+    
+<script src="/js/tg.min.js"></script>
+
+</div>
+    </div>
+
+
+</body>
+</html>
