@@ -31,14 +31,14 @@ postWidget:
   - about
   - latest
 
-favicon: /images/favicon.ico
+favicon: //cache.yaming.me/githubPage/favicon.ico
 
 #UserInfo
 avatar: 
 author: 
 slogan: 
 
-defaultThumb: /images/default.jpeg
+defaultThumb: //cache.yaming.me/githubPage/default.jpeg
 
 #count and time
 symbols_count_time:
