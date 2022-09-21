@@ -28,7 +28,7 @@
     <title>冒泡排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
-<link rel="icon" href="/images/favicon.ico">
+<link rel="icon" href="//cache.yaming.me/githubPage/favicon.ico">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -101,7 +101,7 @@
     </div>
 </div>
 <div class="banner">
-    <img src="/images/banner.png" alt="">
+    <img src="//cache.yaming.me/githubPage/banner.png" alt="">
 </div>
         <div class="container-box">
             <div class="container-body">
@@ -133,7 +133,7 @@
 <li>步骤1，2找到了第一个最大的数。此时再次遍历数组，对数组中剩余所有元素跑一遍步骤1，2；</li>
 <li>因为每次需要比较的数组越来越短，知道比较完所有元素，此时的数组就是排好序的数组；</li>
 </ol>
-<p>过程如图：<br><img src="/20210406/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/sort.gif" alt="冒泡排序"></p>
+<p>过程如图：<br><img src="//cache.yaming.me/githubPage/sort.gif" alt="冒泡排序"></p>
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( arr[j] &gt; arr[j+<span class="number">1</span>] )&#123;  <span class="comment">// 两两比较找大的</span></span><br><span class="line">                <span class="keyword">let</span> temp = arr[j+<span class="number">1</span>];  <span class="comment">// 下面交互下前后位置</span></span><br><span class="line"></span><br><span class="line">                arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log( bubbleSort([<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">4</span>]) ); <span class="comment">//[ 1, 2, 4, 4, 7 ]</span></span><br></pre></td></tr></table></figure>
         </div>
     </div>

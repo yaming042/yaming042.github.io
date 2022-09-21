@@ -27,7 +27,7 @@
     <title>插入排序 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
-<link rel="icon" href="/images/favicon.ico">
+<link rel="icon" href="//cache.yaming.me/githubPage/favicon.ico">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -100,7 +100,7 @@
     </div>
 </div>
 <div class="banner">
-    <img src="/images/banner.png" alt="">
+    <img src="//cache.yaming.me/githubPage/banner.png" alt="">
 </div>
         <div class="container-box">
             <div class="container-body">
@@ -134,7 +134,7 @@
 <li>3再和4比，3比4小，那么此时4后面的一位换成4([1,2,<strong>4</strong>,4,5])，此时第一个4就 <em><strong>相当于</strong></em> 3，但并未赋值</li>
 <li>3再和2比，3比2大，那么此时不移动，只需要将2后面的一位赋值为3即可</li>
 </ol>
-<p>过程如图<br><img src="/20210408/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/sort.gif" alt="插入排序"></p>
+<p>过程如图<br><img src="//cache.yaming.me/githubPage/i-sort.gif" alt="插入排序"></p>
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr=[]</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> length = arr.length,</span><br><span class="line">        current,</span><br><span class="line">        preIndex;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;length;i++)&#123;</span><br><span class="line">        current = arr[i];</span><br><span class="line">        preIndex = i - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// current 每次是不变的，相当于是把值暂存起来，</span></span><br><span class="line">        <span class="comment">// 每次比较都是把前面一个元素的值赋给后面一个</span></span><br><span class="line">        <span class="keyword">while</span>( preIndex &gt;= <span class="number">0</span> &amp;&amp; current &lt; arr[preIndex] )&#123;</span><br><span class="line">            arr[preIndex+<span class="number">1</span>] = arr[preIndex];</span><br><span class="line">            preIndex--;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        arr[preIndex+<span class="number">1</span>] = current;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( insertSort([<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">72</span>,<span class="number">5</span>,<span class="number">2</span>]) ) <span class="comment">//[ 1, 2, 3, 4, 5, 72 ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
         </div>
     </div>

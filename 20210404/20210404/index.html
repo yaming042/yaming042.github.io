@@ -27,7 +27,7 @@
     <title>一个改变的key引发的问题 | Coding_用代码记录点滴，Happy_用快乐享受生活</title>
 
 
-<link rel="icon" href="/images/favicon.ico">
+<link rel="icon" href="//cache.yaming.me/githubPage/favicon.ico">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -100,7 +100,7 @@
     </div>
 </div>
 <div class="banner">
-    <img src="/images/banner.png" alt="">
+    <img src="//cache.yaming.me/githubPage/banner.png" alt="">
 </div>
         <div class="container-box">
             <div class="container-body">
@@ -124,7 +124,7 @@
             </div>
             <p>今天闲来无事，忽然想起了前天在开发功能时遇到的一个问题，具体情况就是我渲染了一个邮箱列表，列表支持修改邮箱，但是发现每次改完邮箱后input框就会失去焦点，按理说input是不会失去焦点的，但bug就此发生了。</p>
 <hr>
-<p><img src="/20210404/20210404/email.png" alt="邮件列表"></p>
+<p><img src="//cache.yaming.me/githubPage/email.png" alt="邮件列表"></p>
 <hr>
 <p>需要渲染的邮箱列表数据格式 <code>['xiaoming@163.com','lier@163.com']</code>，渲染的列表支持修改，代码如下:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">render</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; emails &#125; = <span class="built_in">this</span>.state;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div className=<span class="string">&quot;container&quot;</span>&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                (emails || []).map(<span class="function">(<span class="params">email, index</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> (</span><br><span class="line">                        &lt;div className=<span class="string">&quot;email-row&quot;</span> key=&#123; email &#125;&gt;</span><br><span class="line">                            &lt;input </span><br><span class="line">                                type=<span class="string">&quot;text&quot;</span> </span><br><span class="line">                                value=&#123; email &#125; </span><br><span class="line">                                onChange=&#123;<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">                                    emails[index] = (e.target.value || <span class="string">&#x27;&#x27;</span>).trim();</span><br><span class="line">                                    <span class="built_in">this</span>.setState(&#123;</span><br><span class="line">                                        emails: emails)</span><br><span class="line">                                    &#125;);</span><br><span class="line">                                &#125;&#125;    </span><br><span class="line">                            /&gt;</span><br><span class="line">                        &lt;/div&gt;</span><br><span class="line">                    );</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
