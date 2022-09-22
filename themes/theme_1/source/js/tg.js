@@ -12,13 +12,13 @@
                 var url = $(".leancloud_visitors").attr('id').trim();
 
                 query.equalTo("words", url).count().then(function (number) {
-                    $(document.getElementById(url)).text( typeof (number || 0) === 'number' ? number+1 : '--' );
+                    $(document.getElementById(url)).text( typeof (number || 0) === 'number' ? number+1 : '1' );
                 }, function (error) {});
             }
         }else{
             query.select(['words']).count().then(function(number){
                 $('.visitor_area').css('display', 'inline');
-                $('#visit_count').text( number || '--' );
+                $('#visit_count').text( number || '1' );
             }, function (error) {});
         }
     }
@@ -50,12 +50,13 @@
                     visitors[words] = 1;
                 }
 
+                // 循环完毕
                 if( count == number ){
                     $('.visitor').each(function( index, item ){
                         let url = $(item).attr('id'),
                             num = visitors[url];
                     
-                        $(document.getElementById(url)).text( num ? num : '--' );
+                        $(document.getElementById(url)).text( num ? num : '1' );
                     });
                 }
             });
